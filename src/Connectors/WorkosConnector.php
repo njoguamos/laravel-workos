@@ -9,9 +9,9 @@ use Saloon\Http\Connector;
 class WorkosConnector extends Connector
 {
     public function __construct(
-        public string $apiKey,
-        public string $clientId,
-        public string $apiBaseurl,
+        public readonly string $apiKey,
+        public readonly string $clientId,
+        public readonly string $apiBaseurl,
     ) {
     }
 
