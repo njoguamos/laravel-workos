@@ -39,81 +39,468 @@ php artisan vendor:publish --tag="laravel-workos-config"
 
 ## Usage
 
-### 1. User Management
+### 1. Events
 
-#### 1.1 User
-- [ ] TODO
-#### 1.2 Identities
-- [ ] TODO
-#### 1.3 Authentication
-- [ ] TODO
-#### 1.4 Session tokens
-- [ ] TODO
-#### 1.5 Authentication errors
-- [ ] TODO
-#### 1.6 Magic Auth
-- [ ] TODO
-#### 1.7 Multi-Factor Authentication
-- [ ] TODO
-#### 1.8 Email verification
-- [ ] TODO
-#### 1.9 Password reset
-- [ ] TODO
-#### 1.10 Organization membership
-- [ ] TODO
-#### 1.11 Invitation
-- [ ] TODO
-#### 1.12 Logout
+<details>
+
+<summary>List events</summary>
+
 - [ ] TODO
 
-### 2. Single Sign-On
+</details>
 
-#### 2.1 Get an authorization URL
-- [ ] TODO
-#### 2.2 Profile
-- [ ] TODO
-#### 2.3 Connection
-- [ ] TODO
+### 2. Organization
 
-### 3. Directory Sync
+<details>
 
-#### 3.1 Directory
-- [ ] TODO
-#### 3.2 Directory User
-- [ ] TODO
-#### 3.3 Directory Group
+<summary>Get an Organization</summary>
+
 - [ ] TODO
 
-### 4. Admin Portal
+</details>
 
-#### 4.1 Generate a Portal Link
-- [ ] TODO
+<details>
 
-### 5. Audit Logs
+<summary>List Organizations</summary>
 
-#### 5.1 Events
-- [ ] TODO
-#### 5.2 Schema
-- [ ] TODO
-#### 5.3 Actions
-- [ ] TODO
-#### 5.4 Exports
-- [ ] TODO
-#### 5.4 Retention
 - [ ] TODO
 
-### 6. Domain Verification
+</details>
 
-#### 6.1 Organization domain
+<details>
+
+<summary>Create an Organization</summary>
+
 - [ ] TODO
 
-### 7.Multi-Factor Auth
+</details>
 
-#### 7.1 Enroll
+<details>
+
+<summary>Update an Organization</summary>
+
 - [ ] TODO
-#### 7.2 Challenge
+
+</details>
+
+<details>
+
+<summary>Delete an Organization</summary>
+
 - [ ] TODO
-#### 7.3 Factor
+
+</details>
+
+### 3. User Management
+
+#### 3.1 User Management
+<details>
+
+<summary>Get a user</summary>
+
+- [ ] TODO
+
+</details>
+
+<details>
+
+<summary>List users</summary>
+
+- [ ] TODO
+
+</details>
+
+<details>
+
+<summary>Create a user</summary>
+
+- [ ] TODO
+
+</details>
+
+<details>
+
+<summary>Update a user</summary>
+
+- [ ] TODO
+
+</details>
+
+<details>
+
+<summary>Delete a user</summary>
+
+- [ ] TODO
+
+</details>
+
+#### 3.2 Identities
+
+<details>
+
+<summary>Get user identities</summary>
+
+- [ ] TODO
+
+</details>
+
+#### 3.3 Authentication
+
+<details>
+
+<summary>Get an authorization URL</summary>
+
+- [ ] TODO
+
+</details>
+
+<details>
+
+<summary>Authenticate with code</summary>
+
+- [ ] TODO
+
+</details>
+
+<details>
+
+<summary>Authenticate a user with password</summary>
+
+- [ ] TODO
+
+</details>
+
+<details>
+
+<summary>Authenticate with Magic Auth</summary>
+
+- [ ] TODO
+
+</details>
+
+<details>
+
+<summary>Authenticate with refresh token</summary>
+
+- [ ] TODO
+
+</details>
+
+<details>
+
+<summary>Authenticate with an email verification code</summary>
+
+- [ ] TODO
+
+</details>
+
+<details>
+
+<summary>Authenticate with a time-based one-time password</summary>
+
+- [ ] TODO
+
+</details>
+
+<details>
+
+<summary>Authenticate with organization selection</summary>
+
+- [ ] TODO
+
+</details>
+
+#### 3.4 Session tokens
+
+<details>
+
+<summary>JWKS URL</summary>
+
+- [ ] TODO
+
+</details>
+
+#### 3.5 Authentication errors
+
+<details>
+
+<summary>Email verification required error</summary>
+
+- [ ] TODO
+
+</details>
+
+<details>
+
+<summary>MFA enrollment error</summary>
+
+- [ ] TODO
+
+</details>
+
+<details>
+
+<summary>MFA challenge error</summary>
+
+- [ ] TODO
+
+</details>
+
+<details>
+
+<summary>Organization selection required error</summary>
+
+- [ ] TODO
+
+</details>
+
+<details>
+
+<summary>SSO required error</summary>
+
+- [ ] TODO
+
+</details>
+
+<details>
+
+<summary>Organization authentication required error</summary>
+
+- [ ] TODO
+
+</details>
+
+#### 3.6 Magic Auth
+
+<details>
+
+<summary>Get a Magic Auth code</summary>
+
+- [ ] TODO
+
+</details>
+
+<details>
+
+<summary>Create a Magic Auth code</summary>
+
+- [ ] TODO
+
+</details>
+
+#### 3.7 Multi-Factor Authentication
+
+<details>
+
+<summary>Enroll an authentication factor</summary>
+
+- [ ] TODO
+
+</details>
+
+<details>
+
+<summary>List authentication factors</summary>
+
+- [ ] TODO
+
+</details>
+
+#### 3.8 Email verification
+
+<details>
+
+<summary>Get an email verification code</summary>
+
+- [ ] TODO
+
+</details>
+
+#### 3.9 Password reset
+
+<details>
+
+<summary>Get a password reset token</summary>
+
+- [ ] TODO
+
+</details>
+
+<details>
+
+<summary>Create a password reset token</summary>
+
+- [ ] TODO
+
+</details>
+
+<details>
+
+<summary>Reset the password</summary>
+
+- [ ] TODO
+
+</details>
+
+
+#### 3.10 Organization membership
+
+<details>
+
+<summary>Get an organization membership</summary>
+
+- [ ] TODO
+
+</details>
+
+<details>
+
+<summary>List organization memberships</summary>
+
+- [ ] TODO
+
+</details>
+
+<details>
+
+<summary>Create an organization membership</summary>
+
+- [ ] TODO
+
+</details>
+
+<details>
+
+<summary>Update an organization membership</summary>
+
+- [ ] TODO
+
+</details>
+
+<details>
+
+<summary>Delete an organization membership</summary>
+
+- [ ] TODO
+
+</details>
+
+<details>
+
+<summary>Deactivate an organization membership</summary>
+
+- [ ] TODO
+
+</details>
+
+<details>
+
+<summary>Reactivate an organization membership</summary>
+
+- [ ] TODO
+
+</details>
+
+#### 3.11 Invitation
+
+<details>
+
+<summary>Get an invitation</summary>
+
+- [ ] TODO
+
+</details>
+
+<details>
+
+<summary>Find an invitation by token</summary>
+
+- [ ] TODO
+
+</details>
+
+<details>
+
+<summary>List invitations</summary>
+
+- [ ] TODO
+
+</details>
+
+<details>
+
+<summary>Send an invitation</summary>
+
+- [ ] TODO
+
+</details>
+
+<details>
+
+<summary>Revoke an invitation</summary>
+
+- [ ] TODO
+
+</details>
+
+#### 3.12 Logout
+
+<details>
+
+<summary>End a user’s session.</summary>
+
+- [ ] TODO
+
+</details>
+
+### 4. Single Sign-On
+
+#### 4.1 Get an authorization URL
+- [ ] TODO
+#### 4.2 Profile
+- [ ] TODO
+#### 4.3 Connection
+- [ ] TODO
+
+### 5. Directory Sync
+
+#### 5.1 Directory
+- [ ] TODO
+#### 5.2 Directory User
+- [ ] TODO
+#### 5.3 Directory Group
+- [ ] TODO
+
+### 6. Admin Portal
+
+#### 6.1 Generate a Portal Link
+- [ ] TODO
+
+### 7. Audit Logs
+
+#### 7.1 Events
+- [ ] TODO
+#### 7.2 Schema
+- [ ] TODO
+#### 7.3 Actions
+- [ ] TODO
+#### 7.4 Exports
+- [ ] TODO
+#### 7.4 Retention
+- [ ] TODO
+
+### 7. Domain Verification
+
+#### 7.1 Organization domain
+- [ ] TODO
+
+### 8.. Multi-Factor Auth
+
+#### 8..1 Enroll
+- [ ] TODO
+#### 8..2 Challenge
+- [ ] TODO
+#### 8..3 Factor
 - [ ] TODO
 
 ## Testing
