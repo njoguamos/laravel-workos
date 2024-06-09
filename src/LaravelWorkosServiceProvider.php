@@ -5,6 +5,8 @@ declare(strict_types=1);
 namespace NjoguAmos\LaravelWorkos;
 
 use NjoguAmos\LaravelWorkos\Connectors\WorkosConnector;
+use NjoguAmos\LaravelWorkos\Exceptions\ApiKeyIsMissing;
+use NjoguAmos\LaravelWorkos\Exceptions\ClientIdIsMissing;
 use Spatie\LaravelPackageTools\Package;
 use Spatie\LaravelPackageTools\PackageServiceProvider;
 use NjoguAmos\LaravelWorkos\Commands\LaravelWorkosCommand;
@@ -21,6 +23,7 @@ class LaravelWorkosServiceProvider extends PackageServiceProvider
         $package
             ->name(name: 'laravel-workos')
             ->hasConfigFile(configFileName: 'workos')
+            ->hasTranslations()
             ->hasMigration(migrationFileName: 'create_laravel-workos_table')
             ->hasCommand(commandClassName: LaravelWorkosCommand::class);
     }
@@ -30,8 +33,19 @@ class LaravelWorkosServiceProvider extends PackageServiceProvider
         $this->app->bind(abstract: WorkosConnector::class, concrete: function ($app) {
             $config = $app['config']->get('workos');
 
+            $apiKey = $config['api_key'];
+            $clientId = $config['client_id'];
+
+            if (empty($apiKey)) {
+                throw ApiKeyIsMissing::create();
+            }
+
+            if (empty($clientId)) {
+                throw ClientIdIsMissing::create();
+            }
+
             return new WorkosConnector(
-                apiKey: $config['api_key'],
+                apiKey: $apiKey,
                 clientId: $config['client_id'],
                 apiBaseurl: $config['api_base_url']
             );
