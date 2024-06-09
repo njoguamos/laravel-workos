@@ -17,6 +17,13 @@ You can install the package via composer:
 composer require njoguamos/laravel-workos
 ```
 
+Update your `.env` file with the following
+    
+```dotenv
+WORKOS_API_KEY=
+WORKOS_CLIENT_ID=
+```
+
 You can publish and run the migrations with:
 
 ```bash
@@ -33,8 +40,7 @@ php artisan vendor:publish --tag="laravel-workos-config"
 ## Usage
 
 ```php
-$laravelWorkos = new NjoguAmos\LaravelWorkos();
-echo $laravelWorkos->echoPhrase('Hello, NjoguAmos!');
+# TODO
 ```
 
 ## Testing
