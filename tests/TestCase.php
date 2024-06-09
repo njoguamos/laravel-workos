@@ -19,16 +19,18 @@ class TestCase extends Orchestra
         );
     }
 
-    protected function getPackageProviders($app)
+    protected function getPackageProviders($app): array
     {
         return [
             LaravelWorkosServiceProvider::class,
         ];
     }
 
-    public function getEnvironmentSetUp($app)
+    public function getEnvironmentSetUp($app): void
     {
         config()->set('database.default', 'testing');
+        config()->set('workos.api_key', 'sk_test_1234567890');
+        config()->set('workos.client_id', 'client_1234567890');
 
         /*
         $migration = include __DIR__.'/../database/migrations/create_laravel-workos_table.php.stub';
