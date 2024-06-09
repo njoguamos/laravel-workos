@@ -35,10 +35,9 @@ return [
      * The WorkOS Base URL.
      * --------------------------------------------------------------------------
      *
-     * This is the base URL for the WorkOS API. By default, this is set to the
-     * production API URL. You can override this by setting the WORKOS_API_BASE_URL
-     * environment variable.
-     *
+     * This is the base URL for the WorkOS API. At the time of writing this
+     * the base URL is https://api.workos.com. If the base URL changes in the
+     * future, you can update it here.
      */
-    'api_base_url' => env(key: 'WORKOS_API_BASE_URL', default: 'https://api.workos.com'),
+    'api_base_url' => 'https://api.workos.com'
 ];
