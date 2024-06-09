@@ -19,8 +19,7 @@ class LaravelWorkosServiceProvider extends PackageServiceProvider
          */
         $package
             ->name(name: 'laravel-workos')
-            ->hasConfigFile()
-            ->hasViews()
+            ->hasConfigFile(configFileName: 'workos')
             ->hasMigration(migrationFileName: 'create_laravel-workos_table')
             ->hasCommand(commandClassName: LaravelWorkosCommand::class);
     }
