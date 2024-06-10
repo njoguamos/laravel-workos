@@ -1,0 +1,31 @@
+{
+    "statusCode": 302,
+    "headers": {
+        "Date": "Mon, 10 Jun 2024 18:31:10 GMT",
+        "Content-Type": "text\/plain; charset=utf-8",
+        "Content-Length": "269",
+        "Connection": "keep-alive",
+        "Location": "http:\/\/localhost:5173\/callback?error_description=No%20Connection%20associated%20with%20Organization%20%27org_1234567890%27&error=organization_invalid&error_uri=https%3A%2F%2Fworkos.com%2Fdocs%2Freference%2Fsso%2Fget-authorization-url%2Ferror-codes",
+        "CF-Ray": "891b6fd01f084929-CPT",
+        "CF-Cache-Status": "DYNAMIC",
+        "Strict-Transport-Security": "max-age=15552000; includeSubDomains",
+        "Vary": "Origin, Accept, Accept-Encoding",
+        "access-control-allow-credentials": "true",
+        "content-security-policy": "default-src 'self';base-uri 'self';block-all-mixed-content;font-src 'self' https: data:;frame-ancestors 'self';img-src 'self' data:;object-src 'none';script-src 'self';script-src-attr 'none';style-src 'self' https: 'unsafe-inline';upgrade-insecure-requests",
+        "expect-ct": "max-age=0",
+        "referrer-policy": "no-referrer",
+        "x-content-type-options": "nosniff",
+        "x-dns-prefetch-control": "off",
+        "x-download-options": "noopen",
+        "x-frame-options": "SAMEORIGIN",
+        "x-permitted-cross-domain-policies": "none",
+        "x-request-id": "43160524-f49e-4e30-af41-c83d18e4281f",
+        "x-xss-protection": "0",
+        "Set-Cookie": [
+            "__cf_bm=4SyiUcMlZu6sISV84B1z2apSYKwDdDCb0E.FtZETVhM-1718044270-1.0.1.1-4Z3DhiMWF6I_nUHOi1.c4Q174CJ4SCm.mX_hRobso1Q1fuqO.hcy_NZR6SDP_TDDg6IaxZ3b32vICbaB9nHEJQ; path=\/; expires=Mon, 10-Jun-24 19:01:10 GMT; domain=.workos.com; HttpOnly; Secure; SameSite=None",
+            "__cfruid=c80d50275c3036517e8efda243627b8b33e85d23-1718044270; path=\/; domain=.workos.com; HttpOnly; Secure; SameSite=None"
+        ],
+        "Server": "cloudflare"
+    },
+    "data": "Found. Redirecting to http:\/\/localhost:5173\/callback?error_description=No%20Connection%20associated%20with%20Organization%20%27org_1234567890%27&error=organization_invalid&error_uri=https%3A%2F%2Fworkos.com%2Fdocs%2Freference%2Fsso%2Fget-authorization-url%2Ferror-codes"
+}
