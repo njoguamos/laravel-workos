@@ -9,6 +9,13 @@
 
 @TODO: Add package description here.
 
+## Why use This package?
+
+- ✅ The package has been optimised for Laravel 10+
+- ✅ Offer developer friendly error handling e.g. `Get an authorization URL Errors`
+- ✅ Offers language translations 
+- ✅ TODO: Add more reasons here
+
 ## Installation
 
 You can install the package via composer:
