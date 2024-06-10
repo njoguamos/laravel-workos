@@ -7,12 +7,12 @@ namespace NjoguAmos\LaravelWorkos\Facades;
 use Illuminate\Support\Facades\Facade;
 
 /**
- * @see \NjoguAmos\LaravelWorkos\LaravelWorkos
+ * @see \NjoguAmos\LaravelWorkos\UserManagement
  */
-class LaravelWorkos extends Facade
+class UserManagement extends Facade
 {
     protected static function getFacadeAccessor(): string
     {
-        return \NjoguAmos\LaravelWorkos\LaravelWorkos::class;
+        return \NjoguAmos\LaravelWorkos\UserManagement::class;
     }
 }

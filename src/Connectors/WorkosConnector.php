@@ -5,9 +5,12 @@ declare(strict_types=1);
 namespace NjoguAmos\LaravelWorkos\Connectors;
 
 use Saloon\Http\Connector;
+use Saloon\Traits\Plugins\AlwaysThrowOnErrors;
 
 class WorkosConnector extends Connector
 {
+    use AlwaysThrowOnErrors;
+
     public function __construct(
         public readonly string $apiKey,
         public readonly string $clientId,
@@ -23,8 +26,19 @@ class WorkosConnector extends Connector
     protected function defaultHeaders(): array
     {
         return [
-            'Content-Type' => 'application/json',
-            'Accept'       => 'application/json',
+            'Content-Type' => 'application/json'
         ];
+    }
+
+    public function defaultConfig(): array
+    {
+        return [
+            'allow_redirects' => false,
+        ];
+    }
+
+    public function getClientId(): string
+    {
+        return $this->clientId;
     }
 }

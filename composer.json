@@ -19,7 +19,8 @@
     "require": {
         "php": "^8.2",
         "illuminate/contracts": "^10.0||^11.0",
-        "saloonphp/saloon": "^3.0",
+        "saloonphp/saloon": "^3.9",
+        "spatie/laravel-data": "^4.6",
         "spatie/laravel-package-tools": "^1.16"
     },
     "require-dev": {
@@ -77,7 +78,7 @@
                 "NjoguAmos\\LaravelWorkos\\LaravelWorkosServiceProvider"
             ],
             "aliases": {
-                "LaravelWorkos": "NjoguAmos\\LaravelWorkos\\Facades\\LaravelWorkos"
+                "UserManagement": "NjoguAmos\\LaravelWorkos\\Facades\\UserManagement"
             }
         }
     },

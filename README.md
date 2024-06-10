@@ -9,6 +9,14 @@
 
 @TODO: Add package description here.
 
+## Why use This package?
+
+- ✅ The package has been optimised for Laravel 10+
+- ✅ Offer developer friendly error handling e.g. `Get an authorization URL Errors`
+- ✅ Offers language translations 
+- ✅ Users [Spatie DTOs](https://github.com/spatie/laravel-data/) for efficient data handling
+- ✅ TODO: Add more reasons here
+
 ## Installation
 
 You can install the package via composer:
@@ -456,7 +464,40 @@ php artisan vendor:publish --tag="laravel-workos-config"
 ### 4. Single Sign-On
 
 #### 4.1 Get an authorization URL
+
+<details>
+
+<summary>Generates an OAuth 2.0 authorization URL to authenticate a user with AuthKit or SSO.</summary>
+
+```php
+use NjoguAmos\LaravelWorkos\DTOs\AuthorizationRequestDTO;
+use NjoguAmos\LaravelWorkos\UserManagement;
+use NjoguAmos\LaravelWorkos\Enums\Provider;
+
+$dto = new AuthorizationRequestDTO(
+    provider: Provider::GOOGLE,
+    redirect_uri: 'http://localhost:3000/callback',
+);
+
+$url = (new UserManagement())->getAuthorizationURL($dto);
+```
+
+The `getAuthorizationURL` return a string which is the authorization URL. 
+
+```php
+'https://workos.com/oauth/authorize?client_id=client_id&redirect_uri=http%3A%2F%2Flocalhost%3A3000%2Fcallback&response_type=code&scope=openid+email+profile&state=state';
+```
+
+The DTO has the following properties
+
 - [ ] TODO
+
+Error handling
+
+- [ ] TODO
+
+</details>
+
 #### 4.2 Profile
 - [ ] TODO
 #### 4.3 Connection

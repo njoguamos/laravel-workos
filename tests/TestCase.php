@@ -29,8 +29,8 @@ class TestCase extends Orchestra
     public function getEnvironmentSetUp($app): void
     {
         config()->set('database.default', 'testing');
-        config()->set('workos.api_key', 'sk_test_1234567890');
-        config()->set('workos.client_id', 'client_1234567890');
+        config()->set('workos.api_key', 'sk_test_123456789');
+        config()->set('workos.client_id', 'client_123456789');
 
         /*
         $migration = include __DIR__.'/../database/migrations/create_laravel-workos_table.php.stub';
