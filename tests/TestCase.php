@@ -31,10 +31,5 @@ class TestCase extends Orchestra
         config()->set('database.default', 'testing');
         config()->set('workos.api_key', 'sk_test_123456789');
         config()->set('workos.client_id', 'client_123456789');
-
-        /*
-        $migration = include __DIR__.'/../database/migrations/create_laravel-workos_table.php.stub';
-        $migration->up();
-        */
     }
 }
