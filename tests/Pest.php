@@ -7,8 +7,8 @@ use Saloon\Http\Faking\MockClient;
 use Saloon\MockConfig;
 
 uses(TestCase::class)
-    ->beforeEach(fn () => MockClient::destroyGlobal())
+    ->beforeEach(hook: fn () => MockClient::destroyGlobal())
     ->in(__DIR__);
 
 
-MockConfig::setFixturePath('tests/Fixtures');
+MockConfig::setFixturePath(path: 'tests/Fixtures');
