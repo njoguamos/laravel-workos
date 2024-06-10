@@ -32,17 +32,16 @@ WORKOS_API_KEY=
 WORKOS_CLIENT_ID=
 ```
 
-You can publish and run the migrations with:
-
-```bash
-php artisan vendor:publish --tag="laravel-workos-migrations"
-php artisan migrate
-```
-
 You can publish the config file with:
 
 ```bash
-php artisan vendor:publish --tag="laravel-workos-config"
+php artisan vendor:publish --tag="workos-config"
+```
+
+You can publish the translations  file with:
+
+```bash
+php artisan vendor:publish --tag="workos-translations"
 ```
 
 ## Usage
@@ -178,6 +177,55 @@ $url = (new UserManagement())->getAuthorizationURL($dto);
 
 ```text
 https://accounts.google.com/o/oauth2/v2/auth?access_type=offline&scope=https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fuserinfo.email%20https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fuserinfo.profile&state=eyJhbGciOiJIUzIGHJKDSFSFGGF7.eyJhcGkiOiJ1c2VyX21hbmFnZW1lbnQiLCJyZWRpcmVjdF91cmkiOiJodHRwOi8vbG9jYUYGASFIUFSGUIF76sDFGsjgdytUIYXQiOjE3MTgwMzY4NTMsImV4cCI6MTcxODAzNzc1M30.XVLCkLerRvwuVzC_Qrugbi3mzN36g8ROJQKiGGVOL8w&response_type=code&client_id=107873717349-glhtihlrvlblbs4u94teon3o5fcqb79f.apps.googleusercontent.com&redirect_uri=https%3A%2F%2Fauth.workos.com%2Fsso%2Foauth%2Fgoogle%2FLIDju2jt3JCqKGExIexjgOSQ1%2Fcallback
+```
+
+Here is practical example on a laravel application
+
+```php
+<?php
+
+declare(strict_types=1);
+
+namespace App\Http\Controllers;
+
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
+use Illuminate\Validation\Rule;
+use NjoguAmos\LaravelWorkos\DTOs\AuthorizationRequestDTO;
+use NjoguAmos\LaravelWorkos\Enums\Provider;
+use NjoguAmos\LaravelWorkos\Facades\UserManagement;
+
+class AuthorizationUrlController extends Controller
+{
+    public function __invoke(Request $request)
+    {
+        $validated = $request->validate([
+            'provider'     => ['required', Rule::enum(type: Provider::class)],
+            'redirect_uri' => ['required', 'url'],
+        ]);
+
+        try {
+            $dto = new AuthorizationRequestDTO(
+                provider: $validated['provider'],
+                redirect_uri: $validated['redirect_uri'],
+            );
+
+            $url = UserManagement::getAuthorizationURL($dto);
+        } catch (\Exception $e) {
+            Log::error($e->getMessage());
+
+            throw new \RuntimeException(
+                message: "Unable to generate authorization URL fro for `{$validated['provider']}`. Please try again later.",
+            );
+        }
+
+        // You have the URL here, you can
+        // - return it to the client as json response
+        // - return the URL as in view
+        // - redirect the user to the url
+        return redirect()->away($url);
+    }
+}
 ```
 
 > **Note**: The `AuthorizationRequestDTO` class accepts the following parameters: `provider`, `redirect_uri`, `response_type`, `code_challenge`, `code_challenge_method`, `connection_id`, `organization_id`, `state`, `login_hint`, `domain_hint` and `screen_hint`. Learn more form the [official documentation](https://workos.com/docs/reference/user-management/authentication/get-authorization-url).
