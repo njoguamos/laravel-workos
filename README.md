@@ -1,4 +1,5 @@
->*warning*: This package is still under development and not ready for production use.
+> [!CAUTION]
+> This package is still under development and not ready for production use.
 
 # A fluent Laravel package for interacting with WorkOS API.
 
@@ -154,7 +155,7 @@ php artisan vendor:publish --tag="workos-translations"
 #### 3.3 Authentication
 
 
-<details open>
+<details>
 
 <summary>Get an authorization URL</summary>
 
@@ -179,7 +180,7 @@ $url = (new UserManagement())->getAuthorizationURL($dto);
 https://accounts.google.com/o/oauth2/v2/auth?access_type=offline&scope=https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fuserinfo.email%20https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fuserinfo.profile&state=eyJhbGciOiJIUzIGHJKDSFSFGGF7.eyJhcGkiOiJ1c2VyX21hbmFnZW1lbnQiLCJyZWRpcmVjdF91cmkiOiJodHRwOi8vbG9jYUYGASFIUFSGUIF76sDFGsjgdytUIYXQiOjE3MTgwMzY4NTMsImV4cCI6MTcxODAzNzc1M30.XVLCkLerRvwuVzC_Qrugbi3mzN36g8ROJQKiGGVOL8w&response_type=code&client_id=107873717349-glhtihlrvlblbs4u94teon3o5fcqb79f.apps.googleusercontent.com&redirect_uri=https%3A%2F%2Fauth.workos.com%2Fsso%2Foauth%2Fgoogle%2FLIDju2jt3JCqKGExIexjgOSQ1%2Fcallback
 ```
 
-Here is practical example on a laravel application
+Here is practical example on a laravel application. 
 
 ```php
 <?php
@@ -212,14 +213,16 @@ class AuthorizationUrlController extends Controller
 
             $url = UserManagement::getAuthorizationURL($dto);
         } catch (\Exception $e) {
+            // Log this error for debugging
             Log::error($e->getMessage());
 
+            // Throw any exception you want
             throw new \RuntimeException(
                 message: "Unable to generate authorization URL fro for `{$validated['provider']}`. Please try again later.",
             );
         }
 
-        // You have the URL here, you can
+        // At this point, you have the URL here, you can:
         // - return it to the client as json response
         // - return the URL as in view
         // - redirect the user to the url
@@ -228,9 +231,11 @@ class AuthorizationUrlController extends Controller
 }
 ```
 
-> **Note**: The `AuthorizationRequestDTO` class accepts the following parameters: `provider`, `redirect_uri`, `response_type`, `code_challenge`, `code_challenge_method`, `connection_id`, `organization_id`, `state`, `login_hint`, `domain_hint` and `screen_hint`. Learn more form the [official documentation](https://workos.com/docs/reference/user-management/authentication/get-authorization-url).
+> [!NOTE]
+> The `AuthorizationRequestDTO` class accepts the following parameters: `provider`, `redirect_uri`, `response_type`, `code_challenge`, `code_challenge_method`, `connection_id`, `organization_id`, `state`, `login_hint`, `domain_hint` and `screen_hint`. Learn more form the [official documentation](https://workos.com/docs/reference/user-management/authentication/get-authorization-url).
 
->**Info**: This package will automatically throw exception [authorization URL errors](https://workos.com/docs/reference/user-management/authentication/get-authorization-url/error-codes). The error messages are descriptive so that you know what went wrong.
+> [!IMPORTANT]
+> This package will automatically throw exception [authorization URL errors](https://workos.com/docs/reference/user-management/authentication/get-authorization-url/error-codes). The error messages are descriptive so that you know what went wrong.
 
 
 </details>
