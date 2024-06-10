@@ -9,7 +9,6 @@ use NjoguAmos\LaravelWorkos\Exceptions\ApiKeyIsMissing;
 use NjoguAmos\LaravelWorkos\Exceptions\ClientIdIsMissing;
 use Spatie\LaravelPackageTools\Package;
 use Spatie\LaravelPackageTools\PackageServiceProvider;
-use NjoguAmos\LaravelWorkos\Commands\LaravelWorkosCommand;
 
 class LaravelWorkosServiceProvider extends PackageServiceProvider
 {
@@ -23,9 +22,7 @@ class LaravelWorkosServiceProvider extends PackageServiceProvider
         $package
             ->name(name: 'laravel-workos')
             ->hasConfigFile(configFileName: 'workos')
-            ->hasTranslations()
-            ->hasMigration(migrationFileName: 'create_laravel-workos_table')
-            ->hasCommand(commandClassName: LaravelWorkosCommand::class);
+            ->hasTranslations();
     }
 
     public function registeringPackage(): void

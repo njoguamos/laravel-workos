@@ -10,6 +10,7 @@ return [
         'access_denied'                 => 'The user denied an OAuth authorization request at the identity provider.',
         'ambiguous_connection_selector' => 'A connection could not be uniquely identified using the provided connection selector (e.g., organization)',
         'connection_invalid'            => 'There is no connection for the provided ID.',
+        'code_challenge_missing'        => "A code challenge method has been specified in the request, but a code challenge is missing. Please add the code challenge.",
         'connection_strategy_invalid'   => 'The provider has multiple strategies associated per environment.',
         'connection_unlinked'           => 'The connection associated with the request is unlinked.',
         'invalid_connection_selector'   => 'Valid connection selectors are either connection, organization, or provider.',

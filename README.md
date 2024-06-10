@@ -49,7 +49,7 @@ php artisan vendor:publish --tag="laravel-workos-config"
 
 ### 1. Events
 
-<details>
+<details open>
 
 <summary>List events</summary>
 
@@ -59,7 +59,7 @@ php artisan vendor:publish --tag="laravel-workos-config"
 
 ### 2. Organization
 
-<details>
+<details open>
 
 <summary>Get an Organization</summary>
 
@@ -67,7 +67,7 @@ php artisan vendor:publish --tag="laravel-workos-config"
 
 </details>
 
-<details>
+<details open>
 
 <summary>List Organizations</summary>
 
@@ -75,7 +75,7 @@ php artisan vendor:publish --tag="laravel-workos-config"
 
 </details>
 
-<details>
+<details open>
 
 <summary>Create an Organization</summary>
 
@@ -83,7 +83,7 @@ php artisan vendor:publish --tag="laravel-workos-config"
 
 </details>
 
-<details>
+<details open>
 
 <summary>Update an Organization</summary>
 
@@ -91,7 +91,7 @@ php artisan vendor:publish --tag="laravel-workos-config"
 
 </details>
 
-<details>
+<details open>
 
 <summary>Delete an Organization</summary>
 
@@ -102,7 +102,7 @@ php artisan vendor:publish --tag="laravel-workos-config"
 ### 3. User Management
 
 #### 3.1 User Management
-<details>
+<details open>
 
 <summary>Get a user</summary>
 
@@ -110,7 +110,7 @@ php artisan vendor:publish --tag="laravel-workos-config"
 
 </details>
 
-<details>
+<details open>
 
 <summary>List users</summary>
 
@@ -118,7 +118,7 @@ php artisan vendor:publish --tag="laravel-workos-config"
 
 </details>
 
-<details>
+<details open>
 
 <summary>Create a user</summary>
 
@@ -126,7 +126,7 @@ php artisan vendor:publish --tag="laravel-workos-config"
 
 </details>
 
-<details>
+<details open>
 
 <summary>Update a user</summary>
 
@@ -134,7 +134,7 @@ php artisan vendor:publish --tag="laravel-workos-config"
 
 </details>
 
-<details>
+<details open>
 
 <summary>Delete a user</summary>
 
@@ -144,7 +144,7 @@ php artisan vendor:publish --tag="laravel-workos-config"
 
 #### 3.2 Identities
 
-<details>
+<details open>
 
 <summary>Get user identities</summary>
 
@@ -154,320 +154,12 @@ php artisan vendor:publish --tag="laravel-workos-config"
 
 #### 3.3 Authentication
 
-<details>
+
+<details open>
 
 <summary>Get an authorization URL</summary>
 
-- [ ] TODO
-
-</details>
-
-<details>
-
-<summary>Authenticate with code</summary>
-
-- [ ] TODO
-
-</details>
-
-<details>
-
-<summary>Authenticate a user with password</summary>
-
-- [ ] TODO
-
-</details>
-
-<details>
-
-<summary>Authenticate with Magic Auth</summary>
-
-- [ ] TODO
-
-</details>
-
-<details>
-
-<summary>Authenticate with refresh token</summary>
-
-- [ ] TODO
-
-</details>
-
-<details>
-
-<summary>Authenticate with an email verification code</summary>
-
-- [ ] TODO
-
-</details>
-
-<details>
-
-<summary>Authenticate with a time-based one-time password</summary>
-
-- [ ] TODO
-
-</details>
-
-<details>
-
-<summary>Authenticate with organization selection</summary>
-
-- [ ] TODO
-
-</details>
-
-#### 3.4 Session tokens
-
-<details>
-
-<summary>JWKS URL</summary>
-
-- [ ] TODO
-
-</details>
-
-#### 3.5 Authentication errors
-
-<details>
-
-<summary>Email verification required error</summary>
-
-- [ ] TODO
-
-</details>
-
-<details>
-
-<summary>MFA enrollment error</summary>
-
-- [ ] TODO
-
-</details>
-
-<details>
-
-<summary>MFA challenge error</summary>
-
-- [ ] TODO
-
-</details>
-
-<details>
-
-<summary>Organization selection required error</summary>
-
-- [ ] TODO
-
-</details>
-
-<details>
-
-<summary>SSO required error</summary>
-
-- [ ] TODO
-
-</details>
-
-<details>
-
-<summary>Organization authentication required error</summary>
-
-- [ ] TODO
-
-</details>
-
-#### 3.6 Magic Auth
-
-<details>
-
-<summary>Get a Magic Auth code</summary>
-
-- [ ] TODO
-
-</details>
-
-<details>
-
-<summary>Create a Magic Auth code</summary>
-
-- [ ] TODO
-
-</details>
-
-#### 3.7 Multi-Factor Authentication
-
-<details>
-
-<summary>Enroll an authentication factor</summary>
-
-- [ ] TODO
-
-</details>
-
-<details>
-
-<summary>List authentication factors</summary>
-
-- [ ] TODO
-
-</details>
-
-#### 3.8 Email verification
-
-<details>
-
-<summary>Get an email verification code</summary>
-
-- [ ] TODO
-
-</details>
-
-#### 3.9 Password reset
-
-<details>
-
-<summary>Get a password reset token</summary>
-
-- [ ] TODO
-
-</details>
-
-<details>
-
-<summary>Create a password reset token</summary>
-
-- [ ] TODO
-
-</details>
-
-<details>
-
-<summary>Reset the password</summary>
-
-- [ ] TODO
-
-</details>
-
-
-#### 3.10 Organization membership
-
-<details>
-
-<summary>Get an organization membership</summary>
-
-- [ ] TODO
-
-</details>
-
-<details>
-
-<summary>List organization memberships</summary>
-
-- [ ] TODO
-
-</details>
-
-<details>
-
-<summary>Create an organization membership</summary>
-
-- [ ] TODO
-
-</details>
-
-<details>
-
-<summary>Update an organization membership</summary>
-
-- [ ] TODO
-
-</details>
-
-<details>
-
-<summary>Delete an organization membership</summary>
-
-- [ ] TODO
-
-</details>
-
-<details>
-
-<summary>Deactivate an organization membership</summary>
-
-- [ ] TODO
-
-</details>
-
-<details>
-
-<summary>Reactivate an organization membership</summary>
-
-- [ ] TODO
-
-</details>
-
-#### 3.11 Invitation
-
-<details>
-
-<summary>Get an invitation</summary>
-
-- [ ] TODO
-
-</details>
-
-<details>
-
-<summary>Find an invitation by token</summary>
-
-- [ ] TODO
-
-</details>
-
-<details>
-
-<summary>List invitations</summary>
-
-- [ ] TODO
-
-</details>
-
-<details>
-
-<summary>Send an invitation</summary>
-
-- [ ] TODO
-
-</details>
-
-<details>
-
-<summary>Revoke an invitation</summary>
-
-- [ ] TODO
-
-</details>
-
-#### 3.12 Logout
-
-<details>
-
-<summary>End a user’s session.</summary>
-
-- [ ] TODO
-
-</details>
-
-### 4. Single Sign-On
-
-#### 4.1 Get an authorization URL
-
-<details>
-
-<summary>Generates an OAuth 2.0 authorization URL to authenticate a user with AuthKit or SSO.</summary>
+To get the authorization URL, call the `getAuthorizationURL` method of `UserManagement` class. The method accepts an instance of `AuthorizationRequestDTO` as an argument. 
 
 ```php
 use NjoguAmos\LaravelWorkos\DTOs\AuthorizationRequestDTO;
@@ -482,21 +174,323 @@ $dto = new AuthorizationRequestDTO(
 $url = (new UserManagement())->getAuthorizationURL($dto);
 ```
 
-The `getAuthorizationURL` return a string which is the authorization URL. 
+ You should redirect your users to `response URL` to complete the authentication. 
 
-```php
-'https://workos.com/oauth/authorize?client_id=client_id&redirect_uri=http%3A%2F%2Flocalhost%3A3000%2Fcallback&response_type=code&scope=openid+email+profile&state=state';
+```text
+https://accounts.google.com/o/oauth2/v2/auth?access_type=offline&scope=https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fuserinfo.email%20https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fuserinfo.profile&state=eyJhbGciOiJIUzIGHJKDSFSFGGF7.eyJhcGkiOiJ1c2VyX21hbmFnZW1lbnQiLCJyZWRpcmVjdF91cmkiOiJodHRwOi8vbG9jYUYGASFIUFSGUIF76sDFGsjgdytUIYXQiOjE3MTgwMzY4NTMsImV4cCI6MTcxODAzNzc1M30.XVLCkLerRvwuVzC_Qrugbi3mzN36g8ROJQKiGGVOL8w&response_type=code&client_id=107873717349-glhtihlrvlblbs4u94teon3o5fcqb79f.apps.googleusercontent.com&redirect_uri=https%3A%2F%2Fauth.workos.com%2Fsso%2Foauth%2Fgoogle%2FLIDju2jt3JCqKGExIexjgOSQ1%2Fcallback
 ```
 
-The DTO has the following properties
+> **Note**: The `AuthorizationRequestDTO` class accepts the following parameters: `provider`, `redirect_uri`, `response_type`, `code_challenge`, `code_challenge_method`, `connection_id`, `organization_id`, `state`, `login_hint`, `domain_hint` and `screen_hint`. Learn more form the [official documentation](https://workos.com/docs/reference/user-management/authentication/get-authorization-url).
 
-- [ ] TODO
+>**Info**: This package will automatically throw exception [authorization URL errors](https://workos.com/docs/reference/user-management/authentication/get-authorization-url/error-codes). The error messages are descriptive so that you know what went wrong.
 
-Error handling
+
+</details>
+
+<details open>
+
+<summary>Authenticate with code</summary>
 
 - [ ] TODO
 
 </details>
+
+<details open>
+
+<summary>Authenticate a user with password</summary>
+
+- [ ] TODO
+
+</details>
+
+<details open>
+
+<summary>Authenticate with Magic Auth</summary>
+
+- [ ] TODO
+
+</details>
+
+<details open>
+
+<summary>Authenticate with refresh token</summary>
+
+- [ ] TODO
+
+</details>
+
+<details open>
+
+<summary>Authenticate with an email verification code</summary>
+
+- [ ] TODO
+
+</details>
+
+<details open>
+
+<summary>Authenticate with a time-based one-time password</summary>
+
+- [ ] TODO
+
+</details>
+
+<details open>
+
+<summary>Authenticate with organization selection</summary>
+
+- [ ] TODO
+
+</details>
+
+#### 3.4 Session tokens
+
+<details open>
+
+<summary>JWKS URL</summary>
+
+- [ ] TODO
+
+</details>
+
+#### 3.5 Authentication errors
+
+<details open>
+
+<summary>Email verification required error</summary>
+
+- [ ] TODO
+
+</details>
+
+<details open>
+
+<summary>MFA enrollment error</summary>
+
+- [ ] TODO
+
+</details>
+
+<details open>
+
+<summary>MFA challenge error</summary>
+
+- [ ] TODO
+
+</details>
+
+<details open>
+
+<summary>Organization selection required error</summary>
+
+- [ ] TODO
+
+</details>
+
+<details open>
+
+<summary>SSO required error</summary>
+
+- [ ] TODO
+
+</details>
+
+<details open>
+
+<summary>Organization authentication required error</summary>
+
+- [ ] TODO
+
+</details>
+
+#### 3.6 Magic Auth
+
+<details open>
+
+<summary>Get a Magic Auth code</summary>
+
+- [ ] TODO
+
+</details>
+
+<details open>
+
+<summary>Create a Magic Auth code</summary>
+
+- [ ] TODO
+
+</details>
+
+#### 3.7 Multi-Factor Authentication
+
+<details open>
+
+<summary>Enroll an authentication factor</summary>
+
+- [ ] TODO
+
+</details>
+
+<details open>
+
+<summary>List authentication factors</summary>
+
+- [ ] TODO
+
+</details>
+
+#### 3.8 Email verification
+
+<details open>
+
+<summary>Get an email verification code</summary>
+
+- [ ] TODO
+
+</details>
+
+#### 3.9 Password reset
+
+<details open>
+
+<summary>Get a password reset token</summary>
+
+- [ ] TODO
+
+</details>
+
+<details open>
+
+<summary>Create a password reset token</summary>
+
+- [ ] TODO
+
+</details>
+
+<details open>
+
+<summary>Reset the password</summary>
+
+- [ ] TODO
+
+</details>
+
+
+#### 3.10 Organization membership
+
+<details open>
+
+<summary>Get an organization membership</summary>
+
+- [ ] TODO
+
+</details>
+
+<details open>
+
+<summary>List organization memberships</summary>
+
+- [ ] TODO
+
+</details>
+
+<details open>
+
+<summary>Create an organization membership</summary>
+
+- [ ] TODO
+
+</details>
+
+<details open>
+
+<summary>Update an organization membership</summary>
+
+- [ ] TODO
+
+</details>
+
+<details open>
+
+<summary>Delete an organization membership</summary>
+
+- [ ] TODO
+
+</details>
+
+<details open>
+
+<summary>Deactivate an organization membership</summary>
+
+- [ ] TODO
+
+</details>
+
+<details open>
+
+<summary>Reactivate an organization membership</summary>
+
+- [ ] TODO
+
+</details>
+
+#### 3.11 Invitation
+
+<details open>
+
+<summary>Get an invitation</summary>
+
+- [ ] TODO
+
+</details>
+
+<details open>
+
+<summary>Find an invitation by token</summary>
+
+- [ ] TODO
+
+</details>
+
+<details open>
+
+<summary>List invitations</summary>
+
+- [ ] TODO
+
+</details>
+
+<details open>
+
+<summary>Send an invitation</summary>
+
+- [ ] TODO
+
+</details>
+
+<details open>
+
+<summary>Revoke an invitation</summary>
+
+- [ ] TODO
+
+</details>
+
+#### 3.12 Logout
+
+<details open>
+
+<summary>End a user’s session.</summary>
+
+- [ ] TODO
+
+</details>
+
+### 4. Single Sign-On
+
+#### 4.1 Get an authorization URL
+
+- [ ] TODO
 
 #### 4.2 Profile
 - [ ] TODO
@@ -535,16 +529,20 @@ Error handling
 #### 7.1 Organization domain
 - [ ] TODO
 
-### 8.. Multi-Factor Auth
+### 8. Multi-Factor Auth
 
-#### 8..1 Enroll
+#### 8.1 Enroll
 - [ ] TODO
-#### 8..2 Challenge
+#### 8.2 Challenge
 - [ ] TODO
-#### 8..3 Factor
+#### 8.3 Factor
 - [ ] TODO
 
 ## Testing
+
+This package uses fixtures to test the API. These fixtures have been generated by running running real API call and saving the response in the `tests/Fixtures` directory.
+
+These fixtures are close to the real API response as opposed to mocking a fake response. 
 
 ```bash
 composer test
@@ -552,7 +550,7 @@ composer test
 
 ## Changelog
 
-@TODO: Add a link to the changelog file.
+You can find the changes made in the [repository Releases page](https://github.com/njoguamos/laravel-workos/releases)
 
 ## Contributing
 

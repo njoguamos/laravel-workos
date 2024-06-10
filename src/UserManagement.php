@@ -29,8 +29,6 @@ class UserManagement
 
         $response = $this->connector->send(request: $request);
 
-        // TODO: Consider handling non 3xx responses
-
         return $response->getPsrResponse()->getHeaderLine('Location');
     }
 }
