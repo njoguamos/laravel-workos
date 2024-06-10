@@ -21,7 +21,6 @@ describe(description: 'get an authorization url', tests: function () {
         $dto = new AuthorizationRequestDTO(
             provider: Provider::GOOGLE,
             redirect_uri: 'http://localhost:9999999999999999/callback',
-            code_challenge_method: "test",
         );
 
         expect(
@@ -41,7 +40,6 @@ describe(description: 'get an authorization url', tests: function () {
         $dto = new AuthorizationRequestDTO(
             provider: Provider::AUTHKIT,
             redirect_uri: 'http://localhost:5173/callback',
-            code_challenge_method: "test",
         );
 
         expect(

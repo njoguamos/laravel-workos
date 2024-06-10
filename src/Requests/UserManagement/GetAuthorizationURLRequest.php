@@ -31,7 +31,12 @@ class GetAuthorizationURLRequest extends Request
 
     protected function defaultQuery(): array
     {
-        return [...$this->dto->filled(), 'client_id' => $this->client_id];
+        return [
+            ...$this->dto->filled(),
+            'client_id'             => $this->client_id,
+            'response_type'         => "code",  // The only valid option
+            'code_challenge_method' => "S256",// The only valid PKCE code challenge method
+        ];
     }
 
     public function hasRequestFailed(Response $response): ?bool

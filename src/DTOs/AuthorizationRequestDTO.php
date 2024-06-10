@@ -19,8 +19,6 @@ class AuthorizationRequestDTO extends Data
     public function __construct(
         public readonly Provider $provider,
         public readonly string $redirect_uri,
-        public readonly string $response_type = "code", // The only valid option
-        public readonly string $code_challenge_method = "S256", // The only valid PKCE code challenge method
         public readonly ?string $code_challenge = null,
         public readonly ?string $connection_id = null,
         public readonly ?string $organization_id = null,
