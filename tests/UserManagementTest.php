@@ -113,9 +113,28 @@ describe(description: 'get an authorization url', tests: function () {
         );
     });
 
+    it(description: 'throws an exception if the connection invalid', closure: function () {
+
+        MockClient::global(mockData: [
+            GetAuthorizationURLRequest::class => MockResponse::fixture(name: 'GetAuthorizationURL-connection_invalid'),
+        ]);
+
+        $dto = new AuthorizationRequestDTO(
+            provider: Provider::AUTHKIT,
+            redirect_uri: 'http://localhost:5173/callback',
+            connection_id: 'conn_123456'
+        );
+
+        expect(
+            value: fn () => (new UserManagement())->getAuthorizationURL(dto: $dto)
+        )->toThrow(
+            exception: WorkosRequestException::class,
+            exceptionMessage: trans(key: 'workos::workos.exceptions.connection_invalid')
+        );
+    });
+
     it(description: 'throws an exception if access denied')->todo();
     it(description: 'throws an exception if a connection could not be uniquely identified using the provided connection selector')->todo();
-    it(description: 'throws an exception if the connection invalid')->todo();
     it(description: 'throws an exception if the connection strategy is invalid')->todo();
     it(description: 'throws an exception if the connection used was unlinked')->todo();
     it(description: 'throws an exception if the invalid connection selector is provided')->todo();
