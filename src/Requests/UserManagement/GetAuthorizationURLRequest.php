@@ -17,7 +17,7 @@ class GetAuthorizationURLRequest extends Request
     protected array $errors = [
         'access_denied', 'ambiguous_connection_selector', 'connection_invalid', 'connection_strategy_invalid',
         'connection_unlinked', 'invalid_connection_selector', 'organization_invalid', 'oauth_failed',
-        'server_error', 'client-id-invalid', 'redirect-uri-invalid',
+        'server_error', 'client-id-invalid', 'redirect-uri-invalid', 'code_challenge_missing'
     ];
 
     public function __construct(public AuthorizationRequestDTO $dto, public string $client_id)
@@ -32,10 +32,8 @@ class GetAuthorizationURLRequest extends Request
     protected function defaultQuery(): array
     {
         return [
-            ...$this->dto->filled(),
-            'client_id'             => $this->client_id,
-            'response_type'         => "code",  // The only valid option
-            'code_challenge_method' => "S256",// The only valid PKCE code challenge method
+            ...$this->dto->resolved(),
+            'client_id' => $this->client_id,
         ];
     }
 
@@ -49,6 +47,7 @@ class GetAuthorizationURLRequest extends Request
             }
         }
 
-        return true;
+        // Any response other than a redirect should be treated as an error.
+        return ! $response->redirect();
     }
 }

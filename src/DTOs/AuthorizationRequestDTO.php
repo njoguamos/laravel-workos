@@ -19,7 +19,9 @@ class AuthorizationRequestDTO extends Data
     public function __construct(
         public readonly Provider $provider,
         public readonly string $redirect_uri,
+        public readonly string  $response_type = "code",  // The only valid option is 'code'
         public readonly ?string $code_challenge = null,
+        public readonly ?string $code_challenge_method = null, // The only valid PKCE code challenge value is
         public readonly ?string $connection_id = null,
         public readonly ?string $organization_id = null,
         public readonly ?string $state = null,
@@ -27,5 +29,14 @@ class AuthorizationRequestDTO extends Data
         public readonly ?string $domain_hint = null,
         public readonly ?ScreenHint $screen_hint = null,
     ) {
+    }
+
+    public function resolved(): array
+    {
+        return [
+         ...$this->filled(),
+                'provider'    => $this->provider->value,
+                'screen_hint' => $this->screen_hint?->value,
+        ];
     }
 }
