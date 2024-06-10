@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace NjoguAmos\LaravelWorkos\Requests\UserManagement;
 
-use NjoguAmos\LaravelWorkos\Enums\Provider;
+use NjoguAmos\LaravelWorkos\DTOs\AuthorizationRequestDTO;
 use NjoguAmos\LaravelWorkos\Exceptions\WorkosRequestException;
 use Saloon\Enums\Method;
 use Saloon\Http\Request;
@@ -20,11 +20,8 @@ class GetAuthorizationURLRequest extends Request
         'server_error', 'client-id-invalid', 'redirect-uri-invalid',
     ];
 
-    public function __construct(
-        protected readonly string $client_id,
-        protected readonly Provider $provider,
-        protected readonly string $redirectUri,
-    ) {
+    public function __construct(public AuthorizationRequestDTO $dto, public string $client_id)
+    {
     }
 
     public function resolveEndpoint(): string
@@ -34,12 +31,7 @@ class GetAuthorizationURLRequest extends Request
 
     protected function defaultQuery(): array
     {
-        return [
-            'response_type' => "code", // The only valid option
-            'client_id'     => $this->client_id,
-            'provider'      => $this->provider->value,
-            'redirect_uri'  => $this->redirectUri,
-        ];
+        return [...$this->dto->filled(), 'client_id' => $this->client_id];
     }
 
     public function hasRequestFailed(Response $response): ?bool

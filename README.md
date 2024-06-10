@@ -14,6 +14,7 @@
 - ✅ The package has been optimised for Laravel 10+
 - ✅ Offer developer friendly error handling e.g. `Get an authorization URL Errors`
 - ✅ Offers language translations 
+- ✅ Users [Spatie DTOs](https://github.com/spatie/laravel-data/) for efficient data handling
 - ✅ TODO: Add more reasons here
 
 ## Installation

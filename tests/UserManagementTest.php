@@ -2,6 +2,7 @@
 
 declare(strict_types=1);
 
+use NjoguAmos\LaravelWorkos\DTOs\AuthorizationRequestDTO;
 use NjoguAmos\LaravelWorkos\Enums\Provider;
 use NjoguAmos\LaravelWorkos\Exceptions\WorkosRequestException;
 use NjoguAmos\LaravelWorkos\Requests\UserManagement\GetAuthorizationURLRequest;
@@ -13,18 +14,18 @@ describe(description: 'get an authorization url', tests: function () {
 
     it(description: 'throws an error if redirect url is invalid', closure: function () {
 
-        new MockClient([
+        MockClient::global([
             GetAuthorizationURLRequest::class => MockResponse::fixture(name: 'GetAuthorizationURL-redirect-uri-invalid'),
         ]);
 
-        config()->set(key: 'workos.client_id', value: 'client_01HZ82ZG4W0NNAKZ9MEHF3RSCF');
+        $dto = new AuthorizationRequestDTO(
+            provider: Provider::GOOGLE,
+            redirect_uri: 'http://localhost:9999999999999999/callback',
+            code_challenge_method: "test",
+        );
 
         expect(
-            value: fn () => (new UserManagement())
-                ->getAuthorizationURL(
-                    provider: Provider::AUTHKIT,
-                    redirectUri: 'http://localhost:99999999/callback',
-                )
+            value: fn () => (new UserManagement())->getAuthorizationURL($dto)
         )->toThrow(
             exception: WorkosRequestException::class,
             exceptionMessage: trans(key: 'workos::workos.exceptions.redirect_uri_invalid')
@@ -33,16 +34,18 @@ describe(description: 'get an authorization url', tests: function () {
 
     it(description: 'throws an error if client id is invalid', closure: function () {
 
-        new MockClient([
+        MockClient::global([
             GetAuthorizationURLRequest::class => MockResponse::fixture(name: 'GetAuthorizationURL-client-id-invalid'),
         ]);
 
+        $dto = new AuthorizationRequestDTO(
+            provider: Provider::AUTHKIT,
+            redirect_uri: 'http://localhost:5173/callback',
+            code_challenge_method: "test",
+        );
+
         expect(
-            value: fn () => (new UserManagement())
-                ->getAuthorizationURL(
-                    provider: Provider::AUTHKIT,
-                    redirectUri: 'http://localhost:5173/callback',
-                )
+            value: fn () => (new UserManagement())->getAuthorizationURL($dto)
         )->toThrow(
             exception: WorkosRequestException::class,
             exceptionMessage: trans(key: 'workos::workos.exceptions.client_id_invalid')

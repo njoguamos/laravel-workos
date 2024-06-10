@@ -5,8 +5,7 @@ declare(strict_types=1);
 namespace NjoguAmos\LaravelWorkos;
 
 use NjoguAmos\LaravelWorkos\Connectors\WorkosConnector;
-use NjoguAmos\LaravelWorkos\Enums\Provider;
-use NjoguAmos\LaravelWorkos\Exceptions\WorkosRequestException;
+use NjoguAmos\LaravelWorkos\DTOs\AuthorizationRequestDTO;
 use NjoguAmos\LaravelWorkos\Requests\UserManagement\GetAuthorizationURLRequest;
 use Saloon\Exceptions\Request\FatalRequestException;
 use Saloon\Exceptions\Request\RequestException;
@@ -24,25 +23,14 @@ class UserManagement
      * @throws FatalRequestException
      * @throws RequestException
      */
-    public function getAuthorizationURL(Provider $provider, string $redirectUri): string
+    public function getAuthorizationURL(AuthorizationRequestDTO $dto): string
     {
-        $request = new GetAuthorizationURLRequest(
-            client_id: $this->connector->clientId(),
-            provider: $provider,
-            redirectUri: $redirectUri,
-        );
+        $request = new GetAuthorizationURLRequest(dto: $dto, client_id: $this->connector->getClientId());
 
         $response = $this->connector->send(request: $request);
 
-        // If response is not a redirect, throw an exception
-        if (! $response->redirect()) {
-            throw WorkosRequestException::create(
-                message: trans(key: 'workos::workos.exceptions.client_id_is_missing')
-            );
-        }
+        // TODO: Consider handling non 3xx responses
 
-        $redirectUrl = $response->getPsrResponse()->getHeaderLine('Location');
-
-        return $redirectUrl;
+        return $response->getPsrResponse()->getHeaderLine('Location');
     }
 }

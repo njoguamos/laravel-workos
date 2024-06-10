@@ -19,8 +19,7 @@ it(description: 'set the default headers', closure: function () {
     $connector = app(abstract: WorkosConnector::class);
 
     $expectedHeaders = [
-        'Content-Type' => 'application/json',
-        'Accept'       => 'application/json',
+        'Content-Type' => 'application/json'
     ];
 
     expect(value: $connector->headers()->all())->toBe(expected: $expectedHeaders);

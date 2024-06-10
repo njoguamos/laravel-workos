@@ -37,7 +37,7 @@ class WorkosConnector extends Connector
         ];
     }
 
-    public function clientId(): string
+    public function getClientId(): string
     {
         return $this->clientId;
     }
