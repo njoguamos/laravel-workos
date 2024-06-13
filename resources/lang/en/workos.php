@@ -20,5 +20,14 @@ return [
         'server_error'                  => 'The SSO authentication failed for the user. More detailed errors and steps to resolve are available in the Sessions tab on the connection page in the WorkOS Dashboard.',
 
         'client_id_invalid' => 'The client ID is invalid. Please set `WORKOS_CLIENT_ID` in your `.env` file with a value from your Workos dashboard.',
+    ],
+
+    'errors' => [
+        400 => 'The request was not acceptable. Check that the parameters were correct.',
+        401 => 'The API key used was invalid. Check that the API key is correct.',
+        403 => 'The API key used did not have the correct permissions. Check that the API key has the correct permissions.',
+        404 => 'The resource was not found. Refer to the message for more information.',
+        422 => 'Validation failed for the request. Check that the parameters were correct.',
+        429 => 'Too many requests. Refer to the Rate Limits section.',
     ]
 ];

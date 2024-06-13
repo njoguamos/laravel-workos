@@ -15,7 +15,8 @@
 - ✅ The package has been optimised for Laravel 10+
 - ✅ Offer developer friendly error handling e.g. `Get an authorization URL Errors`
 - ✅ Offers language translations 
-- ✅ Users [Spatie DTOs](https://github.com/spatie/laravel-data/) for efficient data handling
+- ✅ Users Data Object Transfer for efficient data handling, in-and-out of the WorkOS API.
+- ✅ Automatically prevent hitting rate limits and handle retries.
 - ✅ TODO: Add more reasons here
 
 ## Installation
@@ -46,6 +47,178 @@ php artisan vendor:publish --tag="workos-translations"
 ```
 
 ## Usage
+
+### 0.Requests, Response and Errors
+
+### 0.1 Making Request to WorkOs API
+
+Under the hood, this package uses [Saloon](https://github.com/saloonphp/saloon) to make requests to the WorkOS API.
+
+When making requests, your must instantiate the corresponding Data Transfer Objects (DTOs). These DTOs are powered by [Spatie Laravel Data](https://github.com/spatie/laravel-data). DTOs makes it easier to pass data to-and-fro the WorkOS API.
+
+Here is an example on how to make a request and handle errors.
+
+```php
+<?php
+
+declare(strict_types=1);
+
+namespace App\Http\Controllers;
+
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
+use Illuminate\Validation\Rule;
+use NjoguAmos\LaravelWorkos\DTOs\CodeAuthDTO;
+use NjoguAmos\LaravelWorkos\DTOs\AuthUserDTO;
+use NjoguAmos\LaravelWorkos\Enums\Provider;
+use NjoguAmos\LaravelWorkos\UserManagement;
+
+class AuthorizationUrlController extends Controller
+{
+    public function __invoke(Request $request)
+    {
+        $validated = $request->validate([
+            'code' => ['required', 'string'],
+        ]);
+
+        try {
+            $dto = new CodeAuthDTO(
+                provider: $validated['code'],
+                ip_address: $request->ip(),
+                user_agent: $request->userAgent()
+            );
+
+            /** @var AuthUserDTO $user */
+            $authUser = (new UserManagement())->authenticateWithCode($dto);
+        } catch (\Saloon\Exceptions\Request\FatalRequestException $e) {
+            // Request did not reach the WorkOS API. Handle it.
+        } catch (\Saloon\Exceptions\Request\RequestException $e) {
+            // Request reached the WorkOS API but 4xx or 5xx error occurred. Handle it.
+        }
+
+        // You have a user. Do something with it.
+        return response()->json($authUser->json());
+    }
+}
+```
+
+### 0.2 Response Handling
+
+The default response format is a DTO object. This object instance differs depending on the request made. For example, for the about request the response is an instance of `CodeAuthDTO`.
+
+```php
+use NjoguAmos\LaravelWorkos\DTOs\AuthUserDTO;
+use NjoguAmos\LaravelWorkos\UserManagement;
+
+/** @var AuthUserDTO $user */
+$authUser = (new UserManagement())->authenticateWithCode($dto);
+
+dd($authUser);
+```
+The die-dump outputs the following.
+
+```php
+NjoguAmos\LaravelWorkos\DTOs\AuthUserDTO {#1457
+  +user: NjoguAmos\LaravelWorkos\DTOs\UserDTO {#1532
+    +object: "user"
+    +id: "user_01E4ZCR3C56J083X43JQXF3JK5"
+    +email: "marcelina.davis@example.com"
+    +email_verified: true
+    +created_at: "2021-06-25T19:07:33.155Z"
+    +updated_at: "2021-06-25T19:07:33.155Z"
+    +first_name: "Marcelina"
+    +last_name: "Davis"
+    +profile_picture_url: "https://workoscdn.com/images/v1/123abc"
+  }
+  +access_token: "eyJhb.nNzb19vaWRjX2tleV9.lc5Uk4yWVk5In0"
+  +refresh_token: "yAjhKk123NLIjdrBdGZPf8pLIDvK"
+  +authentication_method: "GoogleOAuth"
+  +organization_id: "org_01H945H0YD4F97JN9MATX7BYAG"
+  +impersonator: null
+  #response: Saloon\Http\Response {#1528}
+}
+```
+
+And when die-dump the json `dd($authUser->json())`
+
+```json
+{
+    "user": {
+        "object": "user",
+        "id": "user_01E4ZCR3C56J083X43JQXF3JK5",
+        "email": "marcelina.davis@example.com",
+        "email_verified": true,
+        "created_at": "2021-06-25T19:07:33.155Z",
+        "updated_at": "2021-06-25T19:07:33.155Z",
+        "first_name": "Marcelina",
+        "last_name": "Davis",
+        "profile_picture_url": "https://workoscdn.com/images/v1/123abc"
+    },
+    "access_token": "eyJhb.nNzb19vaWRjX2tleV9.lc5Uk4yWVk5In0",
+    "refresh_token": "yAjhKk123NLIjdrBdGZPf8pLIDvK",
+    "authentication_method": "GoogleOAuth",
+    "organization_id": "org_01H945H0YD4F97JN9MATX7BYAG",
+    "impersonator": null
+}
+```
+
+### 0.3 Response Errors
+
+If an error occurs, the package will throw either of the of exceptions.
+
+1. `Saloon\Exceptions\Request\FatalRequestException`.
+
+This exception is thrown when the package encountered a problem before the WorkOS API was able to respond. For example: An issue with connecting to the API or an SSL error.
+
+You can access the pending PendingRequest that caused the exception by calling the `getPendingRequest` method on the exception which will return an instance of `Saloon\Http\PendingRequest`. This comes with handy methods to help you debug the request.
+
+```php
+try {
+    // ...
+} 
+} catch (\Saloon\Exceptions\Request\FatalRequestException $e) {
+    $e->getMessage(); // Gets the Exception message
+    $e->getCode(); // Gets the Exception code
+    $pendingRequest = $e->getPendingRequest(); // Get the PendingRequest that caused the exception.
+    $body = $pendingRequest->body(); // Retrieve the body on the instance
+    $request = $pendingRequest->getRequest(); // Get the request
+    $headers = $request->headers(); //Access the headers
+    
+    // Use the IDE auto-completion to see more methods.
+}
+````
+
+2. `Saloon\Exceptions\Request\RequestException` 
+
+This exception is thrown when the WorkOS API responds with a 4xx or 5xx error. You can access the response by calling the `getResponse` method on the exception which will return an instance of `Saloon\Http\Response`. The response class comes with handy methods to help you debug the response. A list of all these methods is available in [Saloon Documentation](https://docs.saloon.dev/the-basics/responses#useful-methods)
+
+```php
+try {
+    // ...
+} 
+} catch (\Saloon\Exceptions\Request\RequestException $e) {
+    $e->status(); // Get the HTTP status code.
+    $e->body(); // Returns the raw response body as a string
+    $e->json(); // Retrieves a JSON response body and json_decodes it into an array.
+    $->getPsrRequest(); // The PSR-7 request that was built up by Saloon
+    $->getPsrResponse(); // The PSR-7 response that was built up by the HTTP client/sender.
+    
+    // Use the IDE auto-completion to see more methods.
+}
+````
+
+3. `Saloon\RateLimitPlugin\Exceptions\RateLimitReachedException`
+
+```php
+try {
+   // ...
+} catch (RateLimitReachedException $exception) {
+    $seconds = $exception->getLimit()->getRemainingSeconds();
+    
+    // Return our users back to our application with a custom response that could be 
+    // shown on the front end.
+}
+```
 
 ### 1. Events
 
@@ -159,14 +332,14 @@ php artisan vendor:publish --tag="workos-translations"
 
 <summary>Get an authorization URL</summary>
 
-To get the authorization URL, call the `getAuthorizationURL` method of `UserManagement` class. The method accepts an instance of `AuthorizationRequestDTO` as an argument. 
+To get the authorization URL, call the `getAuthorizationURL` method of `UserManagement` class. The method accepts an instance of `AuthorizationRequestDTO` as an argument.
 
 ```php
-use NjoguAmos\LaravelWorkos\DTOs\AuthorizationRequestDTO;
+use NjoguAmos\LaravelWorkos\DTOs\AuthUrlDTO;
 use NjoguAmos\LaravelWorkos\UserManagement;
 use NjoguAmos\LaravelWorkos\Enums\Provider;
 
-$dto = new AuthorizationRequestDTO(
+$dto = new AuthUrlDTO(
     provider: Provider::GOOGLE,
     redirect_uri: 'http://localhost:3000/callback',
 );
@@ -174,61 +347,10 @@ $dto = new AuthorizationRequestDTO(
 $url = (new UserManagement())->getAuthorizationURL($dto);
 ```
 
- You should redirect your users to `response URL` to complete the authentication. 
+The response ia string containing the url. You should redirect your users to `response URL` to complete the authentication. 
 
 ```text
 https://accounts.google.com/o/oauth2/v2/auth?access_type=offline&scope=https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fuserinfo.email%20https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fuserinfo.profile&state=eyJhbGciOiJIUzIGHJKDSFSFGGF7.eyJhcGkiOiJ1c2VyX21hbmFnZW1lbnQiLCJyZWRpcmVjdF91cmkiOiJodHRwOi8vbG9jYUYGASFIUFSGUIF76sDFGsjgdytUIYXQiOjE3MTgwMzY4NTMsImV4cCI6MTcxODAzNzc1M30.XVLCkLerRvwuVzC_Qrugbi3mzN36g8ROJQKiGGVOL8w&response_type=code&client_id=107873717349-glhtihlrvlblbs4u94teon3o5fcqb79f.apps.googleusercontent.com&redirect_uri=https%3A%2F%2Fauth.workos.com%2Fsso%2Foauth%2Fgoogle%2FLIDju2jt3JCqKGExIexjgOSQ1%2Fcallback
-```
-
-Here is practical example on a laravel application. 
-
-```php
-<?php
-
-declare(strict_types=1);
-
-namespace App\Http\Controllers;
-
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Log;
-use Illuminate\Validation\Rule;
-use NjoguAmos\LaravelWorkos\DTOs\AuthorizationRequestDTO;
-use NjoguAmos\LaravelWorkos\Enums\Provider;
-use NjoguAmos\LaravelWorkos\Facades\UserManagement;
-
-class AuthorizationUrlController extends Controller
-{
-    public function __invoke(Request $request)
-    {
-        $validated = $request->validate([
-            'provider'     => ['required', Rule::enum(type: Provider::class)],
-            'redirect_uri' => ['required', 'url'],
-        ]);
-
-        try {
-            $dto = new AuthorizationRequestDTO(
-                provider: $validated['provider'],
-                redirect_uri: $validated['redirect_uri'],
-            );
-
-            $url = UserManagement::getAuthorizationURL($dto);
-        } catch (\Exception $e) {
-            // Log this error for debugging
-            Log::error($e->getMessage());
-
-            // Throw any exception you want
-            throw new \RuntimeException(
-                message: "Unable to generate authorization URL fro for `{$validated['provider']}`. Please try again later.",
-            );
-        }
-
-        // At this point, you have the URL here, you can:
-        // - return it to the client as json response
-        // - return the URL as in view
-        // - redirect the user to the url
-        return redirect()->away($url);
-    }
-}
 ```
 
 > [!NOTE]
@@ -244,7 +366,50 @@ class AuthorizationUrlController extends Controller
 
 <summary>Authenticate with code</summary>
 
-- [ ] TODO
+To authenticate user with a code, call the `authenticateWithCode` method of `UserManagement` class. The method accepts an instance of `CodeAuthDTO` as an argument.
+
+```php
+use NjoguAmos\LaravelWorkos\DTOs\CodeAuthDTO;
+use NjoguAmos\LaravelWorkos\UserManagement;
+
+$dto = new CodeAuthDTO(
+        code: '01HZDJKXHRS9DVDN74B4W22M3M',
+        ip_address: '168.0.2.45',
+        user_agent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36'
+    );
+
+$response = (new UserManagement())->authenticateWithCode(dto: $dto);
+```
+
+The response is a `AuthUserDTO` object which can be used as an `object` or converted to `json` ora `array`.
+
+```php
+$json = $response->json()
+```
+
+Output
+
+```json
+{
+    "user": {
+        "object": "user",
+        "id": "user_01E4ZCR3C56J083X43JQXF3JK5",
+        "email": "marcelina.davis@example.com",
+        "email_verified": true,
+        "created_at": "2021-06-25T19:07:33.155Z",
+        "updated_at": "2021-06-25T19:07:33.155Z",
+        "first_name": "Marcelina",
+        "last_name": "Davis",
+        "profile_picture_url": "https://workoscdn.com/images/v1/123abc"
+    },
+    "access_token": "eyJhb.nNzb19vaWRjX2tleV9.lc5Uk4yWVk5In0",
+    "refresh_token": "yAjhKk123NLIjdrBdGZPf8pLIDvK",
+    "authentication_method": "GoogleOAuth",
+    "organization_id": "org_01H945H0YD4F97JN9MATX7BYAG",
+    "impersonator": null
+}
+```
+
 
 </details>
 
@@ -592,10 +757,6 @@ class AuthorizationUrlController extends Controller
 - [ ] TODO
 
 ## Testing
-
-This package uses fixtures to test the API. These fixtures have been generated by running running real API call and saving the response in the `tests/Fixtures` directory.
-
-These fixtures are close to the real API response as opposed to mocking a fake response. 
 
 ```bash
 composer test
