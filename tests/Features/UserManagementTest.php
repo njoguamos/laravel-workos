@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 use NjoguAmos\LaravelWorkos\DTOs\CodeAuthDTO;
 use NjoguAmos\LaravelWorkos\DTOs\AuthUrlDTO;
+use NjoguAmos\LaravelWorkos\Enums\AuthMethod;
 use NjoguAmos\LaravelWorkos\Enums\Provider;
 use NjoguAmos\LaravelWorkos\Requests\UserManagement\AuthWithCodeRequest;
 use NjoguAmos\LaravelWorkos\Requests\UserManagement\GetAuthURLRequest;
@@ -54,7 +55,7 @@ it(description: 'can authenticate user with a valid code', closure: function () 
         ],
         "access_token"          => "eyJhb.nNzb19vaWRjX2tleV9.lc5Uk4yWVk5In0",
         "refresh_token"         => "yAjhKk123NLIjdrBdGZPf8pLIDvK",
-        "authentication_method" => "GoogleOauth",
+        "authentication_method" => "GoogleOAuth",
         "organization_id"       => "org_01H945H0YD4F97JN9MATX7BYAG",
         "impersonator"          => null
     ];
@@ -71,5 +72,5 @@ it(description: 'can authenticate user with a valid code', closure: function () 
 
     $response = (new UserManagement())->authenticateWithCode(dto: $dto);
 
-    expect($response->array())->toBe($responseData);
+    expect($response->array())->toBe([...$responseData, "authentication_method" => AuthMethod::GOOGLE]);
 });

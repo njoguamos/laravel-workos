@@ -48,7 +48,9 @@ php artisan vendor:publish --tag="workos-translations"
 
 ## Usage
 
-### 0. Making Request and Handling Errors
+### 0.Requests, Response and Errors
+
+### 0.1 Making Request to WorkOs API
 
 Under the hood, this package uses [Saloon](https://github.com/saloonphp/saloon) to make requests to the WorkOS API.
 
@@ -67,6 +69,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Validation\Rule;
 use NjoguAmos\LaravelWorkos\DTOs\CodeAuthDTO;
+use NjoguAmos\LaravelWorkos\DTOs\AuthUserDTO;
 use NjoguAmos\LaravelWorkos\Enums\Provider;
 use NjoguAmos\LaravelWorkos\UserManagement;
 
@@ -85,7 +88,8 @@ class AuthorizationUrlController extends Controller
                 user_agent: $request->userAgent()
             );
 
-            $user = (new UserManagement())->getAuthorizationURL($dto);
+            /** @var AuthUserDTO $user */
+            $authUser = (new UserManagement())->authenticateWithCode($dto);
         } catch (\Saloon\Exceptions\Request\FatalRequestException $e) {
             // Request did not reach the WorkOS API. Handle it.
         } catch (\Saloon\Exceptions\Request\RequestException $e) {
@@ -93,10 +97,72 @@ class AuthorizationUrlController extends Controller
         }
 
         // You have a user. Do something with it.
-        return response()->json($user);
+        return response()->json($authUser->json());
     }
 }
 ```
+
+### 0.2 Response Handling
+
+The default response format is a DTO object. This object instance differs depending on the request made. For example, for the about request the response is an instance of `CodeAuthDTO`.
+
+```php
+use NjoguAmos\LaravelWorkos\DTOs\AuthUserDTO;
+use NjoguAmos\LaravelWorkos\UserManagement;
+
+/** @var AuthUserDTO $user */
+$authUser = (new UserManagement())->authenticateWithCode($dto);
+
+dd($authUser);
+```
+The die-dump outputs the following.
+
+```php
+NjoguAmos\LaravelWorkos\DTOs\AuthUserDTO {#1457
+  +user: NjoguAmos\LaravelWorkos\DTOs\UserDTO {#1532
+    +object: "user"
+    +id: "user_01E4ZCR3C56J083X43JQXF3JK5"
+    +email: "marcelina.davis@example.com"
+    +email_verified: true
+    +created_at: "2021-06-25T19:07:33.155Z"
+    +updated_at: "2021-06-25T19:07:33.155Z"
+    +first_name: "Marcelina"
+    +last_name: "Davis"
+    +profile_picture_url: "https://workoscdn.com/images/v1/123abc"
+  }
+  +access_token: "eyJhb.nNzb19vaWRjX2tleV9.lc5Uk4yWVk5In0"
+  +refresh_token: "yAjhKk123NLIjdrBdGZPf8pLIDvK"
+  +authentication_method: "GoogleOAuth"
+  +organization_id: "org_01H945H0YD4F97JN9MATX7BYAG"
+  +impersonator: null
+  #response: Saloon\Http\Response {#1528}
+}
+```
+
+And when die-dump the json `dd($authUser->json())`
+
+```json
+{
+    "user": {
+        "object": "user",
+        "id": "user_01E4ZCR3C56J083X43JQXF3JK5",
+        "email": "marcelina.davis@example.com",
+        "email_verified": true,
+        "created_at": "2021-06-25T19:07:33.155Z",
+        "updated_at": "2021-06-25T19:07:33.155Z",
+        "first_name": "Marcelina",
+        "last_name": "Davis",
+        "profile_picture_url": "https://workoscdn.com/images/v1/123abc"
+    },
+    "access_token": "eyJhb.nNzb19vaWRjX2tleV9.lc5Uk4yWVk5In0",
+    "refresh_token": "yAjhKk123NLIjdrBdGZPf8pLIDvK",
+    "authentication_method": "GoogleOAuth",
+    "organization_id": "org_01H945H0YD4F97JN9MATX7BYAG",
+    "impersonator": null
+}
+```
+
+### 0.3 Response Errors
 
 If an error occurs, the package will throw either of the of exceptions.
 

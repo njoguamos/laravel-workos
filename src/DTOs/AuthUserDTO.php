@@ -20,7 +20,7 @@ class AuthUserDTO implements WithResponse, Arrayable
         public readonly UserDTO          $user,
         public readonly string           $access_token,
         public readonly string           $refresh_token,
-        public readonly string        $authentication_method,
+        public readonly AuthMethod | string $authentication_method,
         public readonly ?string          $organization_id = null,
         public readonly ?ImpersonatorDTO $impersonator = null,
     ) {
@@ -32,7 +32,7 @@ class AuthUserDTO implements WithResponse, Arrayable
             'user'                  => $this->user->array(),
             'access_token'          => $this->access_token,
             'refresh_token'         => $this->refresh_token,
-            'authentication_method' => AuthMethod::from($this->authentication_method),
+            'authentication_method' => is_string($this->authentication_method) ? AuthMethod::from($this->authentication_method) : $this->authentication_method,
             'organization_id'       => $this->organization_id,
             'impersonator'          => $this->impersonator?->array(),
         ];
