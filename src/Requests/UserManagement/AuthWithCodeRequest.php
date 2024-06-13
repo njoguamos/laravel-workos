@@ -7,7 +7,7 @@ namespace NjoguAmos\LaravelWorkos\Requests\UserManagement;
 use JsonException;
 use NjoguAmos\LaravelWorkos\DTOs\AuthUserDTO;
 use NjoguAmos\LaravelWorkos\DTOs\CodeAuthDTO;
-use NjoguAmos\LaravelWorkos\DTOs\impersonatorDTO;
+use NjoguAmos\LaravelWorkos\DTOs\ImpersonatorDTO;
 use NjoguAmos\LaravelWorkos\DTOs\UserDTO;
 use NjoguAmos\LaravelWorkos\Enums\GrantType;
 use Saloon\Contracts\Body\HasBody;
@@ -64,7 +64,7 @@ class AuthWithCodeRequest extends Request implements HasBody
             refresh_token: $data['refresh_token'],
             authentication_method: $data['authentication_method'],
             organization_id: $data['organization_id'],
-            impersonator: isset($data['impersonator']) ? new impersonatorDTO(
+            impersonator: isset($data['impersonator']) ? new ImpersonatorDTO(
                 email: $data['impersonator']['email'],
                 reason: $data['impersonator']['reason'],
             ) : null,

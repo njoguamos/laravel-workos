@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-use NjoguAmos\LaravelWorkos\DTOs\impersonatorDTO;
+use NjoguAmos\LaravelWorkos\DTOs\ImpersonatorDTO;
 
 it(description: 'can transform data', closure: function () {
-    $dto = new impersonatorDTO(
+    $dto = new ImpersonatorDTO(
         email: "marcelina.davis@example.com",
         reason: "Debugging user account issue.",
     );
