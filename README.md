@@ -347,7 +347,7 @@ $dto = new AuthUrlDTO(
 $url = (new UserManagement())->getAuthorizationURL($dto);
 ```
 
- You should redirect your users to `response URL` to complete the authentication. 
+The response ia string containing the url. You should redirect your users to `response URL` to complete the authentication. 
 
 ```text
 https://accounts.google.com/o/oauth2/v2/auth?access_type=offline&scope=https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fuserinfo.email%20https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fuserinfo.profile&state=eyJhbGciOiJIUzIGHJKDSFSFGGF7.eyJhcGkiOiJ1c2VyX21hbmFnZW1lbnQiLCJyZWRpcmVjdF91cmkiOiJodHRwOi8vbG9jYUYGASFIUFSGUIF76sDFGsjgdytUIYXQiOjE3MTgwMzY4NTMsImV4cCI6MTcxODAzNzc1M30.XVLCkLerRvwuVzC_Qrugbi3mzN36g8ROJQKiGGVOL8w&response_type=code&client_id=107873717349-glhtihlrvlblbs4u94teon3o5fcqb79f.apps.googleusercontent.com&redirect_uri=https%3A%2F%2Fauth.workos.com%2Fsso%2Foauth%2Fgoogle%2FLIDju2jt3JCqKGExIexjgOSQ1%2Fcallback
@@ -366,7 +366,50 @@ https://accounts.google.com/o/oauth2/v2/auth?access_type=offline&scope=https%3A%
 
 <summary>Authenticate with code</summary>
 
-- [ ] TODO
+To authenticate user with a code, call the `authenticateWithCode` method of `UserManagement` class. The method accepts an instance of `CodeAuthDTO` as an argument.
+
+```php
+use NjoguAmos\LaravelWorkos\DTOs\CodeAuthDTO;
+use NjoguAmos\LaravelWorkos\UserManagement;
+
+$dto = new CodeAuthDTO(
+        code: '01HZDJKXHRS9DVDN74B4W22M3M',
+        ip_address: '168.0.2.45',
+        user_agent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36'
+    );
+
+$response = (new UserManagement())->authenticateWithCode(dto: $dto);
+```
+
+The response is a `AuthUserDTO` object which can be used as an `object` or converted to `json` ora `array`.
+
+```php
+$json = $response->json()
+```
+
+Output
+
+```json
+{
+    "user": {
+        "object": "user",
+        "id": "user_01E4ZCR3C56J083X43JQXF3JK5",
+        "email": "marcelina.davis@example.com",
+        "email_verified": true,
+        "created_at": "2021-06-25T19:07:33.155Z",
+        "updated_at": "2021-06-25T19:07:33.155Z",
+        "first_name": "Marcelina",
+        "last_name": "Davis",
+        "profile_picture_url": "https://workoscdn.com/images/v1/123abc"
+    },
+    "access_token": "eyJhb.nNzb19vaWRjX2tleV9.lc5Uk4yWVk5In0",
+    "refresh_token": "yAjhKk123NLIjdrBdGZPf8pLIDvK",
+    "authentication_method": "GoogleOAuth",
+    "organization_id": "org_01H945H0YD4F97JN9MATX7BYAG",
+    "impersonator": null
+}
+```
+
 
 </details>
 
