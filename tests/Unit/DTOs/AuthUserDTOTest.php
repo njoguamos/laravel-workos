@@ -36,11 +36,11 @@ it(description: 'can transform data', closure: function () {
                 'last_name'           => null,
                 'profile_picture_url' => null,
             ],
-            "access_token"      => "eyJhb.nNzb19vaWRjX2tleV9.lc5Uk4yWVk5In0",
+            "access_token"          => "eyJhb.nNzb19vaWRjX2tleV9.lc5Uk4yWVk5In0",
             "refresh_token"         => "yAjhKk123NLIjdrBdGZPf8pLIDvK",
             "authentication_method" => AuthMethod::GOOGLE,
             "organization_id"       => "org_01H945H0YD4F97JN9MATX7BYAG",
-            'impersonator'      => null,
+            'impersonator'          => null,
         ]);
 
 });
