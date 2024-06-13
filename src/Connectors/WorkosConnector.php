@@ -78,7 +78,7 @@ class WorkosConnector extends Connector
     protected function resolveRateLimitStore(): RateLimitStore
     {
         return new LaravelCacheStore(
-            store: Cache::store(config(key: 'CACHE_STORE', default: 'array'))
+            store: Cache::store(config(key: 'workos.cache_store'))
         );
     }
 

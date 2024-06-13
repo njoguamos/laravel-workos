@@ -1,6 +1,5 @@
 {
     "name": "njoguamos/laravel-workos",
-    "version": "0.1.0",
     "description": "A fluent Laravel package for interacting with WorkOS API.",
     "keywords": [
         "NjoguAmos",

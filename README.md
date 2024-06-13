@@ -54,7 +54,7 @@ php artisan vendor:publish --tag="workos-translations"
 
 Under the hood, this package uses [Saloon](https://github.com/saloonphp/saloon) to make requests to the WorkOS API.
 
-When making requests, your must instantiate the corresponding Data Transfer Objects (DTOs). These DTOs are powered by [Spatie Laravel Data](https://github.com/spatie/laravel-data). DTOs makes it easier to pass data to-and-fro the WorkOS API.
+When making requests, your must instantiate the corresponding Data Transfer Objects (DTOs). DTOs makes it easier to pass data to-and-fro the WorkOS API.
 
 Here is an example on how to make a request and handle errors.
 
@@ -362,7 +362,7 @@ https://accounts.google.com/o/oauth2/v2/auth?access_type=offline&scope=https%3A%
 
 </details>
 
-<details open>
+<details>
 
 <summary>Authenticate with code</summary>
 
