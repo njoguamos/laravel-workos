@@ -9,6 +9,7 @@ use NjoguAmos\LaravelWorkos\DTOs\AuthUserDTO;
 use NjoguAmos\LaravelWorkos\DTOs\CodeAuthDTO;
 use NjoguAmos\LaravelWorkos\DTOs\ImpersonatorDTO;
 use NjoguAmos\LaravelWorkos\DTOs\UserDTO;
+use NjoguAmos\LaravelWorkos\Enums\AuthMethod;
 use NjoguAmos\LaravelWorkos\Enums\GrantType;
 use Saloon\Contracts\Body\HasBody;
 use Saloon\Enums\Method;
@@ -62,7 +63,7 @@ class AuthWithCodeRequest extends Request implements HasBody
             ),
             access_token: $data['access_token'],
             refresh_token: $data['refresh_token'],
-            authentication_method: $data['authentication_method'],
+            authentication_method: AuthMethod::from($data['authentication_method']),
             organization_id: $data['organization_id'],
             impersonator: isset($data['impersonator']) ? new ImpersonatorDTO(
                 email: $data['impersonator']['email'],

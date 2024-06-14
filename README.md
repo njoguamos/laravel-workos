@@ -102,6 +102,9 @@ class AuthorizationUrlController extends Controller
 }
 ```
 
+> [!CAUTION]
+> Always validate the request data before initiating your request. This will help you prevent unnecessary errors. 
+
 ### 0.2 Response Handling
 
 The default response format is a DTO object. This object instance differs depending on the request made. For example, for the about request the response is an instance of `CodeAuthDTO`.
@@ -177,8 +180,8 @@ try {
     // ...
 } 
 } catch (\Saloon\Exceptions\Request\FatalRequestException $e) {
-    $e->getMessage(); // Gets the Exception message
-    $e->getCode(); // Gets the Exception code
+    $message = $e->getMessage(); // Gets the Exception message
+    $code = $e->getCode(); // Gets the Exception code
     $pendingRequest = $e->getPendingRequest(); // Get the PendingRequest that caused the exception.
     $body = $pendingRequest->body(); // Retrieve the body on the instance
     $request = $pendingRequest->getRequest(); // Get the request
@@ -197,12 +200,12 @@ try {
     // ...
 } 
 } catch (\Saloon\Exceptions\Request\RequestException $e) {
-    $e->status(); // Get the HTTP status code.
-    $e->body(); // Returns the raw response body as a string
-    $e->json(); // Retrieves a JSON response body and json_decodes it into an array.
-    $->getPsrRequest(); // The PSR-7 request that was built up by Saloon
-    $->getPsrResponse(); // The PSR-7 response that was built up by the HTTP client/sender.
+    $e->getStatus(); // Get the HTTP status code.
     
+    $res = $e->getResponse();
+    $body = $res->body(); // Returns the raw response body as a string
+    $json = $res->json(); // Retrieves a JSON response body and json_decodes it into an array.
+
     // Use the IDE auto-completion to see more methods.
 }
 ````
@@ -410,6 +413,14 @@ Output
 }
 ```
 
+If the authentication did not succeed, WorkOS API will return a a `400` or `403` error which will be thrown as a `\Saloon\Exceptions\Request\RequestException`.
+
+- `400` error occurs when the authentication code is invalid or expired.
+- `403` occur when WorkOS returns predefined [Authentication errors](https://workos.com/docs/reference/user-management/authentication-errors), which include `email_verification_required`, `mfa_enrollment`, `mfa_challenge`, `organization_selection_required`, `sso_required`, and `organization_authentication_methods_required`.
+
+You can use try and catch block to handle the errors. Example you can determine if body contains `email_verification_required` and redirect user to email verification page.
+
+```php
 
 </details>
 
