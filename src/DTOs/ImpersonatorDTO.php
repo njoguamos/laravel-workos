@@ -5,8 +5,9 @@ declare(strict_types=1);
 namespace NjoguAmos\LaravelWorkos\DTOs;
 
 use NjoguAmos\LaravelWorkos\Contracts\Arrayable;
+use Spatie\LaravelData\Data;
 
-class ImpersonatorDTO implements Arrayable
+class ImpersonatorDTO extends Data implements Arrayable
 {
     /**
      * @link https://workos.com/docs/reference/user-management/authentication/code
