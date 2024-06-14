@@ -9,7 +9,7 @@ use NjoguAmos\LaravelWorkos\Enums\AuthMethod;
 use Saloon\Contracts\DataObjects\WithResponse;
 use Saloon\Traits\Responses\HasResponse;
 
-class AuthUserDTO implements WithResponse, Arrayable
+class AuthUserDTO extends BaseDTO implements WithResponse, Arrayable
 {
     use HasResponse;
 

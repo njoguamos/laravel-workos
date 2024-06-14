@@ -9,7 +9,7 @@ use NjoguAmos\LaravelWorkos\Contracts\Fillable;
 use NjoguAmos\LaravelWorkos\Enums\Provider;
 use NjoguAmos\LaravelWorkos\Enums\ScreenHint;
 
-class AuthUrlDTO implements Fillable
+class AuthUrlDTO extends BaseDTO implements Fillable
 {
     use FillableData;
 

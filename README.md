@@ -12,10 +12,11 @@
 
 ## Why use This package?
 
-- ✅ The package has been optimised for Laravel 10+
-- ✅ Offer developer friendly error handling e.g. `Get an authorization URL Errors`
-- ✅ Offers language translations 
-- ✅ Users Data Object Transfer for efficient data handling, in-and-out of the WorkOS API.
+- ✅ The package has been optimised for Laravel 10+.
+- ✅ Offer developer friendly error handling e.g. `Get an authorization URL Errors`.
+- ✅ Offers language translations .
+- ✅ Build with [Saloon PHP](https://docs.saloon.dev). This mean you can benefit from Saloon goodies such as [Laravel Plugin](https://docs.saloon.dev/installable-plugins/laravel-integration) which can debug the WorkOS API requests inside your Laravel application.
+- ✅ Users Data Object Transfer for efficient data handling. DTO are powered by [Spatie laravel data](https://spatie.be/docs/laravel-data).
 - ✅ Automatically prevent hitting rate limits and handle retries.
 - ✅ TODO: Add more reasons here
 
