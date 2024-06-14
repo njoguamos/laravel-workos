@@ -6,9 +6,8 @@ namespace NjoguAmos\LaravelWorkos\DTOs;
 
 use NjoguAmos\LaravelWorkos\Concerns\FillableData;
 use NjoguAmos\LaravelWorkos\Contracts\Fillable;
-use Spatie\LaravelData\Data;
 
-class CodeAuthDTO extends Data implements Fillable
+class CodeAuthDTO extends BaseDTO implements Fillable
 {
     use FillableData;
 

@@ -8,9 +8,8 @@ use NjoguAmos\LaravelWorkos\Contracts\Arrayable;
 use NjoguAmos\LaravelWorkos\Enums\AuthMethod;
 use Saloon\Contracts\DataObjects\WithResponse;
 use Saloon\Traits\Responses\HasResponse;
-use Spatie\LaravelData\Data;
 
-class AuthUserDTO extends Data implements WithResponse, Arrayable
+class AuthUserDTO extends BaseDTO implements WithResponse, Arrayable
 {
     use HasResponse;
 

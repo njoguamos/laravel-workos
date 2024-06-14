@@ -5,9 +5,8 @@ declare(strict_types=1);
 namespace NjoguAmos\LaravelWorkos\DTOs;
 
 use NjoguAmos\LaravelWorkos\Contracts\Arrayable;
-use Spatie\LaravelData\Data;
 
-class UserDTO extends Data implements Arrayable
+class UserDTO extends BaseDTO implements Arrayable
 {
     /**
      * @link https://workos.com/docs/reference/user-management/user
