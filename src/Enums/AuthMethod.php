@@ -6,11 +6,19 @@ namespace NjoguAmos\LaravelWorkos\Enums;
 
 enum AuthMethod: string
 {
-    case SSO = "SSO";
-    case PASS = "Password";
+    case APPLE = "AppleOAuth";
+
     case GITHUB = "GitHubOAuth";
+
     case GOOGLE = "GoogleOAuth";
-    case MICROSOFT = "MicrosoftOAuth";
-    case MAGIC = "MagicAuth";
+
     case IMPERSONATOR = "Impersonation";
+
+    case MAGIC = "MagicAuth";
+
+    case MICROSOFT = "MicrosoftOAuth";
+
+    case PASS = "Password";
+
+    case SSO = "SSO";
 }
