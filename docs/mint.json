@@ -65,12 +65,18 @@
   {
     "group": "Users",
     "pages": [
-        "user/get",
-        "user/list",
-        "user/create",
-        "user/update",
-        "user/delete"
+        "user-management/user/get",
+        "user-management/user/list",
+        "user-management/user/create",
+        "user-management/user/update",
+        "user-management/user/delete"
     ]
+},
+{
+  "group": "Identity",
+  "pages": [
+      "user-management/identity/list"
+  ]
 }
   ],
   "footerSocials": {
