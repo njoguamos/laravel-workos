@@ -17,7 +17,7 @@
   },
   "topbarLinks": [
     {
-      "name": "Support",
+      "name": "Report an Issue",
       "url": "https://github.com/njoguamos/laravel-workos/issues/new/choose"
     }
   ],
@@ -38,7 +38,14 @@
           "responses",
           "errors"
       ]
-    }
+    },
+      {
+          "group": "Guides",
+          "pages": [
+              "guides/authentication",
+              "guides/webhooks"
+          ]
+      }
   ],
   "footerSocials": {
     "x": "https://x.com/njoguamo",
