@@ -49,6 +49,8 @@ php artisan vendor:publish --tag="workos-translations"
 
 ## Documentation
 
+The documentation is available at [https://njoguamos.github.io/laravel-workos](https://njoguamos.github.io/laravel-workos).
+
 ### 1. Events
 
 <details open>
