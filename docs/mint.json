@@ -45,7 +45,23 @@
               "guides/authentication",
               "guides/webhooks"
           ]
-      }
+      },
+      {
+        "group": "Events",
+        "pages": [
+            "events/list"
+        ]
+    },
+    {
+      "group": "Organizations",
+      "pages": [
+          "organization/get",
+          "organization/list",
+          "organization/create",
+          "organization/update",
+          "organization/delete"
+      ]
+  }
   ],
   "footerSocials": {
     "x": "https://x.com/njoguamo",
