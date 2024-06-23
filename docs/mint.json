@@ -61,7 +61,17 @@
           "organization/update",
           "organization/delete"
       ]
-  }
+  },
+  {
+    "group": "Users",
+    "pages": [
+        "user/get",
+        "user/list",
+        "user/create",
+        "user/update",
+        "user/delete"
+    ]
+}
   ],
   "footerSocials": {
     "x": "https://x.com/njoguamo",
