@@ -1,0 +1,59 @@
+---
+title: 'Making Request'
+description: 'Understand how to make Request to WorkOs API'
+---
+
+Under the hood, this package uses [Saloon](https://github.com/saloonphp/saloon) to make requests to the WorkOS API.
+
+When making requests, your must instantiate the corresponding Data Transfer Objects (DTOs). DTOs makes it easier to pass data to-and-fro the WorkOS API.
+
+Here is an example on how to make a request and handle errors.
+
+## Example Request
+
+```php
+<?php
+
+declare(strict_types=1);
+
+namespace App\Http\Controllers;
+
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
+use Illuminate\Validation\Rule;
+use NjoguAmos\LaravelWorkos\DTOs\CodeAuthDTO;
+use NjoguAmos\LaravelWorkos\DTOs\AuthUserDTO;
+use NjoguAmos\LaravelWorkos\Enums\Provider;
+use NjoguAmos\LaravelWorkos\UserManagement;
+
+class AuthorizationUrlController extends Controller
+{
+    public function __invoke(Request $request)
+    {
+        $validated = $request->validate([
+            'code' => ['required', 'string'],
+        ]);
+
+        try {
+            $dto = new CodeAuthDTO(
+                provider: $validated['code'],
+                ip_address: $request->ip(),
+                user_agent: $request->userAgent()
+            );
+
+            /** @var AuthUserDTO $user */
+            $authUser = (new UserManagement())->authenticateWithCode($dto);
+        } catch (\Saloon\Exceptions\Request\FatalRequestException $e) {
+            // Request did not reach the WorkOS API. Handle it.
+        } catch (\Saloon\Exceptions\Request\RequestException $e) {
+            // Request reached the WorkOS API but 4xx or 5xx error occurred. Handle it.
+        }
+
+        // You have a user. Do something with it.
+        return response()->json($authUser->json());
+    }
+}
+```
+
+<Warning>Always validate the request data before initiating your request. This will help you prevent unnecessary errors.</Warning>
+
