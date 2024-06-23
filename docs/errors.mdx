@@ -1,0 +1,64 @@
+---
+title: 'Response Errors'
+description: 'Learn how to handle responses errors from the WorkOS API'
+---
+
+If an error occurs, the package will throw either of the of exceptions.
+
+## 1. FatalRequestException
+
+The `Saloon\Exceptions\Request\FatalRequestException` exception is thrown when the package encountered a problem before the WorkOS API was able to respond. For example: An issue with connecting to the API or an SSL error.
+
+You can access the pending PendingRequest that caused the exception by calling the `getPendingRequest` method on the exception which will return an instance of `Saloon\Http\PendingRequest`. This comes with handy methods to help you debug the request.
+
+```php
+try {
+    // ...
+}
+} catch (\Saloon\Exceptions\Request\FatalRequestException $e) {
+    $message = $e->getMessage(); // Gets the Exception message
+    $code = $e->getCode(); // Gets the Exception code
+    $pendingRequest = $e->getPendingRequest(); // Get the PendingRequest that caused the exception.
+    $body = $pendingRequest->body(); // Retrieve the body on the instance
+    $request = $pendingRequest->getRequest(); // Get the request
+    $headers = $request->headers(); //Access the headers
+
+    // Use the IDE auto-completion to see more methods.
+}
+````
+
+## 2. RequestException
+
+The `Saloon\Exceptions\Request\RequestException` exception is thrown when the WorkOS API responds with a 4xx or 5xx error. You can access the response by calling the `getResponse` method on the exception which will return an instance of `Saloon\Http\Response`.
+
+```php
+try {
+    // ...
+}
+} catch (\Saloon\Exceptions\Request\RequestException $e) {
+    $e->getStatus(); // Get the HTTP status code.
+
+    $res = $e->getResponse();
+    $body = $res->body(); // Returns the raw response body as a string
+    $json = $res->json(); // Retrieves a JSON response body and json_decodes it into an array.
+
+    // Use the IDE auto-completion to see more methods.
+}
+````
+
+The response class comes with handy methods to help you debug the response. A list of all these methods is available in [Saloon Documentation](https://docs.saloon.dev/the-basics/responses#useful-methods)
+
+## 3. RateLimitReachedException
+
+The `Saloon\RateLimitPlugin\Exceptions\RateLimitReachedException` is thrown when WorkOS APIs rate limit is reached. While this package handles rate limits automatically, you can catch this exception to handle rate limits in your application.
+
+```php
+try {
+   // ...
+} catch (RateLimitReachedException $exception) {
+    $seconds = $exception->getLimit()->getRemainingSeconds();
+
+    // Return our users back to our application with a custom
+    // response that could be shown on the front end.
+}
+```

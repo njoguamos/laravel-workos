@@ -1,0 +1,52 @@
+{
+  "$schema": "https://mintlify.com/schema.json",
+  "name": "Starter Kit",
+  "logo": {
+    "dark": "/logo/dark.svg",
+    "light": "/logo/light.svg"
+  },
+  "favicon": "/favicon.svg",
+  "colors": {
+    "primary": "#5454ed",
+    "light": "#ff3333",
+    "dark": "#5454ed",
+    "anchors": {
+      "from": "#5454ed",
+      "to": "#5454ed"
+    }
+  },
+  "topbarLinks": [
+    {
+      "name": "Support",
+      "url": "https://github.com/njoguamos/laravel-workos/issues/new/choose"
+    }
+  ],
+  "anchors": [
+    {
+      "name": "GitHub Repository",
+      "icon": "github",
+      "url": "https://github.com/njoguamos/laravel-workos"
+    }
+  ],
+  "navigation": [
+    {
+      "group": "Get Started",
+      "pages": [
+        "about",
+        "quickstart",
+          "requests",
+          "responses",
+          "errors"
+      ]
+    }
+  ],
+  "footerSocials": {
+    "x": "https://x.com/njoguamo",
+    "github": "https://github.com/njoguamos/laravel-workos"
+  },
+"analytics": {
+    "plausible": {
+        "domain": "laravel-workos.njoguamos.me.ke"
+    }
+}
+}
