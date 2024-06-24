@@ -1,6 +1,114 @@
 ---
-title: 'Get a user ⚠️'
+title: 'Get a user'
 description: 'Get the details of an existing user.'
 ---
 
-<Note>This functionality is still in development. Please check later or [submit a PR](https://github.com/njoguamos/laravel-workos) to help us build this feature.</Note>
+## Request
+
+To get the details of an existing user, call the `getUser` method of the `UserManagement` class and pass the user's id as an argument.
+
+<CodeGroup>
+
+```php New Class
+use NjoguAmos\LaravelWorkos\UserManagement;
+
+$response = (new UserManagement())->getUser(id: 'user_01J140CFC29X7PN6FF1RVXVSRJ');
+```
+
+```php Facade
+use NjoguAmos\LaravelWorkos\Facades\UserManagement;
+
+$response = UserManagement::getUser(id: 'user_01J140CFC29X7PN6FF1RVXVSRJ');
+```
+ </CodeGroup>
+
+<br/>
+
+<Accordion title="Request Parameters">
+
+    <ParamField query="id" type="string" default="none" required>
+        The unique ID of the user you want to retrieve.
+    </ParamField>
+
+</Accordion>
+
+## Response
+
+The default response in an instance of `NjoguAmos\LaravelWorkos\DTOs\UserDTO`, which can also be converted to an array `$response->array()` or to json `$response->json()`
+
+<CodeGroup>
+
+```php $response->array()
+[
+    "object" => "user"
+    "id" => "user_01E4ZCR3C56J083X43JQXF3JK5"
+    "email" => "marcelina.davis@example.com"
+    "email_verified" => true
+    "created_at" => "2021-06-25T19:07:33.155Z"
+    "updated_at" => "2021-06-25T19:07:33.155Z"
+    "first_name" => "Marcelina"
+    "last_name" => "Davis"
+    "profile_picture_url" => "https://workoscdn.com/images/v1/123abc"
+]
+```
+
+```php Default
+NjoguAmos\LaravelWorkos\DTOs\UserDTO {
+    +object: "user"
+    +id: "user_01E4ZCR3C56J083X43JQXF3JK5"
+    +email: "marcelina.davis@example.com"
+    +email_verified: true
+    +created_at: "2021-06-25T19:07:33.155Z"
+    +updated_at: "2021-06-25T19:07:33.155Z"
+    +first_name: "Marcelina"
+    +last_name: "Davis"
+    +profile_picture_url: "https://workoscdn.com/images/v1/123abc"
+}
+```
+
+
+</CodeGroup>
+
+<br/>
+
+<Accordion title="Response Parameters">
+
+    <ResponseField name="object" type="string" required>
+        Distinguishes the user object.
+    </ResponseField>
+
+    <ResponseField name="id" type="string" required>
+        The unique ID of the user.
+    </ResponseField>
+
+    <ResponseField name="email" type="string" required>
+        The email address of the user.
+    </ResponseField>
+
+    <ResponseField name="first_name" type="string">
+        The first name of the user.
+    </ResponseField>
+
+
+    <ResponseField name="last_name" type="string">
+        The last name of the user.
+    </ResponseField>
+
+    <ResponseField name="email_verified" type="boolean" required>
+        Whether the user’s email has been verified.
+    </ResponseField>
+
+    <ResponseField name="profile_picture_url" type="string">
+        A URL reference to an image representing the user.
+    </ResponseField>
+
+    <ResponseField name="created_at" type="boolean" required>
+        The timestamp when the user was created.
+    </ResponseField>
+
+    <ResponseField name="updated_at" type="boolean" required>
+        The timestamp when the user was last updated.
+    </ResponseField>
+
+</Accordion>
+
