@@ -1,97 +1,111 @@
 {
-    "$schema": "https://mintlify.com/schema.json",
-    "name": "Starter Kit",
-    "logo": {
-        "dark": "/logo/dark.svg",
-        "light": "/logo/light.svg"
-    },
-    "favicon": "/favicon.svg",
-    "colors": {
-        "primary": "#5454ed",
-        "light": "#ff3333",
-        "dark": "#5454ed",
-        "anchors": {
-            "from": "#5454ed",
-            "to": "#5454ed"
-        }
-    },
-    "topbarLinks": [
-        {
-            "name": "Report an Issue",
-            "url": "https://github.com/njoguamos/laravel-workos/issues/new/choose"
-        }
-    ],
-    "anchors": [
-        {
-            "name": "GitHub Repository",
-            "icon": "github",
-            "url": "https://github.com/njoguamos/laravel-workos"
-        }
-    ],
-    "navigation": [
-        {
-            "group": "Get Started",
-            "pages": [
-                "about",
-                "quickstart",
-                "requests",
-                "responses",
-                "errors"
-            ]
-        },
-        {
-            "group": "Guides",
-            "pages": [
-                "guides/authentication",
-                "guides/webhooks"
-            ]
-        },
-        {
-            "group": "Events",
-            "pages": [
-                "events/list"
-            ]
-        },
-        {
-            "group": "Organizations",
-            "pages": [
-                "organization/get",
-                "organization/list",
-                "organization/create",
-                "organization/update",
-                "organization/delete"
-            ]
-        },
-        {
-            "group": "Authentication",
-            "pages": [
-                "user-management/authentication/get-authorization-url"
-            ]
-        },
-        {
-            "group": "Users",
-            "pages": [
-                "user-management/user/get",
-                "user-management/user/list",
-                "user-management/user/create",
-                "user-management/user/update",
-                "user-management/user/delete"
-            ]
-        },
-        {
-            "group": "Identity",
-            "pages": [
-                "user-management/identity/list"
-            ]
-        }
-    ],
-    "footerSocials": {
-        "x": "https://x.com/njoguamo",
-        "github": "https://github.com/njoguamos/laravel-workos"
-    },
-    "analytics": {
-        "plausible": {
-            "domain": "laravel-workos.njoguamos.me.ke"
-        }
+  "$schema": "https://mintlify.com/schema.json",
+  "name": "Starter Kit",
+  "logo": {
+    "dark": "/logo/dark.svg",
+    "light": "/logo/light.svg"
+  },
+  "favicon": "/favicon.svg",
+  "colors": {
+    "primary": "#5454ed",
+    "light": "#ff3333",
+    "dark": "#5454ed",
+    "anchors": {
+      "from": "#5454ed",
+      "to": "#5454ed"
     }
+  },
+  "topbarLinks": [
+    {
+      "name": "Report an Issue",
+      "url": "https://github.com/njoguamos/laravel-workos/issues/new/choose"
+    }
+  ],
+  "anchors": [
+    {
+      "name": "GitHub Repository",
+      "icon": "github",
+      "url": "https://github.com/njoguamos/laravel-workos"
+    }
+  ],
+  "navigation": [
+    {
+      "group": "Get Started",
+      "pages": [
+        "about",
+        "quickstart",
+          "requests",
+          "responses",
+          "errors"
+      ]
+    },
+      {
+          "group": "Guides",
+          "pages": [
+              "guides/authentication",
+              "guides/webhooks"
+          ]
+      },
+      {
+        "group": "Events",
+        "pages": [
+            "events/list"
+        ]
+    },
+    {
+      "group": "Organizations",
+      "pages": [
+          "organization/get",
+          "organization/list",
+          "organization/create",
+          "organization/update",
+          "organization/delete"
+      ]
+  },
+  {
+    "group": "Users",
+    "pages": [
+        "user-management/user/get",
+        "user-management/user/list",
+        "user-management/user/create",
+        "user-management/user/update",
+        "user-management/user/delete"
+    ]
+},
+{
+  "group": "Identity",
+  "pages": [
+      "user-management/identity/list"
+  ]
+},
+
+{
+  "group": "User management",
+  "pages": [{
+  "group": "Get authorization url",
+  "pages": [
+      "user-management/authentication/get-authorization-url/redirect-url",
+      "user-management/authentication/get-authorization-url/pkce",
+      "user-management/authentication/get-authorization-url/error-codes"
+  ]
+},
+      "user-management/authentication/code",
+      "user-management/authentication/password",
+      "user-management/authentication/magic-auth",
+      "user-management/authentication/refresh-token",
+      "user-management/authentication/email-verification-code",
+      "user-management/authentication/totp",
+      "user-management/authentication/organization-selection"
+  ]
+}
+  ],
+  "footerSocials": {
+    "x": "https://x.com/njoguamo",
+    "github": "https://github.com/njoguamos/laravel-workos"
+  },
+"analytics": {
+    "plausible": {
+        "domain": "laravel-workos.njoguamos.me.ke"
+    }
+}
 }
