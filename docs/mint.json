@@ -77,6 +77,26 @@
   "pages": [
       "user-management/identity/list"
   ]
+},
+
+{
+  "group": "User management",
+  "pages": [{
+  "group": "Get authorization url",
+  "pages": [
+      "user-management/authentication/get-authorization-url/redirect-url",
+      "user-management/authentication/get-authorization-url/pkce",
+      "user-management/authentication/get-authorization-url/error-codes"
+  ]
+},
+      "user-management/authentication/code",
+      "user-management/authentication/password",
+      "user-management/authentication/magic-auth",
+      "user-management/authentication/refresh-token",
+      "user-management/authentication/email-verification-code",
+      "user-management/authentication/totp",
+      "user-management/authentication/organization-selection"
+  ]
 }
   ],
   "footerSocials": {
