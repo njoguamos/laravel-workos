@@ -5,8 +5,9 @@ declare(strict_types=1);
 namespace NjoguAmos\LaravelWorkos\Requests\UserManagement;
 
 use JsonException;
+use NjoguAmos\LaravelWorkos\Concerns\FillableData;
+use NjoguAmos\LaravelWorkos\Contracts\Fillable;
 use NjoguAmos\LaravelWorkos\DTOs\AuthUserDTO;
-use NjoguAmos\LaravelWorkos\DTOs\CodeAuthDTO;
 use NjoguAmos\LaravelWorkos\DTOs\ImpersonatorDTO;
 use NjoguAmos\LaravelWorkos\DTOs\UserDTO;
 use NjoguAmos\LaravelWorkos\Enums\AuthMethod;
@@ -18,14 +19,19 @@ use Saloon\Http\Response;
 use Saloon\RateLimitPlugin\Limit;
 use Saloon\Traits\Body\HasJsonBody;
 
-class AuthWithCodeRequest extends Request implements HasBody
+class AuthWithCodeRequest extends Request implements HasBody, Fillable
 {
     use HasJsonBody;
+    use FillableData;
 
     protected Method $method = Method::POST;
 
-    public function __construct(protected CodeAuthDTO $dto)
-    {
+    public function __construct(
+        public readonly string  $code,
+        public readonly ?string $invitation_code = null,
+        public readonly ?string $ip_address = null,
+        public readonly ?string $user_agent = null
+    ) {
     }
 
     public function resolveEndpoint(): string
@@ -36,10 +42,12 @@ class AuthWithCodeRequest extends Request implements HasBody
     protected function defaultBody(): array
     {
         return [
-            ...$this->dto->getFilledData(),
+            ...$this->getFilledData(),
             'grant_type' => GrantType::CODE->value,
         ];
     }
+
+
 
     /**
      * @throws JsonException
@@ -57,9 +65,9 @@ class AuthWithCodeRequest extends Request implements HasBody
                 email_verified: $user['email_verified'],
                 created_at: $user['created_at'],
                 updated_at: $user['updated_at'],
-                first_name: $user['first_name'],
-                last_name: $user['last_name'],
-                profile_picture_url: $user['profile_picture_url'],
+                first_name: $user['first_name'] ?? null,
+                last_name: $user['last_name'] ?? null,
+                profile_picture_url: $user['profile_picture_url'] ?? null,
             ),
             access_token: $data['access_token'],
             refresh_token: $data['refresh_token'],

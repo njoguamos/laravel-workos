@@ -2,7 +2,6 @@
 
 declare(strict_types=1);
 
-use NjoguAmos\LaravelWorkos\DTOs\CodeAuthDTO;
 use NjoguAmos\LaravelWorkos\Enums\GrantType;
 use NjoguAmos\LaravelWorkos\Requests\UserManagement\AuthWithCodeRequest;
 use Saloon\Enums\Method;
@@ -10,8 +9,7 @@ use Saloon\Enums\Method;
 beforeEach(closure: function () {
     $this->code = '01J08K4D6QH4WDP6M3BF3C36HT';
 
-    $this->dto = new CodeAuthDTO(code: $this->code);
-    $this->request = new AuthWithCodeRequest(dto: $this->dto);
+    $this->request = new AuthWithCodeRequest(code: $this->code);
 });
 
 it(description: 'has the correct method', closure: function () {
