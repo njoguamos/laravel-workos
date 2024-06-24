@@ -28,6 +28,7 @@ class AuthWithCodeRequest extends Request implements HasBody, Fillable
 
     public function __construct(
         public readonly string  $code,
+        public readonly GrantType $grant_type,
         public readonly ?string $invitation_code = null,
         public readonly ?string $ip_address = null,
         public readonly ?string $user_agent = null
@@ -41,12 +42,8 @@ class AuthWithCodeRequest extends Request implements HasBody, Fillable
 
     protected function defaultBody(): array
     {
-        return [
-            ...$this->getFilledData(),
-            'grant_type' => GrantType::CODE->value,
-        ];
+        return $this->getFilledData(except: ['method']);
     }
-
 
 
     /**
@@ -71,7 +68,7 @@ class AuthWithCodeRequest extends Request implements HasBody, Fillable
             ),
             access_token: $data['access_token'],
             refresh_token: $data['refresh_token'],
-            authentication_method: AuthMethod::from($data['authentication_method']),
+            authentication_method: AuthMethod::from(value: $data['authentication_method']),
             organization_id: $data['organization_id'],
             impersonator: isset($data['impersonator']) ? new ImpersonatorDTO(
                 email: $data['impersonator']['email'],
