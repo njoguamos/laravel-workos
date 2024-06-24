@@ -52,46 +52,9 @@ php artisan vendor:publish --tag="workos-translations"
 The documentation is available at [https://njoguamos.github.io/laravel-workos](https://njoguamos.github.io/laravel-workos).
 
 
-#### 3.3 Authentication
-
-Get an authorization URL
 
 
 
-```php
-use NjoguAmos\LaravelWorkos\UserManagement;
-
-$response = (new UserManagement())
-    ->getAuthorizationURL(
-        provider: 'GoogleOAuth',
-        redirect_uri: 'http://localhost:3000/callback',
-    );
-```
-
-The response is string containing the url. You should redirect your users to `response URL` to complete the authentication. 
-
-```text
-https://accounts.google.com/o/oauth2/v2/auth?access_type=offline&scope=https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fuserinfo.email%20https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fuserinfo.profile&state=eyJhbGciOiJIUzIGHJKDSFSFGGF7.eyJhcGkiOiJ1c2VyX21hbmFnZW1lbnQiLCJyZWRpcmVjdF91cmkiOiJodHRwOi8vbG9jYUYGASFIUFSGUIF76sDFGsjgdytUIYXQiOjE3MTgwMzY4NTMsImV4cCI6MTcxODAzNzc1M30.XVLCkLerRvwuVzC_Qrugbi3mzN36g8ROJQKiGGVOL8w&response_type=code&client_id=107873717349-glhtihlrvlblbs4u94teon3o5fcqb79f.apps.googleusercontent.com&redirect_uri=https%3A%2F%2Fauth.workos.com%2Fsso%2Foauth%2Fgoogle%2FLIDju2jt3JCqKGExIexjgOSQ1%2Fcallback
-```
-
-> [!NOTE]
-> The `AuthorizationRequestDTO` class accepts the following parameters: `provider`, `redirect_uri`, `response_type`, `code_challenge`, `code_challenge_method`, `connection_id`, `organization_id`, `state`, `login_hint`, `domain_hint` and `screen_hint`. Learn more form the [official documentation](https://workos.com/docs/reference/user-management/authentication/get-authorization-url).
-
-> [!IMPORTANT]
-> This package will automatically throw exception [authorization URL errors](https://workos.com/docs/reference/user-management/authentication/get-authorization-url/error-codes). The error messages are descriptive so that you know what went wrong.
-
-To authenticate user with a code, call the `authenticateWithCode` method of `UserManagement` class.
-
-```php
-use NjoguAmos\LaravelWorkos\UserManagement;
-
-$response = (new UserManagement())
-        ->authenticateWithCode(
-            code: '01HZDJKXHRS9DVDN74B4W22M3M',
-            ip_address: '168.0.2.45',
-            user_agent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36'
-        );
-```
 
 The response is a `AuthUserDTO` object which can be used as an `object` or converted to `json` or `array`.
 

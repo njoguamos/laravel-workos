@@ -4,6 +4,7 @@
 declare(strict_types=1);
 
 use NjoguAmos\LaravelWorkos\Connectors\WorkosConnector;
+use NjoguAmos\LaravelWorkos\Enums\GrantType;
 use NjoguAmos\LaravelWorkos\Exceptions\ApiKeyIsMissing;
 use NjoguAmos\LaravelWorkos\Exceptions\ClientIdIsMissing;
 use NjoguAmos\LaravelWorkos\Requests\UserManagement\AuthWithCodeRequest;
@@ -58,7 +59,10 @@ it(description: 'can get the correct exception message', closure: function (int 
         AuthWithCodeRequest::class => MockResponse::make(status: $code),
     ]);
 
-    $request = new AuthWithCodeRequest(code: 'code');
+    $request = new AuthWithCodeRequest(
+        code: 'code',
+        grant_type: GrantType::CODE
+    );
 
     $connector = app(abstract: WorkosConnector::class);
 
