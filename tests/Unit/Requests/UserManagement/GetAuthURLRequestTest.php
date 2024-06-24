@@ -3,7 +3,6 @@
 declare(strict_types=1);
 
 use NjoguAmos\LaravelWorkos\Connectors\WorkosConnector;
-use NjoguAmos\LaravelWorkos\DTOs\AuthUrlDTO;
 use NjoguAmos\LaravelWorkos\Enums\Provider;
 use NjoguAmos\LaravelWorkos\Requests\UserManagement\GetAuthURLRequest;
 use Saloon\Enums\Method;
@@ -11,19 +10,11 @@ use Saloon\Exceptions\Request\RequestException;
 use Saloon\Http\Faking\MockClient;
 use Saloon\Http\Faking\MockResponse;
 
-beforeEach(closure: function () {
-    $this->callback = "https://example.com/callback";
-
-    $this->dto = new AuthUrlDTO(
-        provider: Provider::GOOGLE,
-        redirect_uri: $this->callback
-    );
-});
-
 it(description: 'has the correct method', closure: function () {
     $request = new GetAuthURLRequest(
-        dto: $this->dto,
-        client_id: 'client_124325435'
+        client_id: 'client_12432546358',
+        provider: Provider::GOOGLE,
+        redirect_uri: "https://example.com/callback"
     );
 
     expect(value: $request->getMethod())->toBe(expected: Method::GET);
@@ -31,8 +22,9 @@ it(description: 'has the correct method', closure: function () {
 
 it(description: 'has the correct endpoint', closure: function () {
     $request = new GetAuthURLRequest(
-        dto: $this->dto,
-        client_id: 'client_12432546358'
+        client_id: 'client_12432546358',
+        provider: Provider::MICROSOFT,
+        redirect_uri: "https://example.com/callback"
     );
 
     expect(value: $request->resolveEndpoint())->toBe(expected: '/user_management/authorize');
@@ -40,15 +32,16 @@ it(description: 'has the correct endpoint', closure: function () {
 
 it(description: 'has the correct query params', closure: function () {
     $request = new GetAuthURLRequest(
-        dto: $this->dto,
-        client_id: 'client_666666'
+        client_id: 'client_666666',
+        provider: Provider::APPLE,
+        redirect_uri: "https://example.com/callback"
     );
 
     expect(value: $request->query()->all())->toBe(expected: [
-        "provider"      => Provider::GOOGLE->value,
-        "redirect_uri"  => $this->callback,
-        "response_type" => "code",
         "client_id"     => 'client_666666',
+        "provider"      => Provider::APPLE->value,
+        "redirect_uri"  => "https://example.com/callback",
+        "response_type" => "code",
   ]);
 });
 
@@ -64,12 +57,11 @@ it(description: 'throws an exception when redirect url contain a know error` ', 
 
     $connector = app(abstract: WorkosConnector::class);
 
-    $dto = new AuthUrlDTO(
-        provider: Provider::GOOGLE,
-        redirect_uri: 'http://localhost:5173/callback',
+    $request = new GetAuthURLRequest(
+        client_id: 'client_1242354',
+        provider: Provider::APPLE,
+        redirect_uri: "https://example.com/callback"
     );
-
-    $request = new GetAuthURLRequest(dto: $dto, client_id: 'client_1242354');
 
     expect(
         value: fn () => $connector->send(request: $request)
