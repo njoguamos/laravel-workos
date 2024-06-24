@@ -9,7 +9,7 @@ use NjoguAmos\LaravelWorkos\Enums\AuthMethod;
 use Saloon\Contracts\DataObjects\WithResponse;
 use Saloon\Traits\Responses\HasResponse;
 
-class AuthUserDTO extends BaseDTO implements WithResponse, Arrayable
+class AuthUserDTO implements WithResponse, Arrayable
 {
     use HasResponse;
 
@@ -32,9 +32,11 @@ class AuthUserDTO extends BaseDTO implements WithResponse, Arrayable
             'user'                  => $this->user->array(),
             'access_token'          => $this->access_token,
             'refresh_token'         => $this->refresh_token,
-            'authentication_method' => is_string($this->authentication_method) ? AuthMethod::from($this->authentication_method) : $this->authentication_method,
-            'organization_id'       => $this->organization_id ?? null,
-            'impersonator'          => $this->impersonator?->array(),
+            'authentication_method' => is_string($this->authentication_method)
+                ? AuthMethod::from($this->authentication_method)
+                : $this->authentication_method,
+            'organization_id' => $this->organization_id ?? null,
+            'impersonator'    => $this->impersonator?->array(),
         ];
     }
 

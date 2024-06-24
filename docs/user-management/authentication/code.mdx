@@ -1,7 +1,61 @@
 ---
-title: 'Authenticate with code ⚠️'
+title: 'Authenticate with code'
 description: 'Authenticates a user using AuthKit, OAuth or an organization’s SSO connection.'
-sidebarTitle: 'AuthKit,OAuth,SSO ⚠️'
 ---
 
-<Note>This functionality is still in development. Please check later or [submit a PR](https://github.com/njoguamos/laravel-workos) to help us build this feature.</Note>
+## Request
+
+To authenticate user with a code, call the `authenticateWithCode` method of `UserManagement` class.
+
+<CodeGroup>
+
+```php New Class
+use NjoguAmos\LaravelWorkos\UserManagement;
+
+$response = (new UserManagement())
+    ->authenticateWithCode(
+        code: '01HZDJKXHRS9DVDN74B4W22M3M',
+        ip_address: '168.0.2.45',
+        user_agent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36'
+    );
+```
+
+```php Facade
+use NjoguAmos\LaravelWorkos\Facades\UserManagement;
+
+$response = UserManagement::authenticateWithCode(
+        code: '01HZDJKXHRS9DVDN74B4W22M3M',
+        ip_address: '168.0.2.45',
+        user_agent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36'
+    );
+```
+
+</CodeGroup>
+
+<br/>
+
+<Accordion title="Parameters">
+
+    <ParamField query="code" type="string" required>
+
+    </ParamField>
+
+    <ParamField query="invitation_code" type="string">
+
+    </ParamField>
+
+    <ParamField query="ip_address" type="string">
+        The IP address of the request from the user who is attempting to authenticate.
+        In Laravel you can get user IP by calling `request()->ip()`. Remember to [Configuring Trusted Proxies](https://laravel.com/docs/11.x/requests#configuring-trusted-proxies) in case you application is behind a load balancer.
+    </ParamField>
+
+    <ParamField query="user_agent" type="string">
+        The user agent of the request from the device which the user is attempting to authenticate from.
+    </ParamField>
+
+    <ParamField query="code_verifier" type="string">
+        <Warning>Since the `client_secret` (your api key) is present by default, `code_verifier` is not supported.</Warning>
+    </ParamField>
+
+</Accordion>
+

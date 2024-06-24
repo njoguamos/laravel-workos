@@ -5,9 +5,13 @@ declare(strict_types=1);
 namespace NjoguAmos\LaravelWorkos\DTOs;
 
 use NjoguAmos\LaravelWorkos\Contracts\Arrayable;
+use Saloon\Contracts\DataObjects\WithResponse;
+use Saloon\Traits\Responses\HasResponse;
 
-class UserDTO extends BaseDTO implements Arrayable
+class UserDTO implements Arrayable, WithResponse
 {
+    use HasResponse;
+
     /**
      * @link https://workos.com/docs/reference/user-management/user
      */

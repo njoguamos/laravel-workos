@@ -6,6 +6,7 @@ namespace NjoguAmos\LaravelWorkos\Connectors;
 
 use Illuminate\Support\Facades\Cache;
 use Saloon\Exceptions\Request\RequestException;
+use Saloon\Http\Auth\TokenAuthenticator;
 use Saloon\Http\Connector;
 use Saloon\Http\Response;
 use Saloon\RateLimitPlugin\Limit;
@@ -30,6 +31,11 @@ class WorkosConnector extends Connector
     public function resolveBaseurl(): string
     {
         return $this->apiBaseurl;
+    }
+
+    protected function defaultAuth(): TokenAuthenticator
+    {
+        return new TokenAuthenticator($this->apiKey);
     }
 
     public function defaultConfig(): array

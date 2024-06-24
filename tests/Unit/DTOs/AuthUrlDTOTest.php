@@ -2,19 +2,17 @@
 
 declare(strict_types=1);
 
-use NjoguAmos\LaravelWorkos\DTOs\CodeAuthDTO;
+use NjoguAmos\LaravelWorkos\DTOs\AuthUrlDTO;
+use NjoguAmos\LaravelWorkos\Enums\Provider;
 
-it(description: 'can get filled data', closure: function () {
-    $dto = new CodeAuthDTO(
-        code: 'code',
-        ip_address: 'ip_address',
-        user_agent: 'user_agent'
+it(description: 'can transform data', closure: function () {
+    $dto = new AuthUrlDTO(
+        url: 'https://example.com',
+        provider: Provider::GITHUB,
     );
 
-    expect(value: count(value: $dto->getFilledData()))->toBe(expected: 3)
-        ->and(value: $dto->getFilledData())->toBe(expected: [
-            'code'       => 'code',
-            'ip_address' => 'ip_address',
-            'user_agent' => 'user_agent'
-        ]);
+    expect(value: $dto->array())->toBe(expected: [
+        'url'      => 'https://example.com',
+        'provider' => Provider::GITHUB
+    ])->and($dto->json())->toBe(json_encode($dto->array()));
 });

@@ -1,0 +1,168 @@
+---
+title: 'Get an authorization URL'
+description: 'Generates an OAuth 2.0 authorization URL to authenticate a user with AuthKit or SSO.'
+---
+
+## Request
+
+To get the authorization URL, call the `getAuthorizationURL` method of `UserManagement` class and pass the `provider` and `redirect_uri` as minimum required arguments.
+
+<CodeGroup>
+
+```php New Class
+use NjoguAmos\LaravelWorkos\UserManagement;
+
+$response = (new UserManagement())
+    ->getAuthorizationURL(
+        provider: 'GoogleOAuth',
+        redirect_uri: 'http://localhost:3000/callback',
+    );
+```
+
+    ```php Facade
+    use NjoguAmos\LaravelWorkos\Facades\UserManagement;
+
+    $response = UserManagement::getAuthorizationURL(
+        provider: 'GoogleOAuth',
+        redirect_uri: 'http://localhost:3000/callback',
+    );
+    ```
+</CodeGroup>
+
+<br/>
+
+<Accordion title="Parameters">
+
+    <ParamField query="provider" type="string" required>
+        A `NjoguAmos\LaravelWorkos\Enums\Provider` compatible value. i.e.  `authkit`, `AppleOAuth`, `GoogleOAuth`, `MicrosoftOAuth` or `GitHubOAuth`.
+
+        <Warning>Failure to provide the correct value will lead to runtime errors.</Warning>
+    </ParamField>
+
+    <ParamField query="redirect_uri" type="string" required>
+        One of the redirect urls that is configured in your [WorkOS dashboard](https://dashboard.workos.com/redirects).
+
+        <Warning>Failure to provide the a valid `redirect_uri_invalid` will lead to a runtime error.</Warning>
+    </ParamField>
+
+    <ParamField query="code_challenge" type="string">
+        Code challenge is derived from the code verifier used for the PKCE flow.
+
+        <Note>`code_challenge_method` must be provided if `code_challenge` provided.</Note>
+    </ParamField>
+
+    <ParamField query="code_challenge_method" type="string">
+        This parameter is required when specifying `code_challenge` for the PKCE flow is provided.
+
+        <Note>The only valid PKCE code challenge method is "S256".</Note>
+    </ParamField>
+
+    <ParamField query="connection_id" type="string">
+        A WorkOS connection ID.
+        <Note>An runtine exception will be thrown if the connection is is invalid</Note>
+    </ParamField>
+
+    <ParamField query="organization_id" type="string">
+        A WorkOS organization ID.
+    </ParamField>
+
+    <ParamField query="state" type="string">
+        Used to encode arbitrary information to help restore application state between redirects.
+    </ParamField>
+
+    <ParamField query="login_hint" type="string">
+        Can be used to pre-fill the username/email address field of the IdP sign-in pag
+        <Note>Currently, this parameter is supported for OAuth, OpenID Connect, Okta, and Entra ID connections.</Note>
+    </ParamField>
+
+    <ParamField query="domain_hint" type="string">
+        Can be used to pre-fill the domain field when initiating authentication with Microsoft OAuth or with a Google SAML connection type.
+    </ParamField>
+
+    <ParamField query="screen_hint" type="string">
+        A `NjoguAmos\LaravelWorkos\Enums\ScreenHint` enum value. i.e. `sign-up` or `sign-in`
+    </ParamField>
+
+</Accordion>
+
+## Response
+
+The default response in an instance of `NjoguAmos\LaravelWorkos\DTOs\AuthUrlDTO`, which can also be converted to an array `$response->array()` or to json `$response->json()`
+
+<CodeGroup>
+
+```php $response->array()
+[
+    "object" => "user"
+    "id" => "user_01E4ZCR3C56J083X43JQXF3JK5"
+    "email" => "marcelina.davis@example.com"
+    "email_verified" => true
+    "created_at" => "2021-06-25T19:07:33.155Z"
+    "updated_at" => "2021-06-25T19:07:33.155Z"
+    "first_name" => "Marcelina"
+    "last_name" => "Davis"
+    "profile_picture_url" => "https://workoscdn.com/images/v1/123abc"
+]
+```
+
+```php Default Object
+NjoguAmos\LaravelWorkos\DTOs\AuthUrlDTO {
+    +url: "https:\/\/login.microsoftonline.com\/consumers\/oauth2\/v2.0\/..."
+    +provider: NjoguAmos\LaravelWorkos\Enums\Provider {#244
+        +name: "MICROSOFT"
+        +value: "MicrosoftOAuth"
+    }
+    #response: Saloon\Http\Response {}
+}
+    ```
+
+</CodeGroup>
+
+<br/>
+
+<Accordion title="Response Parameters">
+
+    <ResponseField name="object" type="string" required>
+        Distinguishes the user object.
+    </ResponseField>
+
+    <ResponseField name="id" type="string" required>
+        The unique ID of the user.
+    </ResponseField>
+
+    <ResponseField name="email" type="string" required>
+        The email address of the user.
+    </ResponseField>
+
+    <ResponseField name="first_name" type="string">
+        The first name of the user.
+    </ResponseField>
+
+
+    <ResponseField name="last_name" type="string">
+        The last name of the user.
+    </ResponseField>
+
+    <ResponseField name="email_verified" type="boolean" required>
+        Whether the user’s email has been verified.
+    </ResponseField>
+
+    <ResponseField name="profile_picture_url" type="string">
+        A URL reference to an image representing the user.
+    </ResponseField>
+
+    <ResponseField name="created_at" type="boolean" required>
+        The timestamp when the user was created.
+    </ResponseField>
+
+    <ResponseField name="updated_at" type="boolean" required>
+        The timestamp when the user was last updated.
+    </ResponseField>
+
+</Accordion>
+
+## Errors
+
+If there was an issue generating an authorization URL, this package will throw an exception. All the [WorkOs know errors](https://workos.com/docs/reference/user-management/authentication/get-authorization-url/error-codes) are catered for.
+
+Learn how to handle errors in the [error handling section](/errors).

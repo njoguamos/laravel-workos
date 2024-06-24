@@ -8,6 +8,8 @@ enum Provider: string
 {
     case AUTHKIT = 'authkit';
 
+    case APPLE = 'AppleOAuth';
+
     case GOOGLE = 'GoogleOAuth';
 
     case MICROSOFT = 'MicrosoftOAuth';

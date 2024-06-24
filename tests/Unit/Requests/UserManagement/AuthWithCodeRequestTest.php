@@ -2,29 +2,38 @@
 
 declare(strict_types=1);
 
-use NjoguAmos\LaravelWorkos\DTOs\CodeAuthDTO;
 use NjoguAmos\LaravelWorkos\Enums\GrantType;
 use NjoguAmos\LaravelWorkos\Requests\UserManagement\AuthWithCodeRequest;
 use Saloon\Enums\Method;
 
-beforeEach(closure: function () {
-    $this->code = '01J08K4D6QH4WDP6M3BF3C36HT';
-
-    $this->dto = new CodeAuthDTO(code: $this->code);
-    $this->request = new AuthWithCodeRequest(dto: $this->dto);
-});
-
 it(description: 'has the correct method', closure: function () {
-    expect(value: $this->request->getMethod())->toBe(expected: Method::POST);
+    $request = new AuthWithCodeRequest(
+        code: '01J08K4D6QH4WDP6M3BF3C36HT',
+        grant_type: GrantType::CODE
+    );
+
+    expect(value: $request->getMethod())->toBe(expected: Method::POST);
 });
 
 it(description: 'has the correct endpoint', closure: function () {
-    expect(value: $this->request->resolveEndpoint())->toBe(expected: '/user_management/authenticate');
+    $request = new AuthWithCodeRequest(
+        code: '01J15DJBAYME3MM818HBF8RX94',
+        grant_type: GrantType::CODE
+    );
+
+    expect(value: $request->resolveEndpoint())->toBe(expected: '/user_management/authenticate');
 });
 
 it(description: 'has the correct body', closure: function () {
-    expect(value: $this->request->body()->all())->toBe(expected: [
-        "code"       => $this->code,
+    $code = '01J15DNAQC6RDRXBFBZ9XFNV6B';
+
+    $request = new AuthWithCodeRequest(
+        code: $code,
+        grant_type: GrantType::CODE
+    );
+
+    expect(value: $request->body()->all())->toBe(expected: [
+        "code"       => $code,
         "grant_type" => GrantType::CODE->value
   ]);
 });
