@@ -8,6 +8,7 @@ use NjoguAmos\LaravelWorkos\Connectors\WorkosConnector;
 use NjoguAmos\LaravelWorkos\DTOs\AuthUserDTO;
 use NjoguAmos\LaravelWorkos\DTOs\AuthUrlDTO;
 use NjoguAmos\LaravelWorkos\DTOs\UserDTO;
+use NjoguAmos\LaravelWorkos\Enums\GrantType;
 use NjoguAmos\LaravelWorkos\Enums\Provider;
 use NjoguAmos\LaravelWorkos\Enums\ScreenHint;
 use NjoguAmos\LaravelWorkos\Requests\UserManagement\AuthWithCodeRequest;
@@ -88,6 +89,7 @@ class UserManagement
     ): AuthUserDTO {
         $request = new AuthWithCodeRequest(
             code: $code,
+            grant_type: GrantType::CODE,
             invitation_code: $invitation_code,
             ip_address: $ip_address,
             user_agent: $user_agent
