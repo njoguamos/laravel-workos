@@ -6,5 +6,5 @@ namespace NjoguAmos\LaravelWorkos\Contracts;
 
 interface Fillable
 {
-    public function getFilledData(): array;
+    public function getFilledData(array $except = []): array;
 }
