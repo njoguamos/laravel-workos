@@ -92,14 +92,6 @@
             ]
         },
         {
-            "group": "Session tokens",
-            "pages": [
-                "user-management/session-tokens/jwks",
-                "user-management/session-tokens/access-token",
-                "user-management/session-tokens/refresh-token"
-            ]
-        },
-        {
             "group": "Magic Auth",
             "pages": [
                 "user-management/magic-auth/get-a-magic-auth-code",
