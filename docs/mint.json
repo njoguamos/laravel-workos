@@ -109,6 +109,13 @@
                 "user-management/authentication-errors/sso-required",
                 "user-management/authentication-errors/organization-authentication-required"
             ]
+        },
+        {
+            "group": "Magic Auth",
+            "pages": [
+                "user-management/magic-auth/get-a-magic-auth-code",
+                "user-management/magic-auth/create-a-magic-auth-code"
+            ]
         }
     ],
     "footerSocials": {
