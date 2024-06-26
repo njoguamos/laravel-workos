@@ -105,6 +105,14 @@
                 "user-management/multi-factor-auth/authentication-challenge",
                 "user-management/multi-factor-auth/enroll-an-auth-factor",
                 "user-management/multi-factor-auth/list-auth-factors"
+              ]
+        },
+        {
+            "group": "Session tokens",
+            "pages": [
+                "user-management/session-tokens/jwks",
+                "user-management/session-tokens/access-token",
+                "user-management/session-tokens/refresh-token"
             ]
         }
     ],
