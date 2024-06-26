@@ -98,6 +98,17 @@
                 "user-management/session-tokens/access-token",
                 "user-management/session-tokens/refresh-token"
             ]
+        },
+        {
+            "group": "Authentication errors",
+            "pages": [
+                "user-management/authentication-errors/email-verification",
+                "user-management/authentication-errors/mfa-enrollment",
+                "user-management/authentication-errors/mfa-challenge",
+                "user-management/authentication-errors/organization-selection",
+                "user-management/authentication-errors/sso-required",
+                "user-management/authentication-errors/organization-authentication-required"
+            ]
         }
     ],
     "footerSocials": {
