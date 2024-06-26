@@ -100,21 +100,19 @@
             ]
         },
         {
-            "group": "Authentication errors",
-            "pages": [
-                "user-management/authentication-errors/email-verification",
-                "user-management/authentication-errors/mfa-enrollment",
-                "user-management/authentication-errors/mfa-challenge",
-                "user-management/authentication-errors/organization-selection",
-                "user-management/authentication-errors/sso-required",
-                "user-management/authentication-errors/organization-authentication-required"
-            ]
-        },
-        {
             "group": "Magic Auth",
             "pages": [
                 "user-management/magic-auth/get-a-magic-auth-code",
                 "user-management/magic-auth/create-a-magic-auth-code"
+            ]
+        },
+        {
+            "group": "Multi-Factor Auth",
+            "pages": [
+                "user-management/multi-factor-auth/authentication-factor",
+                "user-management/multi-factor-auth/authentication-challenge",
+                "user-management/multi-factor-auth/enroll-an-auth-factor",
+                "user-management/multi-factor-auth/list-auth-factors"
             ]
         }
     ],
