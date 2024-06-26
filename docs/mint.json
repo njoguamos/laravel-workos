@@ -92,6 +92,22 @@
             ]
         },
         {
+            "group": "Magic Auth",
+            "pages": [
+                "user-management/magic-auth/get-a-magic-auth-code",
+                "user-management/magic-auth/create-a-magic-auth-code"
+            ]
+        },
+        {
+            "group": "Multi-Factor Auth",
+            "pages": [
+                "user-management/multi-factor-auth/authentication-factor",
+                "user-management/multi-factor-auth/authentication-challenge",
+                "user-management/multi-factor-auth/enroll-an-auth-factor",
+                "user-management/multi-factor-auth/list-auth-factors"
+              ]
+        },
+        {
             "group": "Session tokens",
             "pages": [
                 "user-management/session-tokens/jwks",
