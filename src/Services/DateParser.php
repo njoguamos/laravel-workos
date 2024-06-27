@@ -21,10 +21,10 @@ class DateParser
     public function parse(string $timestamp): CarbonImmutable
     {
         $datetime = CarbonImmutable::parse(time: $timestamp)
-            ->setTimezone(timeZone: self::DEFAULT_WORKOS_TIMEZONE);
+            ->setTimezone(self::DEFAULT_WORKOS_TIMEZONE);
 
         if ($this->convertToAppTimezone) {
-            return $datetime->setTimezone(timeZone: $this->appTimezone);
+            return $datetime->setTimezone($this->appTimezone);
         }
 
         return $datetime;
