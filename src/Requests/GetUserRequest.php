@@ -2,10 +2,12 @@
 
 declare(strict_types=1);
 
-namespace NjoguAmos\LaravelWorkos\Requests\UserManagement;
+namespace NjoguAmos\LaravelWorkOS\Requests;
 
 use JsonException;
-use NjoguAmos\LaravelWorkos\DTOs\UserDTO;
+use NjoguAmos\LaravelWorkOS\DTOs\UserData;
+use NjoguAmos\LaravelWorkOS\Enums\WorkOSObject;
+use NjoguAmos\LaravelWorkOS\Services\DateParser;
 use Saloon\Enums\Method;
 use Saloon\Http\Request;
 use Saloon\Http\Response;
@@ -23,13 +25,6 @@ class GetUserRequest extends Request
         return "/user_management/users/{$this->id}";
     }
 
-
-    public function hasRequestFailed(Response $response): ?bool
-    {
-        // @TODO: Throw an error when user is not found
-        return false;
-    }
-
     /**
      * @throws JsonException
      */
@@ -37,13 +32,13 @@ class GetUserRequest extends Request
     {
         $data = $response->json();
 
-        return new UserDTO(
-            object: $data['object'],
+        return new UserData(
+            object: WorkOSObject::from($data['object']),
             id: $data['id'],
             email: $data['email'],
             email_verified: $data['email_verified'],
-            created_at: $data['created_at'],
-            updated_at: $data['updated_at'],
+            created_at: app(abstract: DateParser::class)->parse(timestamp: $data['created_at']),
+            updated_at: app(abstract: DateParser::class)->parse(timestamp: $data['updated_at']),
             first_name: $data['first_name'] ?? null,
             last_name: $data['last_name'] ?? null,
             profile_picture_url: $data['profile_picture_url'] ?? null,

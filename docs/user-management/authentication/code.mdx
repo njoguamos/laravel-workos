@@ -10,7 +10,7 @@ To authenticate user with a code, call the `authenticateWithCode` method of `Use
 <CodeGroup>
 
 ```php New Class
-use NjoguAmos\LaravelWorkos\UserManagement;
+use NjoguAmos\LaravelWorkOS\UserManagement;
 
 $response = (new UserManagement())
     ->authenticateWithCode(
@@ -21,7 +21,7 @@ $response = (new UserManagement())
 ```
 
 ```php Facade
-use NjoguAmos\LaravelWorkos\Facades\UserManagement;
+use NjoguAmos\LaravelWorkOS\Facades\UserManagement;
 
 $response = UserManagement::authenticateWithCode(
         code: '01HZDJKXHRS9DVDN74B4W22M3M',

@@ -2,10 +2,11 @@
 
 declare(strict_types=1);
 
-namespace NjoguAmos\LaravelWorkos\Connectors;
+namespace NjoguAmos\LaravelWorkOS\Connectors;
 
 use Illuminate\Support\Facades\Cache;
-use Saloon\Exceptions\Request\RequestException;
+use NjoguAmos\LaravelWorkOS\Exceptions\RateLimitReachedException;
+use NjoguAmos\LaravelWorkOS\Exceptions\WorkOSRequestException;
 use Saloon\Http\Auth\TokenAuthenticator;
 use Saloon\Http\Connector;
 use Saloon\Http\Response;
@@ -22,7 +23,9 @@ class WorkosConnector extends Connector
     use HasRateLimits;
 
     public function __construct(
+        #[\SensitiveParameter]
         protected readonly string $apiKey,
+        #[\SensitiveParameter]
         protected readonly string $clientId,
         protected readonly string $apiBaseurl,
     ) {
@@ -88,27 +91,15 @@ class WorkosConnector extends Connector
         );
     }
 
-    public function getRequestException(Response $response, ?Throwable $senderException): ?Throwable
+    public function getRequestException(Response $response, ?Throwable $senderException): WorkOSRequestException
     {
-        return new RequestException(
-            response: $response,
-            message: $this->getMessage(response: $response),
-            code: $response->getPsrResponse()->getStatusCode()
-        );
+        return (new WorkOSExceptionResolver())->getRequestException($response, $senderException);
     }
 
-    /**
-     * @link https://workos.com/docs/reference/errors
-     */
-    public function getMessage(Response $response): string
+    protected function throwLimitException(Limit $limit): void
     {
-        return match ($response->getPsrResponse()->getStatusCode()) {
-            400     => trans(key: 'workos::workos.errors.400'),
-            401     => trans(key: 'workos::workos.errors.401'),
-            403     => trans(key: 'workos::workos.errors.403'),
-            404     => trans(key: 'workos::workos.errors.404'),
-            422     => trans(key: 'workos::workos.errors.422'),
-            default => $response->getPsrResponse()->getReasonPhrase()
-        };
+        throw new RateLimitReachedException(
+            message: trans(key: 'workos::workos.errors.429')
+        );
     }
 }

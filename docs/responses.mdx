@@ -9,8 +9,8 @@ The default response format is a DTO object. This object instance differs depend
 
 
 ```php
-use NjoguAmos\LaravelWorkos\DTOs\AuthUserDTO;
-use NjoguAmos\LaravelWorkos\UserManagement;
+use NjoguAmos\LaravelWorkOS\DTOs\AuthUserDTO;
+use NjoguAmos\LaravelWorkOS\UserManagement;
 
 /** @var AuthUserDTO $user */
 $authUser = (new UserManagement())->authenticateWithCode($dto);
@@ -20,8 +20,8 @@ dd($authUser);
 The die-dump outputs the following.
 
 ```php
-NjoguAmos\LaravelWorkos\DTOs\AuthUserDTO {#1457
-  +user: NjoguAmos\LaravelWorkos\DTOs\UserDTO {#1532
+NjoguAmos\LaravelWorkOS\DTOs\AuthUserDTO {#1457
+  +user: NjoguAmos\LaravelWorkOS\DTOs\UserDTO {#1532
     +object: "user"
     +id: "user_01E4ZCR3C56J083X43JQXF3JK5"
     +email: "marcelina.davis@example.com"

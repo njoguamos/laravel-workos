@@ -2,14 +2,13 @@
 
 declare(strict_types=1);
 
-namespace NjoguAmos\LaravelWorkos\Requests\UserManagement;
+namespace NjoguAmos\LaravelWorkOS\Requests;
 
-use JsonException;
-use NjoguAmos\LaravelWorkos\Concerns\FillableData;
-use NjoguAmos\LaravelWorkos\Contracts\Fillable;
-use NjoguAmos\LaravelWorkos\DTOs\AuthUrlDTO;
-use NjoguAmos\LaravelWorkos\Enums\Provider;
-use NjoguAmos\LaravelWorkos\Enums\ScreenHint;
+use NjoguAmos\LaravelWorkOS\Concerns\FillableData;
+use NjoguAmos\LaravelWorkOS\Contracts\Fillable;
+use NjoguAmos\LaravelWorkOS\DTOs\AuthUrlDTO;
+use NjoguAmos\LaravelWorkOS\Enums\Provider;
+use NjoguAmos\LaravelWorkOS\Enums\ScreenHint;
 use Saloon\Enums\Method;
 use Saloon\Exceptions\Request\RequestException;
 use Saloon\Http\Request;
@@ -29,7 +28,8 @@ class GetAuthURLRequest extends Request implements Fillable
     ];
 
     public function __construct(
-        protected string $client_id,
+        #[\SensitiveParameter]
+        public readonly string $client_id,
         public readonly Provider $provider,
         public readonly string $redirect_uri,
         public readonly string $response_type = "code",
@@ -54,9 +54,6 @@ class GetAuthURLRequest extends Request implements Fillable
         return $this->getFilledData(['errors' ,'method']);
     }
 
-    /**
-     * @throws JsonException
-     */
     public function createDtoFromResponse(Response $response): mixed
     {
         return new AuthUrlDTO(
@@ -65,6 +62,9 @@ class GetAuthURLRequest extends Request implements Fillable
         );
     }
 
+    /**
+     * @throws RequestException
+     */
     public function hasRequestFailed(Response $response): ?bool
     {
         foreach ($this->errors as $error) {

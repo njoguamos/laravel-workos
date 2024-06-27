@@ -10,7 +10,7 @@ it(description: 'can transform data', closure: function () {
     $user = UserFactory::create();
 
     $dto = new UserData(
-        object: $user['object'],
+        object: \NjoguAmos\LaravelWorkOS\Enums\WorkOSObject::from($user['object']),
         id: $user['id'],
         email: $user['email'],
         email_verified: $user['email_verified'],

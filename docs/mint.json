@@ -32,8 +32,8 @@
         {
             "group": "Get Started",
             "pages": [
-                "about",
                 "quickstart",
+                "about",
                 "requests",
                 "responses",
                 "errors"

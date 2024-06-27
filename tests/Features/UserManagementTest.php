@@ -2,36 +2,31 @@
 
 declare(strict_types=1);
 
-use NjoguAmos\LaravelWorkos\Enums\AuthMethod;
-use NjoguAmos\LaravelWorkos\Enums\Provider;
-use NjoguAmos\LaravelWorkos\Requests\UserManagement\AuthWithCodeRequest;
-use NjoguAmos\LaravelWorkos\Requests\UserManagement\GetAuthURLRequest;
-use NjoguAmos\LaravelWorkos\Requests\UserManagement\GetUserRequest;
-use NjoguAmos\LaravelWorkos\UserManagement;
+use NjoguAmos\LaravelWorkOS\Enums\AuthMethod;
+use NjoguAmos\LaravelWorkOS\Enums\Provider;
+use NjoguAmos\LaravelWorkOS\Requests\AuthWithCodeRequest;
+use NjoguAmos\LaravelWorkOS\Requests\GetAuthURLRequest;
+use NjoguAmos\LaravelWorkOS\Requests\GetUserRequest;
+use NjoguAmos\LaravelWorkOS\Tests\Unit\Factories\UserFactory;
+use NjoguAmos\LaravelWorkOS\UserManagement;
 use Saloon\Http\Faking\MockClient;
 use Saloon\Http\Faking\MockResponse;
 
 describe(description: 'User', tests: function () {
 
+    /**
+     * @link [Get a user](https://workos.com/docs/reference/user-management/user/get)
+     */
     it(description: 'can get user', closure: function () {
-
-        $responseData = [
-            "object"              => "user",
-            "id"                  => "user_01E4ZCR3C56J083X43JQXF3JK5",
-            "email"               => "marcelina.davis@example.com",
-            "email_verified"      => true,
-            "created_at"          => "2021-06-25T19:07:33.155Z",
-            "updated_at"          => "2021-06-25T19:07:33.155Z",
-            "first_name"          => "Marcelina",
-            "last_name"           => "Davis",
-            "profile_picture_url" => "https://workoscdn.com/images/v1/123abc",
-        ];
+        $responseData = UserFactory::create();
 
         MockClient::global(mockData: [
             GetUserRequest::class => MockResponse::make(body: $responseData),
         ]);
 
+
         $response = (new UserManagement())->getUser(id: $responseData['id']);
+
 
         expect($response->array())->toBe($responseData);
     });

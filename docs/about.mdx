@@ -7,42 +7,45 @@ description: 'Start building awesome documentation in under 5 minutes'
 
 ## Copyright Disclaimer
 
-Laravel is a Trademark of [Laravel Holdings Inc](https://laravel.com/trademark). This package is not approved, sponsored, or affiliated with Laravel. The term Laravel is used to denote that this package is meant to be used within a Laravel application.
-
-WorkOS is a Trademark of [WorkOS Inc](https://workos.com). This package is not approved, sponsored, or affiliated with WorkOS. The term WorkOS is used to denote that this package is integrating tightly with WorkOS APIs.
-
-## Why this package?
-
-WorkOs has an official [Laravel PHP SDK](https://github.com/workos/workos-php-laravel). This official SDK is great and provide a lot of features. You are more than welcome to use it if the meet your needs.
-
-This package takes a different approach. It tightly integrates with Laravel and provides a more Laravel-like experience. It also provides a lot of features that are not available in the official SDKs.
-
-#### ✅ Laravel 10+ Optimised
-
-The package has been optimised for Laravel 10+.
-
-#### ✅ Easy Error handling and Debugging
-
-- Offer developer friendly error handling e.g. `Get an authorization URL Errors`.
-- Build with [Saloon PHP](https://docs.saloon.dev). This mean you can benefit from Saloon goodies such as [Laravel Plugin](https://docs.saloon.dev/installable-plugins/laravel-integration) which can debug the WorkOS API requests inside your Laravel application.
-
-#### ✅ Language Translations
-
-Offers language translations.
-
-#### ✅ Use of DTOs
-
-Users Data Object Transfer for efficient data handling. DTO are powered by [Spatie laravel data](https://spatie.be/docs/laravel-data).
-
-#### ✅ Rate Limiting handling
-
-Automatically prevent hitting rate limits and handle retries.
-
-
-#### And more...
-
+Laravel is a Trademark of [Laravel Holdings Inc](https://laravel.com/trademark). WorkOS is a Trademark of [WorkOS Inc](https://workos.com). This package is not approved, sponsored, or affiliated with Laravel or WorkOS.
 
 ## Requirements
 
-- PHP 8.0+
-- Laravel 10.0+
+- Laravel 10.x or higher.
+- PHP 8.2 or higher.
+
+## Why this package?
+
+WorkOs has an official [Laravel PHP SDK](https://github.com/workos/workos-php-laravel). This official SDK is great and support even older version of PHP and Laravel. Use them if they meet your needs.
+
+This package takes a different approach and only supports new versions of Laravel. It tightly integrates with Laravel and provides a more Laravel-like experience. It also provides others features that may not available in the official SDKs. This package is opinionated and may not be suitable for all use cases.
+
+### 1. Use of Data Transfer Objects
+
+This package transforms all the responses from WorkOS API into Data Transfer Objects (DTOs) which offers the following benefits:
+
+1. **Better IDE autocompletion:** Your IDEs can utilize the DTO definitions to provide code completion and suggestions, enhancing development speed and accuracy.
+2. **Type safety:** The DTO's defined properties have specific data types (e.g., string, integer, DateTime). This ensures data integrity and prevents errors caused by unexpected data types.
+3. **Timestamp as CarbonImmutable:** All timestamp data from WorkOS API is casted into [Carbon](https://github.com/briannesbitt/Carbon) instances, making dealing with date and time easier. The package can also convert the timestamps into the user's timezone if `convert_timze` is set to `true` in the workos config file.
+4. **Array and JSON Support:**  All the DTOS comes with `->array()` or `->json()` methods which can be used to transform DTOs into array or json respectively.
+5. **Access the original response:** You can access the original response from WorkOS API using the `->getResponse()` method. This gives you access to [response class methods](https://docs.saloon.dev/the-basics/responses) such as `->headers()`, `->body()`, e.t.c., which makes is easy to debug.
+6. **Readonly DTOs properties:** The DTOs properties are read-only. This helps to prevent intentional or accidental property value modification.
+
+<Note>The DTOs have only be used to transform the responses from WorkOS API. The package does not use DTOs to transform WorkOS API request inputs. You should validate this data in your application before calling the API.</Note>
+
+
+### 2. Better Error Handling and Debugging
+
+To help you build more resilient applications, this package offers the following error handling and debugging features:
+
+1. **Catches known errors:** The package catches and throw know errors so that you end users don't have to. This includes errors such as `Invalid API Key`, `Invalid Client ID`, `Invalid Redirect URL`, `Access denied`, `Invalid CODE` e.t.c.
+2. **Act on the error:** You have the freedom to try and catch the errors and act on them as you see fit.
+3. **Developer-friendly error messages:** Where possible, the package provides detailed error messages that help you understand what went wrong and how to fix it.
+4. **Laravel Telescope:** If you have [Laravel Telescope](https://laravel.com/docs/telescope#main-content) and [Laravel Saloon Plugin](https://docs.saloon.dev/installable-plugins/laravel-integration) installed, you can easily debug the WorkOS API requests and response inside your Laravel application.
+
+### 3. Rate Limiting handling
+
+WorkOS API comes with [rate limits](https://workos.com/docs/reference/rate-limits). Handling rate limits can be challenging.
+
+This package is build with [Saloon PHP SDK](https://docs.saloon.dev/) which comes with [rate limiting handling](https://docs.saloon.dev/installable-plugins/handling-rate-limits) out of the box. This means that you don't have to worry about rate limits. The package will automatically prevent hitting rate limits and handle retries.
+
