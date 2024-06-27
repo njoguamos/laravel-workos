@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace NjoguAmos\LaravelWorkos\Contracts;
+namespace NjoguAmos\LaravelWorkOS\Contracts;
 
 interface Fillable
 {
