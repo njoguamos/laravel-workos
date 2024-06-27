@@ -2,13 +2,13 @@
 
 declare(strict_types=1);
 
-use NjoguAmos\LaravelWorkos\DTOs\AuthUserDTO;
-use NjoguAmos\LaravelWorkos\DTOs\UserDTO;
-use NjoguAmos\LaravelWorkos\Enums\AuthMethod;
+use NjoguAmos\LaravelWorkOS\DTOs\AuthUserDTO;
+use NjoguAmos\LaravelWorkOS\DTOs\UserData;
+use NjoguAmos\LaravelWorkOS\Enums\AuthMethod;
 
 it(description: 'can transform data', closure: function () {
     $dto = new AuthUserDTO(
-        user: new UserDTO(
+        user: new UserData(
             object: "user",
             id: "user_01E4ZCR3C56J083X43JQXF3JK5",
             email: "marcelina.davis@example.com",

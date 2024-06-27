@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace NjoguAmos\LaravelWorkos\Tests;
+namespace NjoguAmos\LaravelWorkOS\Tests;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Orchestra\Testbench\TestCase as Orchestra;
-use NjoguAmos\LaravelWorkos\LaravelWorkosServiceProvider;
+use NjoguAmos\LaravelWorkOS\WorkOSServiceProvider;
 
 class TestCase extends Orchestra
 {
@@ -15,19 +15,20 @@ class TestCase extends Orchestra
         parent::setUp();
 
         Factory::guessFactoryNamesUsing(
-            fn (string $modelName) => 'NjoguAmos\\LaravelWorkos\\Database\\Factories\\'.class_basename($modelName).'Factory'
+            fn (string $modelName) => 'NjoguAmos\\LaravelWorkOS\\Database\\Factories\\'.class_basename($modelName).'Factory'
         );
     }
 
     protected function getPackageProviders($app): array
     {
         return [
-            LaravelWorkosServiceProvider::class,
+            WorkOSServiceProvider::class,
         ];
     }
 
     public function getEnvironmentSetUp($app): void
     {
+        config()->set('app.timezone', 'Africa/Nairobi');
         config()->set('database.default', 'testing');
         config()->set('workos.api_key', 'sk_test_123456789');
         config()->set('workos.client_id', 'client_123456789');
