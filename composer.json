@@ -3,8 +3,13 @@
     "description": "A fluent Laravel package for interacting with WorkOS API.",
     "keywords": [
         "NjoguAmos",
-        "laravel",
-        "workos"
+        "Laravel",
+        "WorkOS",
+        "API",
+        "Authentication",
+        "SSO",
+        "SAML",
+        "OAuth"
     ],
     "homepage": "https://github.com/njoguamos/laravel-workos",
     "license": "MIT",
@@ -37,13 +42,13 @@
     },
     "autoload": {
         "psr-4": {
-            "NjoguAmos\\LaravelWorkos\\": "src/",
-            "NjoguAmos\\LaravelWorkos\\Database\\Factories\\": "database/factories/"
+            "NjoguAmos\\LaravelWorkOS\\": "src/",
+            "NjoguAmos\\LaravelWorkOS\\Database\\Factories\\": "database/factories/"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "NjoguAmos\\LaravelWorkos\\Tests\\": "tests/",
+            "NjoguAmos\\LaravelWorkOS\\Tests\\": "tests/",
             "Workbench\\App\\": "workbench/app/"
         }
     },
@@ -75,10 +80,10 @@
     "extra": {
         "laravel": {
             "providers": [
-                "NjoguAmos\\LaravelWorkos\\LaravelWorkosServiceProvider"
+                "NjoguAmos\\LaravelWorkOS\\WorkOSServiceProvider"
             ],
             "aliases": {
-                "UserManagement": "NjoguAmos\\LaravelWorkos\\Facades\\UserManagement"
+                "UserManagement": "NjoguAmos\\LaravelWorkOS\\Facades\\UserManagement"
             }
         }
     },
