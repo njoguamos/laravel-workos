@@ -3,7 +3,7 @@
 /** @noinspection PhpUnhandledExceptionInspection */
 declare(strict_types=1);
 
-use NjoguAmos\LaravelWorkOS\Connectors\WorkosConnector;
+use NjoguAmos\LaravelWorkOS\Connectors\WorkOSConnector;
 use NjoguAmos\LaravelWorkOS\Enums\GrantType;
 use NjoguAmos\LaravelWorkOS\Exceptions\ApiKeyIsMissing;
 use NjoguAmos\LaravelWorkOS\Exceptions\BadRequestException;
@@ -24,7 +24,7 @@ use Saloon\Http\Faking\MockClient;
 use Saloon\Http\Faking\MockResponse;
 
 it(description: 'can bind config values', closure: function () {
-    $connector = app(abstract: WorkosConnector::class);
+    $connector = app(abstract: WorkOSConnector::class);
 
     expect(value: $connector->getApiKey())->toBe(expected: config(key: 'workos.api_key'))
         ->and(value: $connector->getClientId())->toBe(expected: config(key: 'workos.client_id'))
@@ -36,7 +36,7 @@ it(description: 'throws an exception if the api key is missing', closure: functi
 
     $message = trans(key: 'workos::workos.exceptions.api_key_is_missing');
 
-    expect(value: fn () => app(abstract: WorkosConnector::class))->toThrow(exception: ApiKeyIsMissing::class, exceptionMessage: $message);
+    expect(value: fn () => app(abstract: WorkOSConnector::class))->toThrow(exception: ApiKeyIsMissing::class, exceptionMessage: $message);
 });
 
 it(description: 'throws an exception if the client id is missing', closure: function () {
@@ -44,11 +44,11 @@ it(description: 'throws an exception if the client id is missing', closure: func
 
     $message = trans(key: 'workos::workos.exceptions.client_id_is_missing');
 
-    expect(value: fn () => app(abstract: WorkosConnector::class))->toThrow(exception: ClientIdIsMissing::class, exceptionMessage: $message);
+    expect(value: fn () => app(abstract: WorkOSConnector::class))->toThrow(exception: ClientIdIsMissing::class, exceptionMessage: $message);
 });
 
 it(description: 'can get credentials', closure: function () {
-    $connector = app(abstract: WorkosConnector::class);
+    $connector = app(abstract: WorkOSConnector::class);
 
     expect(value: $connector->getCredentials())->toBe(expected: [
         'client_id'     => config(key: 'workos.client_id'),
@@ -57,7 +57,7 @@ it(description: 'can get credentials', closure: function () {
 });
 
 it(description: 'has the correct default Guzzle config', closure: function () {
-    $connector = app(abstract: WorkosConnector::class);
+    $connector = app(abstract: WorkOSConnector::class);
 
     expect(value: $connector->config()->all())->toBe(expected: [
         "allow_redirects" => false
@@ -74,7 +74,7 @@ it(description: 'can get the correct exception message', closure: function (int 
         grant_type: GrantType::CODE
     );
 
-    $connector = app(abstract: WorkosConnector::class);
+    $connector = app(abstract: WorkOSConnector::class);
 
     expect(
         value: fn () => $connector->send(request: $request)
@@ -100,19 +100,19 @@ it(description: 'can get the correct exception message', closure: function (int 
 
 
 it(description: 'should extend BaseWorkosConnector', closure: function () {
-    $connector = new WorkosConnector(
+    $connector = new WorkOSConnector(
         apiKey: 'key',
         clientId: 'client_id',
         apiBaseurl: 'baseurl'
     );
 
-    expect(value: $connector)->toBeInstanceOf(class: WorkosConnector::class);
+    expect(value: $connector)->toBeInstanceOf(class: WorkOSConnector::class);
 });
 
 it(description: 'has the correct authorization header', closure: function () {
     MockClient::global(mockData: [ GetUserRequest::class => MockResponse::make() ]);
 
-    $connector = new WorkosConnector(
+    $connector = new WorkOSConnector(
         apiKey: 'key',
         clientId: 'client_id',
         apiBaseurl: 'baseurl'

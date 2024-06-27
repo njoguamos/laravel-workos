@@ -4,33 +4,32 @@ declare(strict_types=1);
 
 namespace NjoguAmos\LaravelWorkOS;
 
-use NjoguAmos\LaravelWorkOS\Connectors\WorkosConnector;
+use NjoguAmos\LaravelWorkOS\Connectors\WorkOSConnector;
 use NjoguAmos\LaravelWorkOS\DTOs\AuthUrlDTO;
 use NjoguAmos\LaravelWorkOS\DTOs\AuthUserDTO;
 use NjoguAmos\LaravelWorkOS\DTOs\UserData;
 use NjoguAmos\LaravelWorkOS\Enums\GrantType;
 use NjoguAmos\LaravelWorkOS\Enums\Provider;
 use NjoguAmos\LaravelWorkOS\Enums\ScreenHint;
+use NjoguAmos\LaravelWorkOS\Exceptions\WorkOSRequestException;
 use NjoguAmos\LaravelWorkOS\Requests\AuthWithCodeRequest;
+use NjoguAmos\LaravelWorkOS\Requests\CreateUserRequest;
 use NjoguAmos\LaravelWorkOS\Requests\GetAuthURLRequest;
 use NjoguAmos\LaravelWorkOS\Requests\GetUserRequest;
-use Saloon\Exceptions\Request\FatalRequestException;
-use Saloon\Exceptions\Request\RequestException;
 use Saloon\Http\Request;
 use Saloon\Http\Response;
 
 class UserManagement
 {
-    protected WorkosConnector $connector;
+    protected WorkOSConnector $connector;
 
     public function __construct()
     {
-        $this->connector = app(abstract: WorkosConnector::class);
+        $this->connector = app(abstract: WorkOSConnector::class);
     }
 
     /**
-     * @throws FatalRequestException
-     * @throws RequestException
+     * @throws WorkOSRequestException
      */
     public function getUser(string $id): UserData
     {
@@ -38,13 +37,37 @@ class UserManagement
     }
 
     /**
-     * @throws FatalRequestException
-     * @throws RequestException
+     * @throws WorkOSRequestException
+     */
+    public function createUser(
+        string  $email,
+        ?string $password = null,
+        ?string $password_hash = null,
+        ?string $password_hash_type = null,
+        ?string $first_name = null,
+        ?string $last_name = null,
+        ?bool   $email_verified = null,
+    ): UserData {
+        $request = new CreateUserRequest(
+            email: $email,
+            password: $password,
+            password_hash: $password_hash,
+            password_hash_type: $password_hash_type,
+            first_name: $first_name,
+            last_name: $last_name,
+            email_verified: $email_verified,
+        );
+
+        return $this->getDtoOrFail($request);
+    }
+
+    /**
+     * @throws WorkOSRequestException
      */
     public function getAuthorizationURL(
-        string $provider,
-        string $redirect_uri,
-        string $response_type = "code",
+        string  $provider,
+        string  $redirect_uri,
+        string  $response_type = "code",
         ?string $code_challenge = null,
         ?string $code_challenge_method = null, // The only valid PKCE code challenge value is "S256"
         ?string $connection_id = null,
@@ -76,11 +99,10 @@ class UserManagement
     }
 
     /**
-     * @throws FatalRequestException
-     * @throws RequestException
+     * @throws WorkOSRequestException
      */
     public function authenticateWithCode(
-        string $code,
+        string  $code,
         ?string $invitation_code = null,
         ?string $ip_address = null,
         ?string $user_agent = null
@@ -99,8 +121,7 @@ class UserManagement
     }
 
     /**
-     * @throws FatalRequestException
-     * @throws RequestException
+     * @throws WorkOSRequestException
      */
     protected function getDtoOrFail(Request $request): mixed
     {
@@ -108,8 +129,7 @@ class UserManagement
     }
 
     /**
-     * @throws FatalRequestException
-     * @throws RequestException
+     * @throws WorkOSRequestException
      */
     protected function sendRequest(Request $request): Response
     {

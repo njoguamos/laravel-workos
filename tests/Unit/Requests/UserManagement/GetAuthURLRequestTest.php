@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-use NjoguAmos\LaravelWorkOS\Connectors\WorkosConnector;
+use NjoguAmos\LaravelWorkOS\Connectors\WorkOSConnector;
 use NjoguAmos\LaravelWorkOS\Enums\Provider;
 use NjoguAmos\LaravelWorkOS\Requests\GetAuthURLRequest;
 use Saloon\Enums\Method;
@@ -55,7 +55,7 @@ it(description: 'throws an exception when redirect url contain a know error` ', 
         ),
     ]);
 
-    $connector = app(abstract: WorkosConnector::class);
+    $connector = app(abstract: WorkOSConnector::class);
 
     $request = new GetAuthURLRequest(
         client_id: 'client_1242354',

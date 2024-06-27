@@ -17,7 +17,7 @@ use Saloon\RateLimitPlugin\Traits\HasRateLimits;
 use Saloon\RateLimitPlugin\Contracts\RateLimitStore;
 use Throwable;
 
-class WorkosConnector extends Connector
+class WorkOSConnector extends Connector
 {
     use AlwaysThrowOnErrors;
     use HasRateLimits;
