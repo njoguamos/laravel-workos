@@ -114,6 +114,48 @@
                 "user-management/session-tokens/access-token",
                 "user-management/session-tokens/refresh-token"
             ]
+        },
+        {
+            "group": "Email verification",
+            "pages": [
+                "user-management/email-verification/get"
+            ]
+        },
+        {
+            "group": "Password reset",
+            "pages": [
+                "user-management/password-reset/get",
+                "user-management/password-reset/create",
+                "user-management/password-reset/reset-password"
+                ]
+        },
+        {
+            "group": "Organization membership",
+            "pages": [
+                "user-management/organization-membership/get",
+                "user-management/organization-membership/list",
+                "user-management/organization-membership/create",
+                "user-management/organization-membership/update",
+                "user-management/organization-membership/delete",
+                "user-management/organization-membership/deactivate",
+                "user-management/organization-membership/reactivate"
+                ]
+        },
+        {
+            "group": "Invitation",
+            "pages": [
+                "user-management/invitation/get",
+                "user-management/invitation/find-by-token",
+                "user-management/invitation/list",
+                "user-management/invitation/send",
+                "user-management/invitation/revoke"
+                ]
+        },
+        {
+            "group": "Logout",
+            "pages": [
+                "user-management/logout"
+            ]
         }
     ],
     "footerSocials": {
