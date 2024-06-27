@@ -34,47 +34,30 @@ $response = UserManagement::getUser(id: 'user_01J140CFC29X7PN6FF1RVXVSRJ');
 
 ## Response
 
-The default response in an instance of `NjoguAmos\LaravelWorkOS\DTOs\UserDTO`, which can also be converted to an array `$response->array()` or to json `$response->json()`
+The `response` in an instance of `NjoguAmos\LaravelWorkOS\DTOs\UserDTO`.
 
-<CodeGroup>
+```php
+# Available Parameters
+$response->object; # \NjoguAmos\LaravelWorkOS\Enums\WorkOSObject instance
+$response->id; # user_01J140CFC29X7PN6FF1RVXVSRJ
+$response->email; # brian@example.com
+$response->email_verified; # true
+$response->created_at; # Carbon\CarbonImmutable instance
+$response->updated_at; # Carbon\CarbonImmutable instance
+$response->first_name; # Brian
+$response->last_name; # Kariuki
+$response->profile_picture_url; # https://workoscdn.com/images/v1/123abc
 
-```php Example $response->array()
-[
-    "object" => "user"
-    "id" => "user_01E4ZCR3C56J083X43JQXF3JK5"
-    "email" => "marcelina.davis@example.com"
-    "email_verified" => true
-    "created_at" => "2021-06-25T19:07:33.155Z"
-    "updated_at" => "2021-06-25T19:07:33.155Z"
-    "first_name" => "Marcelina"
-    "last_name" => "Davis"
-    "profile_picture_url" => "https://workoscdn.com/images/v1/123abc"
-]
+# Available Methods
+$response->getResponse(); # Original response (\Saloon\Http\Response) for debugging ONLY!
+$response->array(); # Array representation of the response
+$response->json(); # JSON representation of the response
 ```
-
-```php Default Object
-NjoguAmos\LaravelWorkOS\DTOs\UserDTO {
-    +object: "user"
-    +id: "user_01E4ZCR3C56J083X43JQXF3JK5"
-    +email: "marcelina.davis@example.com"
-    +email_verified: true
-    +created_at: "2021-06-25T19:07:33.155Z"
-    +updated_at: "2021-06-25T19:07:33.155Z"
-    +first_name: "Marcelina"
-    +last_name: "Davis"
-    +profile_picture_url: "https://workoscdn.com/images/v1/123abc"
-}
-```
-
-
-</CodeGroup>
-
-<br/>
 
 <Accordion title="Response Parameters">
 
     <ResponseField name="object" type="string" required>
-        Distinguishes the user object.
+        Distinguishes the user object. In instance of `\NjoguAmos\LaravelWorkOS\Enums\WorkOSObject`
     </ResponseField>
 
     <ResponseField name="id" type="string" required>
@@ -103,12 +86,24 @@ NjoguAmos\LaravelWorkOS\DTOs\UserDTO {
     </ResponseField>
 
     <ResponseField name="created_at" type="boolean" required>
-        The timestamp when the user was created.
+        The datetime when the user was created. Is an instance of `Carbon\CarbonImmutable`
     </ResponseField>
 
     <ResponseField name="updated_at" type="boolean" required>
-        The timestamp when the user was last updated.
+        The datetime when the user was last updated. Is an instance of `Carbon\CarbonImmutable`
     </ResponseField>
 
 </Accordion>
+
+## Known Errors
+
+### 404 `entity_not_found`
+
+```php
+ [
+  "message" => "User not found: 'user_01HZDKGGGGGGGGGGTTTTTT'."
+  "code" => "entity_not_found"
+  "entity_id" => "user_01HZDKGGGGGGGGGGTTTTTT"
+]
+```
 
