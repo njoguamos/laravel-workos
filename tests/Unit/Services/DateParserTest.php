@@ -10,7 +10,7 @@ it(description: 'can parse WorkOS timestamps to UTC timezone', closure: function
 
     $parsedDate = $dateParser->parse(timestamp: '2024-06-25T19:07:33.155Z');
 
-    $expectedDate = CarbonImmutable::parse(time: '2024-06-25T19:07:33.155Z')->setTimezone(timeZone: 'UTC');
+    $expectedDate = CarbonImmutable::parse(time: '2024-06-25T19:07:33.155Z')->setTimezone('UTC');
 
     expect(value: $parsedDate->tzName)->toBe(expected: 'UTC')
         ->and(value: $parsedDate->equalTo($expectedDate))->toBeTrue();
@@ -24,7 +24,7 @@ it(description: 'can parse WorkOS dates to app timezone', closure: function () {
 
     $parsedDate = $dateParser->parse(timestamp: '2024-06-25T19:07:33.155Z');
 
-    $expectedDate = CarbonImmutable::parse(time: '2024-06-25T19:07:33.155Z')->setTimezone(timeZone: 'Africa/Nairobi');
+    $expectedDate = CarbonImmutable::parse(time: '2024-06-25T19:07:33.155Z')->setTimezone('Africa/Nairobi');
 
     expect(value: $parsedDate->tzName)->toBe(expected: 'Africa/Nairobi')
         ->and(value: $parsedDate->equalTo($expectedDate))->toBeTrue();
