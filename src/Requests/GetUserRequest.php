@@ -16,19 +16,19 @@ class GetUserRequest extends Request
 {
     protected Method $method = Method::GET;
 
-    public function __construct(protected string $id)
+    public function __construct(public readonly string $id)
     {
     }
 
     public function resolveEndpoint(): string
     {
-        return "/user_management/users/{$this->id}";
+        return "/user_management/users/$this->id";
     }
 
     /**
      * @throws JsonException
      */
-    public function createDtoFromResponse(Response $response): mixed
+    public function createDtoFromResponse(Response $response): UserData
     {
         $data = $response->json();
 

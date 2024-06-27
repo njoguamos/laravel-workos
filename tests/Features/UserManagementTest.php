@@ -1,5 +1,7 @@
 <?php
 
+/** @noinspection PhpUnhandledExceptionInspection */
+
 declare(strict_types=1);
 
 use Illuminate\Support\Str;
@@ -26,9 +28,7 @@ describe(description: 'User', tests: function () {
             GetUserRequest::class => MockResponse::make(body: $responseData),
         ]);
 
-
         $response = (new UserManagement())->getUser(id: $responseData['id']);
-
 
         expect($response->array())->toBe($responseData);
     });
@@ -36,7 +36,7 @@ describe(description: 'User', tests: function () {
     /**
      * @link [Create a user](https://workos.com/docs/reference/user-management/user/create)
      */
-    it('can create a user', function () {
+    it(description: 'can create a user', closure: function () {
         $user = (new UserFactory())->create();
         $password = Str::password();
 

@@ -74,9 +74,10 @@ To create a new user, call the `createUser` method of the `UserManagement` class
 
 ## Response
 
-The default response in an instance of `NjoguAmos\LaravelWorkOS\DTOs\UserDTO`, which can also be converted to an array `$response->array()` or to json `$response->json()`
+The `response` in an instance of `NjoguAmos\LaravelWorkOS\DTOs\UserDTO`.
 
 ```php
+# Available Parameters
 $response->object; # \NjoguAmos\LaravelWorkOS\Enums\WorkOSObject instance
 $response->id; # user_01E4ZCR3C56J083X43JQXF3JK5
 $response->email; # brian@example.com
@@ -87,7 +88,8 @@ $response->first_name; # Brian
 $response->last_name; # Kariuki
 $response->profile_picture_url; # https://workoscdn.com/images/v1/123abc
 
-$response->getResponse(); # Original response \Saloon\Http\Response
+# Available Methods
+$response->getResponse(); # Original response (\Saloon\Http\Response) for debugging ONLY!
 $response->array(); # Array representation of the response
 $response->json(); # JSON representation of the response
 ```
