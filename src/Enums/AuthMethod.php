@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace NjoguAmos\LaravelWorkos\Enums;
+namespace NjoguAmos\LaravelWorkOS\Enums;
 
 enum AuthMethod: string
 {

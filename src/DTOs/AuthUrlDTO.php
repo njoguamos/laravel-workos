@@ -2,14 +2,14 @@
 
 declare(strict_types=1);
 
-namespace NjoguAmos\LaravelWorkos\DTOs;
+namespace NjoguAmos\LaravelWorkOS\DTOs;
 
-use NjoguAmos\LaravelWorkos\Contracts\Arrayable;
-use NjoguAmos\LaravelWorkos\Enums\Provider;
+use NjoguAmos\LaravelWorkOS\Contracts\Transformers;
+use NjoguAmos\LaravelWorkOS\Enums\Provider;
 use Saloon\Contracts\DataObjects\WithResponse;
 use Saloon\Traits\Responses\HasResponse;
 
-class AuthUrlDTO implements WithResponse, Arrayable
+final class AuthUrlDTO implements WithResponse, Transformers
 {
     use HasResponse;
 

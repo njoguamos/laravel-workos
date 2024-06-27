@@ -2,17 +2,17 @@
 
 declare(strict_types=1);
 
-namespace NjoguAmos\LaravelWorkos\Facades;
+namespace NjoguAmos\LaravelWorkOS\Facades;
 
 use Illuminate\Support\Facades\Facade;
 
 /**
- * @see \NjoguAmos\LaravelWorkos\UserManagement
+ * @see \NjoguAmos\LaravelWorkOS\UserManagement
  */
 class UserManagement extends Facade
 {
     protected static function getFacadeAccessor(): string
     {
-        return \NjoguAmos\LaravelWorkos\UserManagement::class;
+        return \NjoguAmos\LaravelWorkOS\UserManagement::class;
     }
 }

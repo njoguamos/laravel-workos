@@ -2,18 +2,18 @@
 
 declare(strict_types=1);
 
-namespace NjoguAmos\LaravelWorkos;
+namespace NjoguAmos\LaravelWorkOS;
 
-use NjoguAmos\LaravelWorkos\Connectors\WorkosConnector;
-use NjoguAmos\LaravelWorkos\DTOs\AuthUserDTO;
-use NjoguAmos\LaravelWorkos\DTOs\AuthUrlDTO;
-use NjoguAmos\LaravelWorkos\DTOs\UserDTO;
-use NjoguAmos\LaravelWorkos\Enums\GrantType;
-use NjoguAmos\LaravelWorkos\Enums\Provider;
-use NjoguAmos\LaravelWorkos\Enums\ScreenHint;
-use NjoguAmos\LaravelWorkos\Requests\UserManagement\AuthWithCodeRequest;
-use NjoguAmos\LaravelWorkos\Requests\UserManagement\GetAuthURLRequest;
-use NjoguAmos\LaravelWorkos\Requests\UserManagement\GetUserRequest;
+use NjoguAmos\LaravelWorkOS\Connectors\WorkosConnector;
+use NjoguAmos\LaravelWorkOS\DTOs\AuthUrlDTO;
+use NjoguAmos\LaravelWorkOS\DTOs\AuthUserDTO;
+use NjoguAmos\LaravelWorkOS\DTOs\UserData;
+use NjoguAmos\LaravelWorkOS\Enums\GrantType;
+use NjoguAmos\LaravelWorkOS\Enums\Provider;
+use NjoguAmos\LaravelWorkOS\Enums\ScreenHint;
+use NjoguAmos\LaravelWorkOS\Requests\AuthWithCodeRequest;
+use NjoguAmos\LaravelWorkOS\Requests\GetAuthURLRequest;
+use NjoguAmos\LaravelWorkOS\Requests\GetUserRequest;
 use Saloon\Exceptions\Request\FatalRequestException;
 use Saloon\Exceptions\Request\RequestException;
 use Saloon\Http\Request;
@@ -32,11 +32,9 @@ class UserManagement
      * @throws FatalRequestException
      * @throws RequestException
      */
-    public function getUser(string $id): UserDTO
+    public function getUser(string $id): UserData
     {
-        return $this->getDtoOrFail(
-            request: new GetUserRequest(id: $id)
-        );
+        return $this->getDtoOrFail(request: new GetUserRequest(id: $id));
     }
 
     /**

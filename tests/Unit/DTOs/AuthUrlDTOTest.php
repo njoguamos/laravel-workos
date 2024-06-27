@@ -2,8 +2,8 @@
 
 declare(strict_types=1);
 
-use NjoguAmos\LaravelWorkos\DTOs\AuthUrlDTO;
-use NjoguAmos\LaravelWorkos\Enums\Provider;
+use NjoguAmos\LaravelWorkOS\DTOs\AuthUrlDTO;
+use NjoguAmos\LaravelWorkOS\Enums\Provider;
 
 it(description: 'can transform data', closure: function () {
     $dto = new AuthUrlDTO(
