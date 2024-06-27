@@ -14,7 +14,7 @@ class UserFactory
     {
         return array_merge([
             "object"              => WorkOSObject::USER->value,
-            "id"                  => "user_".Str::ulid()->toString(),
+            "id"                  => "user_".Str::ulid(),
             "email"               => fake()->unique()->safeEmail(),
             "email_verified"      => fake()->boolean(80),
             "created_at"          => CarbonImmutable::instance(date: fake()->dateTimeThisYear())->format(format: 'Y-m-d\TH:i:s.v\Z'),
