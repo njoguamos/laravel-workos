@@ -9,6 +9,7 @@ use NjoguAmos\LaravelWorkOS\DTOs\AuthUrlDTO;
 use NjoguAmos\LaravelWorkOS\DTOs\AuthUserDTO;
 use NjoguAmos\LaravelWorkOS\DTOs\UserData;
 use NjoguAmos\LaravelWorkOS\Enums\GrantType;
+use NjoguAmos\LaravelWorkOS\Enums\PasswordHashType;
 use NjoguAmos\LaravelWorkOS\Enums\Provider;
 use NjoguAmos\LaravelWorkOS\Enums\ScreenHint;
 use NjoguAmos\LaravelWorkOS\Exceptions\WorkOSRequestException;
@@ -52,7 +53,7 @@ class UserManagement
             email: $email,
             password: $password,
             password_hash: $password_hash,
-            password_hash_type: $password_hash_type,
+            password_hash_type: $password_hash_type ? PasswordHashType::from($password_hash_type) : null,
             first_name: $first_name,
             last_name: $last_name,
             email_verified: $email_verified,

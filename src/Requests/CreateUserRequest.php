@@ -8,6 +8,7 @@ use JsonException;
 use NjoguAmos\LaravelWorkOS\Concerns\FillableData;
 use NjoguAmos\LaravelWorkOS\Contracts\Fillable;
 use NjoguAmos\LaravelWorkOS\DTOs\UserData;
+use NjoguAmos\LaravelWorkOS\Enums\PasswordHashType;
 use NjoguAmos\LaravelWorkOS\Enums\WorkOSObject;
 use NjoguAmos\LaravelWorkOS\Services\DateParser;
 use Saloon\Contracts\Body\HasBody;
@@ -27,7 +28,7 @@ class CreateUserRequest extends Request implements Fillable, HasBody
         public readonly string $email,
         public readonly ?string $password = null,
         public readonly ?string $password_hash = null,
-        public readonly ?string $password_hash_type = null,
+        public readonly ?PasswordHashType $password_hash_type = null,
         public readonly ?string $first_name = null,
         public readonly ?string $last_name = null,
         public readonly ?bool $email_verified = null,
