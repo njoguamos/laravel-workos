@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace NjoguAmos\LaravelWorkos\Exceptions;
+namespace NjoguAmos\LaravelWorkOS\Exceptions;
 
 use InvalidArgumentException;
 
