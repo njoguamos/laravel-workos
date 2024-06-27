@@ -8,7 +8,7 @@ use NjoguAmos\LaravelWorkOS\Requests\GetUserRequest;
 use Saloon\Enums\Method;
 
 beforeEach(function () {
-    $this->user_id = "user_".Str::ulid()->toString();
+    $this->user_id = "user_".Str::ulid();
 
     $this->request = new GetUserRequest(id: $this->user_id);
 });
