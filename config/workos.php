@@ -36,8 +36,8 @@ return [
      | --------------------------------------------------------------------------
      |
      | This is the base URL for the WorkOS API. At the time of writing this
-     | the base URL is https://api.workos.com. If the base URL changes in the
-     | future, you can update it here.
+     | the base URL is https://api.workos.com. If the base URL changes
+     | in the future, you can update it here.
      |
      */
     'api_base_url' => 'https://api.workos.com',
@@ -53,5 +53,18 @@ return [
      | your Laravel application's cache driver or `array` if not set.
      |
      */
-    'cache_store' => env(key: 'WORKOS_CACHE_DRIVER', default: env(key: 'CACHE_DRIVER', default: 'array'))
+    'cache_store' => env(key: 'WORKOS_CACHE_DRIVER', default: env(key: 'CACHE_DRIVER', default: 'array')),
+
+     /*
+     | --------------------------------------------------------------------------
+     | Convert to Application Timezone
+     | --------------------------------------------------------------------------
+     |
+     | This option controls whether timestamps from the WorkOS API should be
+     | converted to the application timezone. By default, the timestamps
+     | are returned in the WorkOS timezone which is the 'UTC' timezone.
+     |
+     |
+     */
+    'convert_timezone' => env(key: 'WORKOS_CONVERT_TIMEZONE', default: false),
 ];

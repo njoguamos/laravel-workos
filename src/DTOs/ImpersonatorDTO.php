@@ -2,17 +2,17 @@
 
 declare(strict_types=1);
 
-namespace NjoguAmos\LaravelWorkos\DTOs;
+namespace NjoguAmos\LaravelWorkOS\DTOs;
 
-use NjoguAmos\LaravelWorkos\Contracts\Arrayable;
+use NjoguAmos\LaravelWorkOS\Contracts\Transformers;
 
-class ImpersonatorDTO implements Arrayable
+final class ImpersonatorDTO implements Transformers
 {
     /**
      * @link https://workos.com/docs/reference/user-management/authentication/code
      */
     public function __construct(
-        public readonly string $email,
+        public readonly string  $email,
         public readonly ?string $reason = null
     ) {
     }

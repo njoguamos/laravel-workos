@@ -2,16 +2,18 @@
 
 declare(strict_types=1);
 
-namespace NjoguAmos\LaravelWorkos\Requests\UserManagement;
+namespace NjoguAmos\LaravelWorkOS\Requests;
 
 use JsonException;
-use NjoguAmos\LaravelWorkos\Concerns\FillableData;
-use NjoguAmos\LaravelWorkos\Contracts\Fillable;
-use NjoguAmos\LaravelWorkos\DTOs\AuthUserDTO;
-use NjoguAmos\LaravelWorkos\DTOs\ImpersonatorDTO;
-use NjoguAmos\LaravelWorkos\DTOs\UserDTO;
-use NjoguAmos\LaravelWorkos\Enums\AuthMethod;
-use NjoguAmos\LaravelWorkos\Enums\GrantType;
+use NjoguAmos\LaravelWorkOS\Concerns\FillableData;
+use NjoguAmos\LaravelWorkOS\Contracts\Fillable;
+use NjoguAmos\LaravelWorkOS\DTOs\AuthUserDTO;
+use NjoguAmos\LaravelWorkOS\DTOs\ImpersonatorDTO;
+use NjoguAmos\LaravelWorkOS\DTOs\UserData;
+use NjoguAmos\LaravelWorkOS\Enums\AuthMethod;
+use NjoguAmos\LaravelWorkOS\Enums\GrantType;
+use NjoguAmos\LaravelWorkOS\Enums\WorkOSObject;
+use NjoguAmos\LaravelWorkOS\Services\DateParser;
 use Saloon\Contracts\Body\HasBody;
 use Saloon\Enums\Method;
 use Saloon\Http\Request;
@@ -19,7 +21,7 @@ use Saloon\Http\Response;
 use Saloon\RateLimitPlugin\Limit;
 use Saloon\Traits\Body\HasJsonBody;
 
-class AuthWithCodeRequest extends Request implements HasBody, Fillable
+final class AuthWithCodeRequest extends Request implements HasBody, Fillable
 {
     use HasJsonBody;
     use FillableData;
@@ -55,13 +57,13 @@ class AuthWithCodeRequest extends Request implements HasBody, Fillable
         $user = $data['user'];
 
         return new AuthUserDTO(
-            user: new UserDTO(
-                object: $user['object'],
+            user: new UserData(
+                object: WorkOSObject::from($user['object']),
                 id: $user['id'],
                 email: $user['email'],
                 email_verified: $user['email_verified'],
-                created_at: $user['created_at'],
-                updated_at: $user['updated_at'],
+                created_at: app(abstract: DateParser::class)->parse(timestamp: $user['created_at']),
+                updated_at: app(abstract: DateParser::class)->parse(timestamp: $user['updated_at']),
                 first_name: $user['first_name'] ?? null,
                 last_name: $user['last_name'] ?? null,
                 profile_picture_url: $user['profile_picture_url'] ?? null,

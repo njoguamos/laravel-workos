@@ -10,7 +10,7 @@ To get the authorization URL, call the `getAuthorizationURL` method of `UserMana
 <CodeGroup>
 
 ```php New Class
-use NjoguAmos\LaravelWorkos\UserManagement;
+use NjoguAmos\LaravelWorkOS\UserManagement;
 
 $response = (new UserManagement())
     ->getAuthorizationURL(
@@ -20,7 +20,7 @@ $response = (new UserManagement())
 ```
 
     ```php Facade
-    use NjoguAmos\LaravelWorkos\Facades\UserManagement;
+    use NjoguAmos\LaravelWorkOS\Facades\UserManagement;
 
     $response = UserManagement::getAuthorizationURL(
         provider: 'GoogleOAuth',
@@ -34,7 +34,7 @@ $response = (new UserManagement())
 <Accordion title="Parameters">
 
     <ParamField query="provider" type="string" required>
-        A `NjoguAmos\LaravelWorkos\Enums\Provider` compatible value. i.e.  `authkit`, `AppleOAuth`, `GoogleOAuth`, `MicrosoftOAuth` or `GitHubOAuth`.
+        A `NjoguAmos\LaravelWorkOS\Enums\Provider` compatible value. i.e.  `authkit`, `AppleOAuth`, `GoogleOAuth`, `MicrosoftOAuth` or `GitHubOAuth`.
 
         <Warning>Failure to provide the correct value will lead to runtime errors.</Warning>
     </ParamField>
@@ -80,14 +80,14 @@ $response = (new UserManagement())
     </ParamField>
 
     <ParamField query="screen_hint" type="string">
-        A `NjoguAmos\LaravelWorkos\Enums\ScreenHint` enum value. i.e. `sign-up` or `sign-in`
+        A `NjoguAmos\LaravelWorkOS\Enums\ScreenHint` enum value. i.e. `sign-up` or `sign-in`
     </ParamField>
 
 </Accordion>
 
 ## Response
 
-The default response in an instance of `NjoguAmos\LaravelWorkos\DTOs\AuthUrlDTO`, which can also be converted to an array `$response->array()` or to json `$response->json()`
+The default response in an instance of `NjoguAmos\LaravelWorkOS\DTOs\AuthUrlDTO`, which can also be converted to an array `$response->array()` or to json `$response->json()`
 
 <CodeGroup>
 
@@ -106,9 +106,9 @@ The default response in an instance of `NjoguAmos\LaravelWorkos\DTOs\AuthUrlDTO`
 ```
 
 ```php Default Object
-NjoguAmos\LaravelWorkos\DTOs\AuthUrlDTO {
+NjoguAmos\LaravelWorkOS\DTOs\AuthUrlDTO {
     +url: "https:\/\/login.microsoftonline.com\/consumers\/oauth2\/v2.0\/..."
-    +provider: NjoguAmos\LaravelWorkos\Enums\Provider {#244
+    +provider: NjoguAmos\LaravelWorkOS\Enums\Provider {#244
         +name: "MICROSOFT"
         +value: "MicrosoftOAuth"
     }

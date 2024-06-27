@@ -3,13 +3,23 @@
 /** @noinspection PhpUnhandledExceptionInspection */
 declare(strict_types=1);
 
-use NjoguAmos\LaravelWorkos\Connectors\WorkosConnector;
-use NjoguAmos\LaravelWorkos\Enums\GrantType;
-use NjoguAmos\LaravelWorkos\Exceptions\ApiKeyIsMissing;
-use NjoguAmos\LaravelWorkos\Exceptions\ClientIdIsMissing;
-use NjoguAmos\LaravelWorkos\Requests\UserManagement\AuthWithCodeRequest;
-use NjoguAmos\LaravelWorkos\Requests\UserManagement\GetUserRequest;
-use Saloon\Exceptions\Request\RequestException;
+use NjoguAmos\LaravelWorkOS\Connectors\WorkosConnector;
+use NjoguAmos\LaravelWorkOS\Enums\GrantType;
+use NjoguAmos\LaravelWorkOS\Exceptions\ApiKeyIsMissing;
+use NjoguAmos\LaravelWorkOS\Exceptions\BadRequestException;
+use NjoguAmos\LaravelWorkOS\Exceptions\ClientIdIsMissing;
+use NjoguAmos\LaravelWorkOS\Exceptions\ForbiddenException;
+use NjoguAmos\LaravelWorkOS\Exceptions\GatewayTimeoutException;
+use NjoguAmos\LaravelWorkOS\Exceptions\InternalServerErrorException;
+use NjoguAmos\LaravelWorkOS\Exceptions\NotFoundException;
+use NjoguAmos\LaravelWorkOS\Exceptions\RateLimitReachedException;
+use NjoguAmos\LaravelWorkOS\Exceptions\RequestTimeOutException;
+use NjoguAmos\LaravelWorkOS\Exceptions\ServiceUnavailableException;
+use NjoguAmos\LaravelWorkOS\Exceptions\UnauthorizedException;
+use NjoguAmos\LaravelWorkOS\Exceptions\UnprocessableEntityException;
+use NjoguAmos\LaravelWorkOS\Exceptions\WorkOSRequestException;
+use NjoguAmos\LaravelWorkOS\Requests\AuthWithCodeRequest;
+use NjoguAmos\LaravelWorkOS\Requests\GetUserRequest;
 use Saloon\Http\Faking\MockClient;
 use Saloon\Http\Faking\MockResponse;
 
@@ -54,7 +64,7 @@ it(description: 'has the correct default Guzzle config', closure: function () {
     ]);
 });
 
-it(description: 'can get the correct exception message', closure: function (int $code, string $message) {
+it(description: 'can get the correct exception message', closure: function (int $code, string $message, string $exception) {
     MockClient::global(mockData: [
         AuthWithCodeRequest::class => MockResponse::make(status: $code),
     ]);
@@ -69,15 +79,23 @@ it(description: 'can get the correct exception message', closure: function (int 
     expect(
         value: fn () => $connector->send(request: $request)
     )->toThrow(
-        exception: RequestException::class,
+        exception: WorkOSRequestException::class,
+        exceptionMessage: $message
+    )->toThrow(
+        exception: $exception,
         exceptionMessage: $message
     );
 })->with([
-    400 => [400, fn () => trans(key: 'workos::workos.errors.400')],
-    401 => [401, fn () => trans(key: 'workos::workos.errors.401')],
-    403 => [403, fn () => trans(key: 'workos::workos.errors.403')],
-    404 => [404, fn () => trans(key: 'workos::workos.errors.404')],
-    422 => [422, fn () => trans(key: 'workos::workos.errors.422')],
+    400 => [400, fn () => trans(key: 'workos::workos.errors.400'),BadRequestException::class],
+    401 => [401, fn () => trans(key: 'workos::workos.errors.401'),UnauthorizedException::class],
+    403 => [403, fn () => trans(key: 'workos::workos.errors.403'), ForbiddenException::class],
+    404 => [404, fn () => trans(key: 'workos::workos.errors.404'), NotFoundException::class],
+    408 => [408, fn () => trans(key: 'workos::workos.errors.408'), RequestTimeOutException::class],
+    422 => [422, fn () => trans(key: 'workos::workos.errors.422'),UnprocessableEntityException::class],
+    429 => [429, fn () => trans(key: 'workos::workos.errors.429'), RateLimitReachedException::class],
+    500 => [500, fn () => trans(key: 'workos::workos.errors.500'), InternalServerErrorException::class],
+    503 => [503, fn () => trans(key: 'workos::workos.errors.503'), ServiceUnavailableException::class],
+    504 => [504, fn () => trans(key: 'workos::workos.errors.504'), GatewayTimeoutException::class],
 ]);
 
 

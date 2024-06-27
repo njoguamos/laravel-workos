@@ -2,14 +2,14 @@
 
 declare(strict_types=1);
 
-namespace NjoguAmos\LaravelWorkos\DTOs;
+namespace NjoguAmos\LaravelWorkOS\DTOs;
 
-use NjoguAmos\LaravelWorkos\Contracts\Arrayable;
-use NjoguAmos\LaravelWorkos\Enums\AuthMethod;
+use NjoguAmos\LaravelWorkOS\Contracts\Transformers;
+use NjoguAmos\LaravelWorkOS\Enums\AuthMethod;
 use Saloon\Contracts\DataObjects\WithResponse;
 use Saloon\Traits\Responses\HasResponse;
 
-class AuthUserDTO implements WithResponse, Arrayable
+final class AuthUserDTO implements WithResponse, Transformers
 {
     use HasResponse;
 
@@ -17,12 +17,12 @@ class AuthUserDTO implements WithResponse, Arrayable
      * @link https://workos.com/docs/reference/user-management/user
      */
     public function __construct(
-        public readonly UserDTO          $user,
-        public readonly string           $access_token,
-        public readonly string           $refresh_token,
+        public readonly UserData            $user,
+        public readonly string              $access_token,
+        public readonly string              $refresh_token,
         public readonly AuthMethod | string $authentication_method,
-        public readonly ?string          $organization_id = null,
-        public readonly ?ImpersonatorDTO $impersonator = null,
+        public readonly ?string             $organization_id = null,
+        public readonly ?ImpersonatorDTO    $impersonator = null,
     ) {
     }
 

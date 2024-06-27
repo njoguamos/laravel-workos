@@ -2,22 +2,21 @@
 
 declare(strict_types=1);
 
-namespace NjoguAmos\LaravelWorkos;
+namespace NjoguAmos\LaravelWorkOS;
 
-use NjoguAmos\LaravelWorkos\Connectors\WorkosConnector;
-use NjoguAmos\LaravelWorkos\Exceptions\ApiKeyIsMissing;
-use NjoguAmos\LaravelWorkos\Exceptions\ClientIdIsMissing;
+use NjoguAmos\LaravelWorkOS\Connectors\WorkosConnector;
+use NjoguAmos\LaravelWorkOS\Exceptions\ApiKeyIsMissing;
+use NjoguAmos\LaravelWorkOS\Exceptions\ClientIdIsMissing;
+use NjoguAmos\LaravelWorkOS\Services\DateParser;
 use Spatie\LaravelPackageTools\Package;
 use Spatie\LaravelPackageTools\PackageServiceProvider;
 
-class LaravelWorkosServiceProvider extends PackageServiceProvider
+class WorkOSServiceProvider extends PackageServiceProvider
 {
     public function configurePackage(Package $package): void
     {
         /*
-         * This class is a Package Service Provider
-         *
-         * More info: https://github.com/spatie/laravel-package-tools
+         * @link [More info](https://github.com/spatie/laravel-package-tools)
          */
         $package
             ->name(name: 'laravel-workos')
@@ -45,6 +44,12 @@ class LaravelWorkosServiceProvider extends PackageServiceProvider
                 apiKey: $apiKey,
                 clientId: $config['client_id'],
                 apiBaseurl: $config['api_base_url']
+            );
+        });
+
+        $this->app->bind(abstract: DateParser::class, concrete: function ($app) {
+            return new DateParser(
+                convertToAppTimezone: $app['config']->get('workos')['convert_timezone']
             );
         });
     }

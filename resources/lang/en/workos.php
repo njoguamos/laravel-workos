@@ -24,10 +24,14 @@ return [
 
     'errors' => [
         400 => 'The request was not acceptable. Check that the parameters were correct.',
-        401 => 'The API key used was invalid. Check that the API key is correct.',
+        401 => 'The API key used was invalid. Ensure that the API key is correct. @see https://workos.com/docs/reference/api-keys',
         403 => 'The API key used did not have the correct permissions. Check that the API key has the correct permissions.',
-        404 => 'The resource was not found. Refer to the message for more information.',
+        404 => 'The WorkOS resource you were looking for was was not found. Ensure you pass the correct parameters.',
+        408 => 'The request to WorkOS API timed out. Please try again later.',
         422 => 'Validation failed for the request. Check that the parameters were correct.',
-        429 => 'Too many requests. Refer to the Rate Limits section.',
+        429 => 'Too many requests. Refer to the Rate Limits documentation. @see https://workos.com/docs/reference/rate-limits.',
+        500 => 'An an error with WorkOS servers occurred. Please try again later. If the issue persists, contact WorkOS support.',
+        503 => 'The WorkOS servers are currently unavailable. Please try again later. If the issue persists, contact WorkOS support.',
+        504 => 'The WorkOS servers are currently unavailable. Please try again later. If the issue persists, contact WorkOS support.',
     ]
 ];

@@ -10,13 +10,13 @@ To get the details of an existing user, call the `getUser` method of the `UserMa
 <CodeGroup>
 
 ```php New Class
-use NjoguAmos\LaravelWorkos\UserManagement;
+use NjoguAmos\LaravelWorkOS\UserManagement;
 
 $response = (new UserManagement())->getUser(id: 'user_01J140CFC29X7PN6FF1RVXVSRJ');
 ```
 
 ```php Facade
-use NjoguAmos\LaravelWorkos\Facades\UserManagement;
+use NjoguAmos\LaravelWorkOS\Facades\UserManagement;
 
 $response = UserManagement::getUser(id: 'user_01J140CFC29X7PN6FF1RVXVSRJ');
 ```
@@ -34,7 +34,7 @@ $response = UserManagement::getUser(id: 'user_01J140CFC29X7PN6FF1RVXVSRJ');
 
 ## Response
 
-The default response in an instance of `NjoguAmos\LaravelWorkos\DTOs\UserDTO`, which can also be converted to an array `$response->array()` or to json `$response->json()`
+The default response in an instance of `NjoguAmos\LaravelWorkOS\DTOs\UserDTO`, which can also be converted to an array `$response->array()` or to json `$response->json()`
 
 <CodeGroup>
 
@@ -53,7 +53,7 @@ The default response in an instance of `NjoguAmos\LaravelWorkos\DTOs\UserDTO`, w
 ```
 
 ```php Default
-NjoguAmos\LaravelWorkos\DTOs\UserDTO {
+NjoguAmos\LaravelWorkOS\DTOs\UserDTO {
     +object: "user"
     +id: "user_01E4ZCR3C56J083X43JQXF3JK5"
     +email: "marcelina.davis@example.com"

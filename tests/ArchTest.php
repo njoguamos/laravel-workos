@@ -7,7 +7,7 @@ arch(description: 'it will not use debugging functions')
     ->each->not->toBeUsed();
 
 test(description: 'connector')
-    ->expect(value: 'NjoguAmos\LaravelWorkos\Connectors\WorkosConnector')
+    ->expect(value: 'NjoguAmos\LaravelWorkOS\Connectors\WorkosConnector')
     ->toBeSaloonConnector()
     ->toUseAlwaysThrowOnErrorsTrait()
     ->toHaveRateLimits();

@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-use NjoguAmos\LaravelWorkos\DTOs\ImpersonatorDTO;
+use NjoguAmos\LaravelWorkOS\DTOs\ImpersonatorDTO;
 
 it(description: 'can transform data', closure: function () {
     $dto = new ImpersonatorDTO(

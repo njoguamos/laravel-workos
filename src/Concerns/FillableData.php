@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace NjoguAmos\LaravelWorkos\Concerns;
+namespace NjoguAmos\LaravelWorkOS\Concerns;
 
 use BackedEnum;
 

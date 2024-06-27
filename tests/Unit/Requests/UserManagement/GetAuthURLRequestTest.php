@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-use NjoguAmos\LaravelWorkos\Connectors\WorkosConnector;
-use NjoguAmos\LaravelWorkos\Enums\Provider;
-use NjoguAmos\LaravelWorkos\Requests\UserManagement\GetAuthURLRequest;
+use NjoguAmos\LaravelWorkOS\Connectors\WorkosConnector;
+use NjoguAmos\LaravelWorkOS\Enums\Provider;
+use NjoguAmos\LaravelWorkOS\Requests\GetAuthURLRequest;
 use Saloon\Enums\Method;
 use Saloon\Exceptions\Request\RequestException;
 use Saloon\Http\Faking\MockClient;

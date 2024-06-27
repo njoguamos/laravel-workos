@@ -2,8 +2,8 @@
 
 declare(strict_types=1);
 
-use NjoguAmos\LaravelWorkos\Enums\GrantType;
-use NjoguAmos\LaravelWorkos\Requests\UserManagement\AuthWithCodeRequest;
+use NjoguAmos\LaravelWorkOS\Enums\GrantType;
+use NjoguAmos\LaravelWorkOS\Requests\AuthWithCodeRequest;
 use Saloon\Enums\Method;
 
 it(description: 'has the correct method', closure: function () {

@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace NjoguAmos\LaravelWorkos\Database\Factories;
+namespace NjoguAmos\LaravelWorkOS\Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
 

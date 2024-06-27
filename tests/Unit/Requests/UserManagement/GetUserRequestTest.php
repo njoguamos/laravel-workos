@@ -3,21 +3,22 @@
 declare(strict_types=1);
 
 
-use NjoguAmos\LaravelWorkos\Requests\UserManagement\GetUserRequest;
+use Illuminate\Support\Str;
+use NjoguAmos\LaravelWorkOS\Requests\GetUserRequest;
 use Saloon\Enums\Method;
 
-it(description: 'has the correct method', closure: function () {
-    $request = new GetUserRequest(
-        id: 'user_01E4ZCR3C56J083X43JQXF3JK5'
-    );
+beforeEach(function () {
+    $this->user_id = "user_".Str::ulid();
 
-    expect(value: $request->getMethod())->toBe(expected: Method::GET);
+    $this->request = new GetUserRequest(id: $this->user_id);
+});
+
+it(description: 'has the correct method', closure: function () {
+    expect(value: $this->request->getMethod())
+        ->toBe(expected: Method::GET);
 });
 
 it(description: 'has the correct endpoint', closure: function () {
-    $id = 'user_01E4ZCR3C56J083X43JQXF3JK5';
-
-    $request = new GetUserRequest(id: $id);
-
-    expect(value: $request->resolveEndpoint())->toBe(expected: "/user_management/users/$id");
+    expect(value: $this->request->resolveEndpoint())
+        ->toBe(expected: "/user_management/users/$this->user_id");
 });
