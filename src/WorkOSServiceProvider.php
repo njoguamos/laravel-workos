@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace NjoguAmos\LaravelWorkOS;
 
-use NjoguAmos\LaravelWorkOS\Connectors\WorkosConnector;
+use NjoguAmos\LaravelWorkOS\Connectors\WorkOSConnector;
 use NjoguAmos\LaravelWorkOS\Exceptions\ApiKeyIsMissing;
 use NjoguAmos\LaravelWorkOS\Exceptions\ClientIdIsMissing;
 use NjoguAmos\LaravelWorkOS\Services\DateParser;
@@ -26,7 +26,7 @@ class WorkOSServiceProvider extends PackageServiceProvider
 
     public function registeringPackage(): void
     {
-        $this->app->bind(abstract: WorkosConnector::class, concrete: function ($app) {
+        $this->app->bind(abstract: WorkOSConnector::class, concrete: function ($app) {
             $config = $app['config']->get('workos');
 
             $apiKey = $config['api_key'];
@@ -40,7 +40,7 @@ class WorkOSServiceProvider extends PackageServiceProvider
                 throw ClientIdIsMissing::create();
             }
 
-            return new WorkosConnector(
+            return new WorkOSConnector(
                 apiKey: $apiKey,
                 clientId: $config['client_id'],
                 apiBaseurl: $config['api_base_url']

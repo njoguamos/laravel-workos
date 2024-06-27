@@ -1,6 +1,147 @@
 ---
-title: 'Create a user ⚠️'
+title: 'Create a user'
 description: 'Create a new user in the current environment.'
 ---
 
-<Note>This functionality is still in development. Please check later or [submit a PR](https://github.com/njoguamos/laravel-workos) to help us build this feature.</Note>
+## Request
+
+To create a new user, call the `createUser` method of the `UserManagement` class and pass the user's details as arguments.
+
+<CodeGroup>
+
+    ```php New Class
+    use NjoguAmos\LaravelWorkOS\UserManagement;
+
+    $response = (new UserManagement())->createUser(
+        email: 'braian@example.com',
+        password: 'stir-embryo-sound-alder',
+        first_name: 'Brian',
+        last_name: 'Kariuki',
+        email_verified: true,
+    );
+    ```
+
+    ```php Facade
+    use NjoguAmos\LaravelWorkOS\Facades\UserManagement;
+
+    $response = UserManagement::createUser(
+        email: 'brian@example.com',
+        password: 'stir-embryo-sound-alder',
+        first_name: 'Brian',
+        last_name: 'Kariuki',
+        email_verified: true,
+    );
+    ```
+</CodeGroup>
+
+<br/>
+
+## Response
+
+The default response in an instance of `NjoguAmos\LaravelWorkOS\DTOs\UserDTO`, which can also be converted to an array `$response->array()` or to json `$response->json()`
+
+<CodeGroup>
+```php Default Object
+# $response is an Instance of NjoguAmos\LaravelWorkOS\DTOs\UserDTO
+
+$response->object; # \NjoguAmos\LaravelWorkOS\Enums\WorkOSObject instance
+$response->id; # user_01E4ZCR3C56J083X43JQXF3JK5
+$response->email; # brian@example.com
+$response->email_verified; # true
+$response->created_at; # Carbon\CarbonImmutable instance
+$response->updated_at; # Carbon\CarbonImmutable instance
+$response->first_name; # Brian
+$response->last_name; # Kariuki
+$response->profile_picture_url; # https://workoscdn.com/images/v1/123abc
+
+$response->getResponse(); # Original response \Saloon\Http\Response
+$response->array(); # Array representation of the response
+$response->json(); # JSON representation of the response
+```
+
+```php Example $response->array()
+[
+    "object" => "user"
+    "id" => "user_01E4ZCR3C56J083X43JQXF3JK5"
+    "email" => "brian@example.com"
+    "email_verified" => true
+    "created_at" => "2021-06-25T19:07:33.155Z"
+    "updated_at" => "2021-06-25T19:07:33.155Z"
+    "first_name" => "Brian"
+    "last_name" => "Kariuki"
+    "profile_picture_url" => "https://workoscdn.com/images/v1/123abc"
+]
+```
+</CodeGroup>
+
+## Known Errors
+
+### 400 `user_creation_error`
+
+```php
+[
+  "message" => "Could not create user."
+  "code" => "user_creation_error"
+  "errors" => [
+    [
+      "code" => "email_not_available"
+      "message" => "This email is not available."
+    ]
+  ]
+]
+```
+
+### 400 `password_strength_error`
+
+```php
+[
+  "message" => "Password does not meet strength requirements."
+  "code" => "password_strength_error"
+  "errors" => [
+    [
+      "message" => "The provided password does not meet the minimum length requirements. Please try a password with 10 or more characters."
+      "code" => "password_too_short"
+      "minimum_length" => 10
+    ]
+    [
+      "message" => "The provided password was found 10434004 times in data breaches and is not safe to be used."
+      "code" => "password_pwned"
+      "occurrences" => 10434004
+    ]
+    [
+      "message" => "The provided password is not strong enough. This is a heavily used password."
+      "code" => "password_too_weak"
+      "warning" => "This is a heavily used password."
+      "suggestions" => [
+        0 => "Add more words that are less common."
+      ]
+    ]
+  ]
+]
+```
+
+### 400 `password_and_password_hash_provided`
+```php
+[
+  "code" => "password_and_password_hash_provided"
+  "message" => "Only one of password and password_hash can be provided."
+]
+```
+
+### 422 `Validation failed`
+```php
+[
+  "code" => "invalid_request_parameters"
+  "message" => "Validation failed"
+  "errors" =>[
+    [
+      "code" => "password_hash_type_required"
+      "message" => "password_hash_type must be one of the following values: bcrypt, firebase-scrypt, ssha"
+    ],
+    [
+      "code" => "email_required"
+      "message" => "Email must be a valid email address."
+    ]
+  ]
+]
+```
