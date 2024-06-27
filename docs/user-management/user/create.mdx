@@ -36,12 +36,47 @@ To create a new user, call the `createUser` method of the `UserManagement` class
 
 <br/>
 
+<Accordion title="Parameters">
+
+    <ParamField query="email" type="string" required>
+        The email address of the user you are creating.
+    </ParamField>
+
+    <ParamField query="password" type="string">
+        The password to set for the user.
+        <Warning>Email + Password must be enabled in the [WorkOS Dashboard](https://workos.com/docs/user-management/email-password). Password must meet the password strength policy.</Warning>
+    </ParamField>
+
+    <ParamField query="password_hash" type="string">
+        The hashed password to set for the user.
+        <Warning>Only one of `password` and `password_hash` can be provided.</Warning>
+    </ParamField>
+
+    <ParamField query="password_hash_type" type="string">
+        The algorithm originally used to hash the password, used when providing a `password_hash`.
+        Should be `value` of `NjoguAmos\LaravelWorkOS\Enums\PasswordHashType` i.e. `bcrypt`, `firebase-scrypt`, `ssha`
+    </ParamField>
+
+    <ParamField query="first_name" type="string">
+        The first name of the user you are creating.
+    </ParamField>
+
+    <ParamField query="last_name" type="string">
+        The last name of the user you are creating.
+    </ParamField>
+
+    <ParamField query="email_verified" type="boolean">
+        Whether the user’s email address was previously verified.
+    </ParamField>
+
+</Accordion>
+
+
 ## Response
 
 The default response in an instance of `NjoguAmos\LaravelWorkOS\DTOs\UserDTO`, which can also be converted to an array `$response->array()` or to json `$response->json()`
 
-<CodeGroup>
-```php Default Object
+```php
 # $response is an Instance of NjoguAmos\LaravelWorkOS\DTOs\UserDTO
 
 $response->object; # \NjoguAmos\LaravelWorkOS\Enums\WorkOSObject instance
@@ -59,20 +94,46 @@ $response->array(); # Array representation of the response
 $response->json(); # JSON representation of the response
 ```
 
-```php Example $response->array()
-[
-    "object" => "user"
-    "id" => "user_01E4ZCR3C56J083X43JQXF3JK5"
-    "email" => "brian@example.com"
-    "email_verified" => true
-    "created_at" => "2021-06-25T19:07:33.155Z"
-    "updated_at" => "2021-06-25T19:07:33.155Z"
-    "first_name" => "Brian"
-    "last_name" => "Kariuki"
-    "profile_picture_url" => "https://workoscdn.com/images/v1/123abc"
-]
-```
-</CodeGroup>
+<Accordion title="Response Parameters">
+
+    <ResponseField name="object" type="string" required>
+        Distinguishes the user object. In instance of `\NjoguAmos\LaravelWorkOS\Enums\WorkOSObject`
+    </ResponseField>
+
+    <ResponseField name="id" type="string" required>
+        The unique ID of the user.
+    </ResponseField>
+
+    <ResponseField name="email" type="string" required>
+        The email address of the user.
+    </ResponseField>
+
+    <ResponseField name="first_name" type="string">
+        The first name of the user.
+    </ResponseField>
+
+
+    <ResponseField name="last_name" type="string">
+        The last name of the user.
+    </ResponseField>
+
+    <ResponseField name="email_verified" type="boolean" required>
+        Whether the user’s email has been verified.
+    </ResponseField>
+
+    <ResponseField name="profile_picture_url" type="string">
+        A URL reference to an image representing the user.
+    </ResponseField>
+
+    <ResponseField name="created_at" type="boolean" required>
+        The datetime when the user was created. Is an instance of `Carbon\CarbonImmutable`
+    </ResponseField>
+
+    <ResponseField name="updated_at" type="boolean" required>
+        The datetime when the user was last updated. Is an instance of `Carbon\CarbonImmutable`
+    </ResponseField>
+
+</Accordion>
 
 ## Known Errors
 
