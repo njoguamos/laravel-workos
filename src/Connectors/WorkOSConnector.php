@@ -7,6 +7,7 @@ namespace NjoguAmos\LaravelWorkOS\Connectors;
 use Illuminate\Support\Facades\Cache;
 use NjoguAmos\LaravelWorkOS\Exceptions\RateLimitReachedException;
 use NjoguAmos\LaravelWorkOS\Exceptions\WorkOSRequestException;
+use NjoguAmos\LaravelWorkOS\WorkOSSDK;
 use Saloon\Http\Auth\TokenAuthenticator;
 use Saloon\Http\Connector;
 use Saloon\Http\Response;
@@ -39,6 +40,13 @@ class WorkOSConnector extends Connector
     protected function defaultAuth(): TokenAuthenticator
     {
         return new TokenAuthenticator($this->apiKey);
+    }
+
+    public function defaultHeaders(): array
+    {
+        return [
+            'User-Agent' => WorkOSSDK::IDENTIFIER . ' / ' . WorkOSSDK::VERSION. ' | ' . WorkOSSDK::WEBSITE,
+        ];
     }
 
     public function defaultConfig(): array

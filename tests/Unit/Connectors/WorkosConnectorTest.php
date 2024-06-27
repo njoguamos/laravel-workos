@@ -20,6 +20,7 @@ use NjoguAmos\LaravelWorkOS\Exceptions\UnprocessableEntityException;
 use NjoguAmos\LaravelWorkOS\Exceptions\WorkOSRequestException;
 use NjoguAmos\LaravelWorkOS\Requests\AuthWithCodeRequest;
 use NjoguAmos\LaravelWorkOS\Requests\GetUserRequest;
+use NjoguAmos\LaravelWorkOS\WorkOSSDK;
 use Saloon\Http\Faking\MockClient;
 use Saloon\Http\Faking\MockResponse;
 
@@ -98,7 +99,6 @@ it(description: 'can get the correct exception message', closure: function (int 
     504 => [504, fn () => trans(key: 'workos::workos.errors.504'), GatewayTimeoutException::class],
 ]);
 
-
 it(description: 'should extend BaseWorkosConnector', closure: function () {
     $connector = new WorkOSConnector(
         apiKey: 'key',
@@ -113,7 +113,7 @@ it(description: 'has the correct authorization header', closure: function () {
     MockClient::global(mockData: [ GetUserRequest::class => MockResponse::make() ]);
 
     $connector = new WorkOSConnector(
-        apiKey: 'key',
+        apiKey: 'sample_api_key_YGFSy787SFUYgyudsf*7fdBv',
         clientId: 'client_id',
         apiBaseurl: 'baseurl'
     );
@@ -122,5 +122,23 @@ it(description: 'has the correct authorization header', closure: function () {
 
     $authHeader = $response->getPendingRequest()->headers()->get(key: 'Authorization');
 
-    expect(value: $authHeader)->toBe(expected: 'Bearer key');
+    expect(value: $authHeader)->toBe(expected: 'Bearer sample_api_key_YGFSy787SFUYgyudsf*7fdBv');
+});
+
+it(description: 'has the correct user agent header', closure: function () {
+    MockClient::global(mockData: [ GetUserRequest::class => MockResponse::make() ]);
+
+    $connector = new WorkOSConnector(
+        apiKey: 'key',
+        clientId: 'client_id',
+        apiBaseurl: 'baseurl'
+    );
+
+    $response = $connector->send(request: new GetUserRequest(id: 'test'));
+
+    $authHeader = $response->getPendingRequest()->headers()->get(key: 'User-Agent');
+
+    $expectedAgent = WorkOSSDK::IDENTIFIER . ' / ' . WorkOSSDK::VERSION. ' | ' . WorkOSSDK::WEBSITE;
+
+    expect(value: $authHeader)->toBe(expected: $expectedAgent);
 });
