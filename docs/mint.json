@@ -209,6 +209,16 @@
         "pages": [
             "admin-portal/generate"
         ]
+    },{
+        "group": "Audit logs",
+        "pages": [
+            "audit-logs/list-schemas",
+            "audit-logs/list-actions",
+            "audit-logs/create-export",
+            "audit-logs/get-export",
+            "audit-logs/get-retention",
+            "audit-logs/set-retention"
+        ]
     }
     ],
     "footerSocials": {
