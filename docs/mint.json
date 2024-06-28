@@ -156,7 +156,8 @@
             "pages": [
                 "user-management/logout"
             ]
-    },{
+    },
+    {
         "group": "Single Sign-on",
         "pages": [
             "single-sign-on/get-authorization-url",
@@ -201,6 +202,12 @@
                     "directory-sync/directory-group/list"
                 ]
             }
+        ]
+    },
+    {
+        "group": "Admin Portal",
+        "pages": [
+            "admin-portal/generate"
         ]
     }
     ],
