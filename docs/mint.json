@@ -176,6 +176,32 @@
                 ]
             }
         ]
+    },{
+        "group": "Directory Sync",
+        "pages": [
+            {
+                "group": "Directory",
+                "pages": [
+                    "directory-sync/directory/get",
+                    "directory-sync/directory/list",
+                    "directory-sync/directory/delete"
+                ]
+            },
+            {
+                "group": "Directory User",
+                "pages": [
+                    "directory-sync/directory-user/get",
+                    "directory-sync/directory-user/list"
+                ]
+            },
+            {
+                "group": "Directory Group",
+                "pages": [
+                    "directory-sync/directory-group/get",
+                    "directory-sync/directory-group/list"
+                ]
+            }
+        ]
     }
     ],
     "footerSocials": {
