@@ -219,6 +219,14 @@
             "audit-logs/get-retention",
             "audit-logs/set-retention"
         ]
+    },
+    {
+        "group": "Domain verification",
+        "pages": [
+            "domain-verification/get",
+            "domain-verification/create",
+            "domain-verification/verify"
+            ]
     }
     ],
     "footerSocials": {
