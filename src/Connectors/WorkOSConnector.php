@@ -104,6 +104,9 @@ class WorkOSConnector extends Connector
         return (new WorkOSExceptionResolver())->getRequestException($response, $senderException);
     }
 
+    /**
+     * @throws RateLimitReachedException
+     */
     protected function throwLimitException(Limit $limit): void
     {
         throw new RateLimitReachedException(
