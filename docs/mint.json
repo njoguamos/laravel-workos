@@ -227,6 +227,18 @@
             "domain-verification/create",
             "domain-verification/verify"
             ]
+    },
+    {
+        "group": "Multi-Factor Auth",
+        "pages": [
+            "multi-factor-auth/authentication-factor",
+            "multi-factor-auth/authentication-challenge",
+            "multi-factor-auth/enroll-factor",
+            "multi-factor-auth/challenge-factor",
+            "multi-factor-auth/verify-challenge",
+            "multi-factor-auth/get-authentication-factor",
+            "multi-factor-auth/delete-authentication-factor"
+        ]
     }
     ],
     "footerSocials": {
