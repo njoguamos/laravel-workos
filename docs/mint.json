@@ -156,7 +156,27 @@
             "pages": [
                 "user-management/logout"
             ]
-        }
+    },{
+        "group": "Single Sign-on",
+        "pages": [
+            "single-sign-on/get-authorization-url",
+            {
+                "group": "Profile",
+                "pages": [
+                    "single-sign-on/profile/get-profile-and-token",
+                    "single-sign-on/profile/get-user-profile"
+                    ]
+            },
+            {
+                "group": "Connection",
+                "pages": [
+                    "single-sign-on/connection/get",
+                    "single-sign-on/connection/list",
+                    "single-sign-on/connection/delete"
+                ]
+            }
+        ]
+    }
     ],
     "footerSocials": {
         "x": "https://x.com/njoguamo",
