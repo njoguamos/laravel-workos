@@ -51,49 +51,6 @@ php artisan vendor:publish --tag="workos-translations"
 
 The documentation is available at [https://njoguamos.github.io/laravel-workos](https://njoguamos.github.io/laravel-workos).
 
-
-
-
-
-
-The response is a `AuthUserDTO` object which can be used as an `object` or converted to `json` or `array`.
-
-```php
-$json = $response->json()
-```
-
-Output
-
-```json
-{
-    "user": {
-        "object": "user",
-        "id": "user_01E4ZCR3C56J083X43JQXF3JK5",
-        "email": "marcelina.davis@example.com",
-        "email_verified": true,
-        "created_at": "2021-06-25T19:07:33.155Z",
-        "updated_at": "2021-06-25T19:07:33.155Z",
-        "first_name": "Marcelina",
-        "last_name": "Davis",
-        "profile_picture_url": "https://workoscdn.com/images/v1/123abc"
-    },
-    "access_token": "eyJhb.nNzb19vaWRjX2tleV9.lc5Uk4yWVk5In0",
-    "refresh_token": "yAjhKk123NLIjdrBdGZPf8pLIDvK",
-    "authentication_method": "GoogleOAuth",
-    "organization_id": "org_01H945H0YD4F97JN9MATX7BYAG",
-    "impersonator": null
-}
-```
-
-If the authentication did not succeed, WorkOS API will return a a `400` or `403` error which will be thrown as a `\Saloon\Exceptions\Request\RequestException`.
-
-- `400` error occurs when the authentication code is invalid or expired.
-- `403` occur when WorkOS returns predefined [Authentication errors](https://workos.com/docs/reference/user-management/authentication-errors), which include `email_verification_required`, `mfa_enrollment`, `mfa_challenge`, `organization_selection_required`, `sso_required`, and `organization_authentication_methods_required`.
-
-You can use try and catch block to handle the errors. Example you can determine if body contains `email_verification_required` and redirect user to email verification page.
-
-```php
-
 ## Testing
 
 ```bash
