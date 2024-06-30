@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace NjoguAmos\LaravelWorkOS\Tests\Unit\Factories;
+namespace NjoguAmos\LaravelWorkOS\Tests\Factories;
 
 use Carbon\CarbonImmutable;
 use Illuminate\Support\Str;
