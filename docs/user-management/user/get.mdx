@@ -7,22 +7,12 @@ description: 'Get the details of an existing user.'
 
 To get the details of an existing user, call the `getUser` method of the `UserManagement` class and pass the user's id as an argument.
 
-<CodeGroup>
-
-```php New Class
+```php
 use NjoguAmos\LaravelWorkOS\UserManagement;
 
-$response = (new UserManagement())->getUser(id: 'user_01J140CFC29X7PN6FF1RVXVSRJ');
+$response = (new UserManagement())
+    ->getUser(id: 'user_01J140CFC29X7PN6FF1RVXVSRJ');
 ```
-
-```php Facade
-use NjoguAmos\LaravelWorkOS\Facades\UserManagement;
-
-$response = UserManagement::getUser(id: 'user_01J140CFC29X7PN6FF1RVXVSRJ');
-```
- </CodeGroup>
-
-<br/>
 
 <Accordion title="Parameters">
 
@@ -37,8 +27,9 @@ $response = UserManagement::getUser(id: 'user_01J140CFC29X7PN6FF1RVXVSRJ');
 The `response` in an instance of `NjoguAmos\LaravelWorkOS\DTOs\UserDTO`.
 
 ```php
-# Available Parameters
 $response->object; # \NjoguAmos\LaravelWorkOS\Enums\WorkOSObject instance
+$response->object->name; # USER
+$response->object->value; # user
 $response->id; # user_01J140CFC29X7PN6FF1RVXVSRJ
 $response->email; # brian@example.com
 $response->email_verified; # true
@@ -47,11 +38,22 @@ $response->updated_at; # Carbon\CarbonImmutable instance
 $response->first_name; # Brian
 $response->last_name; # Kariuki
 $response->profile_picture_url; # https://workoscdn.com/images/v1/123abc
+```
 
-# Available Methods
-$response->getResponse(); # Original response (\Saloon\Http\Response) for debugging ONLY!
-$response->array(); # Array representation of the response
-$response->json(); # JSON representation of the response
+If you prefer array, you can call  `$response->array()` .
+
+```php
+[
+    "object" => "user"
+    "id" => "user_01J140CFC29X7PN6FF1RVXVSRJ"
+    "email" => "brian@example.com"
+    "email_verified" => true
+    "created_at" => "2024-06-29T19:07:33.155Z"
+    "updated_at" => "2024-06-29T19:07:33.155Z"
+    "first_name" => "Brian"
+    "last_name" => "Kariuki"
+    "profile_picture_url" => "https://workoscdn.com/images/v1/123abc"
+]
 ```
 
 <Accordion title="Response Parameters">
@@ -97,7 +99,7 @@ $response->json(); # JSON representation of the response
 
 ## Known Errors
 
-### 404 `entity_not_found`
+### `entity_not_found` - 400
 
 ```php
  [

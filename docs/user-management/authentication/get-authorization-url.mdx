@@ -7,9 +7,7 @@ description: 'Generates an OAuth 2.0 authorization URL to authenticate a user wi
 
 To get the authorization URL, call the `getAuthorizationURL` method of `UserManagement` class and pass the `provider` and `redirect_uri` as minimum required arguments.
 
-<CodeGroup>
-
-```php New Class
+```php
 use NjoguAmos\LaravelWorkOS\UserManagement;
 
 $response = (new UserManagement())
@@ -18,18 +16,6 @@ $response = (new UserManagement())
         redirect_uri: 'http://localhost:3000/callback',
     );
 ```
-
-    ```php Facade
-    use NjoguAmos\LaravelWorkOS\Facades\UserManagement;
-
-    $response = UserManagement::getAuthorizationURL(
-        provider: 'GoogleOAuth',
-        redirect_uri: 'http://localhost:3000/callback',
-    );
-    ```
-</CodeGroup>
-
-<br/>
 
 <Accordion title="Parameters">
 
@@ -87,38 +73,23 @@ $response = (new UserManagement())
 
 ## Response
 
-The default response in an instance of `NjoguAmos\LaravelWorkOS\DTOs\AuthUrlDTO`, which can also be converted to an array `$response->array()` or to json `$response->json()`
+The default response in an instance of `NjoguAmos\LaravelWorkOS\DTOs\AuthUrlDTO`.
 
-<CodeGroup>
-
-```php Example $response->array()
-[
-    "object" => "user"
-    "id" => "user_01E4ZCR3C56J083X43JQXF3JK5"
-    "email" => "marcelina.davis@example.com"
-    "email_verified" => true
-    "created_at" => "2021-06-25T19:07:33.155Z"
-    "updated_at" => "2021-06-25T19:07:33.155Z"
-    "first_name" => "Marcelina"
-    "last_name" => "Davis"
-    "profile_picture_url" => "https://workoscdn.com/images/v1/123abc"
-]
+```php
+$response->url; # https://login.microsoftonline.com/consumers/oauth2/v2.0/...
+$response->provider; # instance of NjoguAmos\LaravelWorkOS\Enums\Provider
+$response->provider->name; # MICROSOFT
+$response->provider->value; # MicrosoftOAuth
 ```
 
-```php Default Object
-NjoguAmos\LaravelWorkOS\DTOs\AuthUrlDTO {
-    +url: "https:\/\/login.microsoftonline.com\/consumers\/oauth2\/v2.0\/..."
-    +provider: NjoguAmos\LaravelWorkOS\Enums\Provider {#244
-        +name: "MICROSOFT"
-        +value: "MicrosoftOAuth"
-    }
-    #response: Saloon\Http\Response {}
-}
-    ```
+If you prefer array, you can call  `$response->array()` .
 
-</CodeGroup>
-
-<br/>
+```php
+[
+    "url" => "https://login.microsoftonline.com/consumers/oauth2/v2.0/..."
+    "provider" => "MicrosoftOAuth"
+]
+```
 
 <Accordion title="Response Parameters">
 
@@ -137,7 +108,6 @@ NjoguAmos\LaravelWorkOS\DTOs\AuthUrlDTO {
     <ResponseField name="first_name" type="string">
         The first name of the user.
     </ResponseField>
-
 
     <ResponseField name="last_name" type="string">
         The last name of the user.
