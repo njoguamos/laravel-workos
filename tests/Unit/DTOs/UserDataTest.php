@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 use Carbon\CarbonImmutable;
 use NjoguAmos\LaravelWorkOS\DTOs\UserData;
-use NjoguAmos\LaravelWorkOS\Tests\Unit\Factories\UserFactory;
+use NjoguAmos\LaravelWorkOS\Tests\Factories\UserFactory;
 
 it(description: 'can transform data', closure: function () {
     $user = UserFactory::create();
